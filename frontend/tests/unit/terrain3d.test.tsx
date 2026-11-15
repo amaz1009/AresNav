@@ -65,26 +65,23 @@ describe('3D Surface Topography Viewer (WebGL / Three.js)', () => {
     fireEvent.click(orbitBtn);
   });
 
-  it('switches between scientific texture layers (CTX/HiRISE, DEM TINT, SLOPE HAZARD)', () => {
+  it('renders CTX/HiRISE optical texture layer and confirms DEM TINT and SLOPE HAZARD options are removed', () => {
     render(<Terrain3DViewer />);
 
-    const demBtn = screen.getByRole('button', { name: /DEM TINT/i });
-    const slopeBtn = screen.getByRole('button', { name: /SLOPE HAZARD/i });
-    const opticalBtn = screen.getByRole('button', { name: /CTX\/HiRISE/i });
-
-    fireEvent.click(demBtn);
-    fireEvent.click(slopeBtn);
-    fireEvent.click(opticalBtn);
+    expect(screen.getByRole('button', { name: /CTX\/HiRISE/i })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /DEM TINT/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /SLOPE HAZARD/i })).not.toBeInTheDocument();
   });
 
-  it('adjusts elevation exaggeration slider', () => {
+  it('confirms elevation exaggeration slider is removed and camera reset is available', () => {
     render(<Terrain3DViewer />);
 
+    expect(screen.queryByText(/EXAGGERATION:/i)).not.toBeInTheDocument();
+    // Verify only the timeline scrubber exists, exaggeration slider is gone
     const sliders = screen.getAllByRole('slider');
-    expect(sliders.length).toBeGreaterThanOrEqual(1);
-    // First slider is exaggeration
-    fireEvent.change(sliders[0], { target: { value: '2.4' } });
-    expect(screen.getByText(/2.4x/i)).toBeInTheDocument();
+    expect(sliders).toHaveLength(1);
+    expect(sliders[0]).toHaveAttribute('aria-label', 'Route Flythrough Scrubber');
+    expect(screen.getByTitle(/Reset 3D Camera/i)).toBeInTheDocument();
   });
 
   it('toggles flythrough route simulation playback', () => {

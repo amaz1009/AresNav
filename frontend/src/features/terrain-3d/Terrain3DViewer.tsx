@@ -7,7 +7,6 @@ import {
   Play,
   Pause,
   RotateCcw,
-  Sliders,
   ChevronRight,
   Maximize2,
   Box,
@@ -70,7 +69,7 @@ export const Terrain3DViewer: React.FC = () => {
   // Viewer State
   const [viewMode, setViewMode] = useState<CameraViewMode>('ORBIT');
   const [textureStyle, setTextureStyle] = useState<TextureStyle>('OPTICAL');
-  const [verticalExaggeration, setVerticalExaggeration] = useState<number>(1.8);
+  const verticalExaggeration = 1.8;
   const [isPlayingFlythrough, setIsPlayingFlythrough] = useState<boolean>(false);
   const [flythroughProgress, setFlythroughProgress] = useState<number>(0); // 0 to 1
   const [flythroughSpeed, setFlythroughSpeed] = useState<number>(1); // 1x, 2x, 4x
@@ -1025,9 +1024,17 @@ export const Terrain3DViewer: React.FC = () => {
               <Maximize2 className="h-3 w-3" />
               <span>ORTHO 2D</span>
             </button>
+
+            <button
+              onClick={handleResetCamera}
+              title="Reset 3D Camera"
+              className="text-[#8B909A] hover:text-[#F4F4F2] p-1 rounded transition-colors"
+            >
+              <RotateCcw className="h-3 w-3" />
+            </button>
           </div>
 
-          {/* Scientific Layer / Colormap Switcher */}
+          {/* Scientific Layer */}
           <div className="bg-[#050507]/90 border border-[#181A22] p-1.5 rounded-[2px] flex items-center space-x-1 shadow-xl">
             <span className="text-[9px] font-mono text-[#8B909A] px-1 uppercase">LAYER:</span>
             <button
@@ -1039,49 +1046,6 @@ export const Terrain3DViewer: React.FC = () => {
               }`}
             >
               CTX/HiRISE
-            </button>
-            <button
-              onClick={() => setTextureStyle('ELEVATION')}
-              className={`text-[10px] font-mono px-2 py-0.5 rounded-[2px] border ${
-                textureStyle === 'ELEVATION'
-                  ? 'bg-[#0F1015] border-[#64B5F6] text-[#64B5F6] font-bold'
-                  : 'border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
-              }`}
-            >
-              DEM TINT
-            </button>
-            <button
-              onClick={() => setTextureStyle('SLOPE')}
-              className={`text-[10px] font-mono px-2 py-0.5 rounded-[2px] border ${
-                textureStyle === 'SLOPE'
-                  ? 'bg-[#0F1015] border-[#C94D4D] text-[#C94D4D] font-bold'
-                  : 'border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
-              }`}
-            >
-              SLOPE HAZARD
-            </button>
-          </div>
-
-          {/* Elevation Exaggeration Slider */}
-          <div className="bg-[#050507]/90 border border-[#181A22] p-2 rounded-[2px] flex items-center space-x-2 text-[10px] font-mono shadow-xl">
-            <Sliders className="h-3 w-3 text-[#C85A32]" />
-            <span className="text-[#8B909A]">EXAGGERATION:</span>
-            <span className="text-[#F4F4F2] font-bold">{verticalExaggeration.toFixed(1)}x</span>
-            <input
-              type="range"
-              min="1.0"
-              max="3.2"
-              step="0.2"
-              value={verticalExaggeration}
-              onChange={(e) => setVerticalExaggeration(parseFloat(e.target.value))}
-              className="w-16 h-1 accent-[#C85A32] bg-[#181A22] rounded"
-            />
-            <button
-              onClick={handleResetCamera}
-              title="Reset 3D Camera"
-              className="ml-auto text-[#8B909A] hover:text-[#F4F4F2] p-0.5"
-            >
-              <RotateCcw className="h-3 w-3" />
             </button>
           </div>
         </div>
@@ -1150,6 +1114,7 @@ export const Terrain3DViewer: React.FC = () => {
             <div className="flex-1 flex items-center space-x-2">
               <input
                 type="range"
+                aria-label="Route Flythrough Scrubber"
                 min="0"
                 max="1"
                 step="0.005"
