@@ -219,3 +219,9 @@ start-aresnav.bat         Starts the backend and frontend together
 
 Backend: Python 3.12+, FastAPI, Pydantic v2, NumPy, rasterio, pyproj, Shapely.
 Frontend: React, TypeScript, Vite, Tailwind CSS, Leaflet, Recharts, Zustand, three.js.
+
+
+## Use of AI tools
+
+AI tools (Claude by Anthropic) were used to help write code, tests and documentation
+for this project. The team directed the design, reviewed the output, and ran the tests.
