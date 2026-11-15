@@ -84,6 +84,7 @@ export interface MissionStoreState {
   setActivePage: (page: NavPage) => void;
   setSelectedRegion: (region: RegionInfo) => void;
   setSelectedSite: (site: CandidateSite | null) => void;
+  setRoutes: (routes: TraverseRoute[]) => void;
   setSelectedRoute: (route: TraverseRoute | null) => void;
   setIsBaseLocked: (locked: boolean) => void;
   setIsDestinationLocked: (locked: boolean) => void;
@@ -210,6 +211,7 @@ export const useMissionStore = create<MissionStoreState>((set, get) => ({
       simulationResult: sim,
     });
   },
+  setRoutes: (routes) => set({ routes }),
   setSimulationResult: (simulationResult) => set({ simulationResult }),
   setSelectedDatasetMeta: (selectedDatasetMeta) => set({ selectedDatasetMeta }),
 

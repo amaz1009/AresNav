@@ -195,7 +195,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
               <span>NASA Data Baseline</span>
             </span>
             <span className="text-[9px] font-mono text-[#4E9A68] bg-[#122419] border border-[#1E3E2B] px-1.5 py-0.5 rounded-[2px]">
-              8 VERIFIED
+              5 ACTIVE
             </span>
           </div>
           <div>
@@ -203,7 +203,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
               Orbital GIS Products
             </h3>
             <span className="text-[11px] font-mono text-[#8B909A] mt-0.5 block">
-              MOLA, HiRISE, THEMIS, CRISM, USGS
+              HiRISE Ortho, Elevation DTM, Slope, Hazard, MOLA
             </span>
           </div>
         </div>

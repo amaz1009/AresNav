@@ -37,7 +37,7 @@ export const Navigation: React.FC = () => {
       id: 'layers',
       label: 'Scientific Layers',
       icon: <Layers className="h-3.5 w-3.5" strokeWidth={1.5} />,
-      badge: '8',
+      badge: '5',
     },
     {
       id: 'sites',

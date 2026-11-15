@@ -217,7 +217,9 @@ export const MarsExplorer: React.FC = () => {
                 title="Select Route Alpha (Lowest Risk)"
               >
                 <span className="w-2.5 h-1.5 rounded-full bg-[#10B981]" />
-                <span>Route Alpha (7.4 km)</span>
+                <span>
+                  Route Alpha ({routes.find((r) => r.route_id === 'ROUTE_A')?.surface_distance_km ? `${routes.find((r) => r.route_id === 'ROUTE_A')?.surface_distance_km} km` : 'Lowest Risk'})
+                </span>
               </button>
               <button
                 type="button"
@@ -230,7 +232,9 @@ export const MarsExplorer: React.FC = () => {
                 title="Select Route Bravo (Balanced)"
               >
                 <span className="w-2.5 h-1.5 rounded-full bg-[#F59E0B]" />
-                <span>Route Bravo (9.1 km)</span>
+                <span>
+                  Route Bravo ({routes.find((r) => r.route_id === 'ROUTE_B')?.surface_distance_km ? `${routes.find((r) => r.route_id === 'ROUTE_B')?.surface_distance_km} km` : 'Balanced'})
+                </span>
               </button>
               <button
                 type="button"
@@ -243,7 +247,9 @@ export const MarsExplorer: React.FC = () => {
                 title="Select Route Charlie (Max Science)"
               >
                 <span className="w-2.5 h-1.5 rounded-full bg-[#A855F7]" />
-                <span>Route Charlie (12.8 km)</span>
+                <span>
+                  Route Charlie ({routes.find((r) => r.route_id === 'ROUTE_C')?.surface_distance_km ? `${routes.find((r) => r.route_id === 'ROUTE_C')?.surface_distance_km} km` : 'Max Science'})
+                </span>
               </button>
               <span className="flex items-center space-x-1.5 px-2.5 py-1 rounded-[2px] bg-[#EF4444]/20 border border-[#EF4444] text-[#EF4444]">
                 <span className="w-2.5 h-0.5 border-t border-dashed border-[#EF4444]" />

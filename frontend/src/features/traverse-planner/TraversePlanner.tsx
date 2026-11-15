@@ -4,10 +4,12 @@ import { StatusBadge } from '../../components/common/StatusBadge';
 import { SampleBadge } from '../common/SampleBadge';
 import { MarsMap } from '../map/MarsMap';
 import type { TraverseRoute } from '../../types/models';
+import { GALE_ROUTES } from '../../mocks/demoData';
 import {
   calculateMarsDistanceKm,
   calculateMarsBearing,
   createTraverseRouteFromPoints,
+  createDynamicTraverseRoutes,
 } from '../../services/routeService';
 import {
   ResponsiveContainer,
@@ -48,6 +50,7 @@ export const TraversePlanner: React.FC = () => {
     selectedRoute,
     setSelectedRoute,
     routes,
+    setRoutes,
     evaConfigParams,
     selectedRegion,
     candidateSites,
@@ -98,7 +101,8 @@ export const TraversePlanner: React.FC = () => {
       return plannerRoute || selectedRoute;
     }
     if (selectedRoute) {
-      return selectedRoute;
+      const matching = routes.find((r) => r.route_id === selectedRoute.route_id);
+      return matching || selectedRoute;
     }
     if (plannerRoute) {
       return plannerRoute;
@@ -140,25 +144,24 @@ export const TraversePlanner: React.FC = () => {
     }
   }, [destination]);
 
-  // Synchronize dynamic Traverse Route into store whenever base & destination coordinates change
+  // Synchronize dynamic Traverse Routes (Alpha, Bravo, Charlie) into store whenever base & destination coordinates change
   useEffect(() => {
     if (base && destination) {
+      const dynamicRoutes = createDynamicTraverseRoutes(
+        base,
+        destination,
+        selectedRegion?.region_id,
+        evaConfigParams?.base_speed_kmh,
+        candidateSites
+      );
+      setRoutes(dynamicRoutes);
+
       const currentSelected = useMissionStore.getState().selectedRoute;
-      if (!currentSelected || currentSelected.route_id === 'TRAVERSE_PLANNER_ROUTE') {
-        const dynamicRoute = createTraverseRouteFromPoints(
-          base,
-          destination,
-          selectedRegion?.region_id,
-          evaConfigParams?.base_speed_kmh,
-          candidateSites
-        );
-        setSelectedRoute(dynamicRoute);
-      }
+      const matching = dynamicRoutes.find((r) => r.route_id === currentSelected?.route_id);
+      setSelectedRoute(matching || dynamicRoutes[1] || dynamicRoutes[0]);
     } else {
-      const currentSelected = useMissionStore.getState().selectedRoute;
-      if (currentSelected?.route_id === 'TRAVERSE_PLANNER_ROUTE') {
-        setSelectedRoute(null);
-      }
+      setRoutes(GALE_ROUTES);
+      setSelectedRoute(null);
     }
   }, [
     base?.lat,
@@ -168,6 +171,7 @@ export const TraversePlanner: React.FC = () => {
     selectedRegion?.region_id,
     evaConfigParams?.base_speed_kmh,
     candidateSites,
+    setRoutes,
     setSelectedRoute,
   ]);
 
@@ -223,14 +227,15 @@ export const TraversePlanner: React.FC = () => {
     setBaseError(null);
 
     if (destination) {
-      const dynamicRoute = createTraverseRouteFromPoints(
+      const dynamicRoutes = createDynamicTraverseRoutes(
         newBase,
         destination,
         selectedRegion?.region_id,
         evaConfigParams?.base_speed_kmh,
         candidateSites
       );
-      setSelectedRoute(dynamicRoute);
+      setRoutes(dynamicRoutes);
+      setSelectedRoute(dynamicRoutes[1] || dynamicRoutes[0]);
     }
   };
 
@@ -261,14 +266,15 @@ export const TraversePlanner: React.FC = () => {
     setDestError(null);
 
     if (base) {
-      const dynamicRoute = createTraverseRouteFromPoints(
+      const dynamicRoutes = createDynamicTraverseRoutes(
         base,
         newDest,
         selectedRegion?.region_id,
         evaConfigParams?.base_speed_kmh,
         candidateSites
       );
-      setSelectedRoute(dynamicRoute);
+      setRoutes(dynamicRoutes);
+      setSelectedRoute(dynamicRoutes[1] || dynamicRoutes[0]);
     }
   };
 
@@ -279,6 +285,7 @@ export const TraversePlanner: React.FC = () => {
     setBaseLatInput('');
     setBaseLonInput('');
     setBaseError(null);
+    setRoutes(GALE_ROUTES);
     setSelectedRoute(null);
   };
 
@@ -288,6 +295,7 @@ export const TraversePlanner: React.FC = () => {
     setDestLatInput('');
     setDestLonInput('');
     setDestError(null);
+    setRoutes(GALE_ROUTES);
     setSelectedRoute(null);
   };
 
@@ -888,15 +896,21 @@ export const TraversePlanner: React.FC = () => {
                 <span className="text-[#8B909A] font-semibold uppercase">PATHS:</span>
                 <span className="flex items-center space-x-1">
                   <span className="w-2.5 h-1.5 rounded-full bg-[#10B981]" />
-                  <span className="text-[#10B981]">Alpha (Lowest Risk)</span>
+                  <span className="text-[#10B981]">
+                    Alpha ({routes.find((r) => r.route_id === 'ROUTE_A')?.surface_distance_km ? `${routes.find((r) => r.route_id === 'ROUTE_A')?.surface_distance_km} km` : 'Lowest Risk'})
+                  </span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="w-2.5 h-1.5 rounded-full bg-[#F59E0B]" />
-                  <span className="text-[#F59E0B]">Bravo (Balanced)</span>
+                  <span className="text-[#F59E0B]">
+                    Bravo ({routes.find((r) => r.route_id === 'ROUTE_B')?.surface_distance_km ? `${routes.find((r) => r.route_id === 'ROUTE_B')?.surface_distance_km} km` : 'Balanced'})
+                  </span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <span className="w-2.5 h-1.5 rounded-full bg-[#A855F7]" />
-                  <span className="text-[#A855F7]">Charlie (Max Science)</span>
+                  <span className="text-[#A855F7]">
+                    Charlie ({routes.find((r) => r.route_id === 'ROUTE_C')?.surface_distance_km ? `${routes.find((r) => r.route_id === 'ROUTE_C')?.surface_distance_km} km` : 'Max Science'})
+                  </span>
                 </span>
               </div>
               <span className="flex items-center space-x-1.5 text-[#EF4444]">
