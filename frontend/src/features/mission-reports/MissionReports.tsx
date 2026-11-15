@@ -35,16 +35,16 @@ export const MissionReports: React.FC = () => {
 
   if (!isPathConfigured || !route || !sim) {
     return (
-      <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1280px] mx-auto w-full select-text font-sans bg-[#111215]">
+      <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1280px] mx-auto w-full select-text font-sans bg-[#050507]">
         {/* Header Panel */}
-        <div className="border border-[#282C37] bg-[#17191E] p-6 md:p-8 rounded-[2px] flex flex-col sm:flex-row sm:items-start justify-between gap-6 relative">
+        <div className="border border-[#181A22] bg-[#0A0B0E] p-6 md:p-8 rounded-[2px] flex flex-col sm:flex-row sm:items-start justify-between gap-6 relative">
           <div className="space-y-2">
             <div className="flex items-center space-x-2.5">
               <FileText className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
               <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold">
                 EXPLAINABLE MISSION BRIEFING (PDF SECTION 10.6)
               </span>
-              <span className="text-[#363B4A]">/</span>
+              <span className="text-[#222530]">/</span>
               <SampleBadge label="GENERATED DOSSIER" />
             </div>
             <h2 className="text-3xl font-normal text-[#F4F4F2] tracking-wide font-editorial">
@@ -57,7 +57,7 @@ export const MissionReports: React.FC = () => {
         </div>
 
         {/* Empty State Banner */}
-        <div className="border border-[#282C37] bg-[#17191E] p-10 md:p-14 rounded-[2px] flex flex-col items-center justify-center text-center space-y-5">
+        <div className="border border-[#181A22] bg-[#0A0B0E] p-10 md:p-14 rounded-[2px] flex flex-col items-center justify-center text-center space-y-5">
           <div className="w-14 h-14 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/30 flex items-center justify-center">
             <FileText className="h-7 w-7 text-[#C85A32]" strokeWidth={1.5} />
           </div>
@@ -108,16 +108,16 @@ export const MissionReports: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1280px] mx-auto w-full select-text font-sans bg-[#111215]">
+    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1280px] mx-auto w-full select-text font-sans bg-[#050507]">
       {/* Header & Export Actions */}
-      <div className="border border-[#282C37] bg-[#17191E] p-6 md:p-8 rounded-[2px] flex flex-col sm:flex-row sm:items-start justify-between gap-6 relative">
+      <div className="border border-[#181A22] bg-[#0A0B0E] p-6 md:p-8 rounded-[2px] flex flex-col sm:flex-row sm:items-start justify-between gap-6 relative">
         <div className="space-y-2">
           <div className="flex items-center space-x-2.5">
             <FileText className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
             <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold">
               EXPLAINABLE MISSION BRIEFING (PDF SECTION 10.6)
             </span>
-            <span className="text-[#363B4A]">/</span>
+            <span className="text-[#222530]">/</span>
             <SampleBadge label="GENERATED DOSSIER" />
           </div>
           <h2 className="text-3xl font-normal text-[#F4F4F2] tracking-wide font-editorial">
@@ -162,18 +162,18 @@ export const MissionReports: React.FC = () => {
       </div>
 
       {/* Rendered Technical Document */}
-      <article className="bg-[#17191E] border border-[#282C37] p-8 md:p-10 rounded-[2px] space-y-7 text-[#C4C7C5] text-xs leading-relaxed">
+      <article className="bg-[#0A0B0E] border border-[#181A22] p-8 md:p-10 rounded-[2px] space-y-7 text-[#C4C7C5] text-xs leading-relaxed">
         {/* Section 1: Executive Overview */}
-        <section className="space-y-3.5 border-b border-[#282C37] pb-7">
+        <section className="space-y-3.5 border-b border-[#181A22] pb-7">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold block">Section 01</span>
           <h3 className="text-base font-semibold text-[#F4F4F2] tracking-wide uppercase font-editorial">Executive Mission Summary</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-2">
-            <div className="bg-[#14161A] p-4 rounded-[2px] border border-[#282C37]">
+            <div className="bg-[#0A0B0E] p-4 rounded-[2px] border border-[#181A22]">
               <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">Exploration Region</span>
               <strong className="text-[#F4F4F2] text-lg block mt-0.5 font-editorial">{selectedRegion.name}</strong>
               <p className="text-[#8B909A] text-[11px] mt-0.5 font-sans">{selectedRegion.sub_heading}</p>
             </div>
-            <div className="bg-[#14161A] p-4 rounded-[2px] border border-[#282C37]">
+            <div className="bg-[#0A0B0E] p-4 rounded-[2px] border border-[#181A22]">
               <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">Overall Feasibility Assessment</span>
               <div className="flex items-center space-x-2 mt-1.5">
                 <StatusBadge status={sim.overall_status} />
@@ -183,17 +183,17 @@ export const MissionReports: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="bg-[#14161A] p-4 rounded-[2px] border border-[#282C37] mt-2">
+          <div className="bg-[#0A0B0E] p-4 rounded-[2px] border border-[#181A22] mt-2">
             <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">Primary Science Objective</span>
             <p className="text-[#F4F4F2] mt-1 leading-relaxed font-sans">{selectedRegion.science_objective}</p>
           </div>
         </section>
 
         {/* Section 2: Candidate Site Selection */}
-        <section className="space-y-3.5 border-b border-[#282C37] pb-7">
+        <section className="space-y-3.5 border-b border-[#181A22] pb-7">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold block">Section 02</span>
           <h3 className="text-base font-semibold text-[#F4F4F2] tracking-wide uppercase font-editorial">Candidate Site Selection Rationale</h3>
-          <div className="bg-[#14161A] p-5 rounded-[2px] border border-[#282C37] space-y-2.5">
+          <div className="bg-[#0A0B0E] p-5 rounded-[2px] border border-[#181A22] space-y-2.5">
             <div className="flex items-center justify-between">
               <strong className="text-[#F4F4F2] text-lg font-editorial">{site.name}</strong>
               <span className="font-mono text-[#F4F4F2] text-xs">
@@ -208,10 +208,10 @@ export const MissionReports: React.FC = () => {
         </section>
 
         {/* Section 3: Human Traverse Route Metrics */}
-        <section className="space-y-3.5 border-b border-[#282C37] pb-7">
+        <section className="space-y-3.5 border-b border-[#181A22] pb-7">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold block">Section 03</span>
           <h3 className="text-base font-semibold text-[#F4F4F2] tracking-wide uppercase font-editorial">Human Traverse Route Metrics</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center font-mono bg-[#14161A] p-5 rounded-[2px] border border-[#282C37]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center font-mono bg-[#0A0B0E] p-5 rounded-[2px] border border-[#181A22]">
             <div>
               <span className="text-[#8B909A] block text-[10px] uppercase tracking-[0.14em] font-semibold">TOTAL DISTANCE</span>
               <strong className="text-[#F4F4F2] text-lg font-editorial">{route.surface_distance_km} km</strong>
@@ -233,7 +233,7 @@ export const MissionReports: React.FC = () => {
           <div className="space-y-2 pt-2">
             <strong className="text-[#F4F4F2] block font-mono text-[11px] uppercase tracking-[0.14em] font-semibold">Designated Work Stops ({route.science_stops.length}):</strong>
             {route.science_stops.map((s, i) => (
-              <div key={i} className="bg-[#14161A] p-3.5 rounded-[2px] border border-[#282C37] flex items-center justify-between text-xs hover:border-[#C85A32]/40 transition-colors">
+              <div key={i} className="bg-[#0A0B0E] p-3.5 rounded-[2px] border border-[#181A22] flex items-center justify-between text-xs hover:border-[#C85A32]/40 transition-colors">
                 <div>
                   <strong className="text-[#F4F4F2] font-medium font-editorial tracking-wide">{i + 1}. {s.name}</strong>
                   <span className="text-[#8B909A] block text-[11px] mt-0.5 font-sans">{s.science_rationale}</span>
@@ -247,25 +247,25 @@ export const MissionReports: React.FC = () => {
         </section>
 
         {/* Section 4: Life Support Safety Feasibility */}
-        <section className="space-y-3.5 border-b border-[#282C37] pb-7">
+        <section className="space-y-3.5 border-b border-[#181A22] pb-7">
           <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold block">Section 04</span>
           <h3 className="text-base font-semibold text-[#F4F4F2] tracking-wide uppercase font-editorial">Life Support & Safe Return Evaluation</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-            <div className="bg-[#14161A] p-4 rounded-[2px] border border-[#282C37]">
+            <div className="bg-[#0A0B0E] p-4 rounded-[2px] border border-[#181A22]">
               <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">Oxygen Usage</span>
               <strong className="text-[#F4F4F2] text-lg block mt-0.5 font-editorial">{sim.oxygen_used_liters} L</strong>
               <span className="text-[#4E9A68] block text-[10px] font-mono mt-0.5 font-semibold">
                 {sim.oxygen_margin_percent}% Remaining Reserve
               </span>
             </div>
-            <div className="bg-[#14161A] p-4 rounded-[2px] border border-[#282C37]">
+            <div className="bg-[#0A0B0E] p-4 rounded-[2px] border border-[#181A22]">
               <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">Power Drain</span>
               <strong className="text-[#F4F4F2] text-lg block mt-0.5 font-editorial">{sim.battery_used_wh} Wh</strong>
               <span className="text-[#4E9A68] block text-[10px] font-mono mt-0.5 font-semibold">
                 {sim.battery_margin_percent}% Battery SoC
               </span>
             </div>
-            <div className="bg-[#14161A] p-4 rounded-[2px] border border-[#282C37]">
+            <div className="bg-[#0A0B0E] p-4 rounded-[2px] border border-[#181A22]">
               <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">Critical Turn-Back</span>
               <strong className="text-[#D4A359] text-lg block mt-0.5 font-editorial">{sim.turn_back_elapsed_min} min</strong>
               <span className="text-[#8B909A] block text-[10px] font-mono mt-0.5">

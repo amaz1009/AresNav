@@ -30,9 +30,9 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
   } = useMissionStore();
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#111215]">
+    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#050507]">
       {/* Top Mission Briefing Panel */}
-      <div className="border border-[#282C37] bg-[#17191E] p-6 md:p-8 rounded-[2px] relative">
+      <div className="border border-[#181A22] bg-[#0A0B0E] p-6 md:p-8 rounded-[2px] relative">
         <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
           <div className="space-y-3 max-w-4xl">
             <div className="flex flex-wrap items-center gap-2">
@@ -49,11 +49,11 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
                   <span>Revert to Landing Page</span>
                 </button>
               )}
-              <span className="text-[#363B4A]">/</span>
+              <span className="text-[#222530]">/</span>
               <span className="text-[10px] font-mono text-[#8B909A] tracking-wider">
                 EXPLORATION REGION
               </span>
-              <span className="text-[#363B4A]">/</span>
+              <span className="text-[#222530]">/</span>
               <SampleBadge label="PLANNING PROTOTYPE" />
             </div>
             <h2 className="text-3xl md:text-4xl font-normal text-[#F4F4F2] tracking-wide leading-tight font-editorial">
@@ -93,7 +93,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
         </div>
 
         {/* Primary Scientific Objective Callout */}
-        <div className="mt-6 pt-4 border-t border-[#282C37] flex items-start space-x-2.5 text-xs">
+        <div className="mt-6 pt-4 border-t border-[#181A22] flex items-start space-x-2.5 text-xs">
           <Compass className="h-4 w-4 text-[#C85A32] shrink-0 mt-0.5" strokeWidth={1.5} />
           <div className="space-y-0.5 font-sans">
             <span className="font-semibold text-[#F4F4F2] uppercase text-[10px] font-mono tracking-[0.14em]">
@@ -105,11 +105,11 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
       </div>
 
       {/* Contiguous Operational Metric Ledger */}
-      <div className="border border-[#282C37] bg-[#17191E] rounded-[2px] divide-y sm:divide-y-0 sm:divide-x divide-[#282C37] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="border border-[#181A22] bg-[#0A0B0E] rounded-[2px] divide-y sm:divide-y-0 sm:divide-x divide-[#181A22] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {/* Metric 1: Selected Candidate Site */}
         <div
           onClick={() => setActivePage('sites')}
-          className="p-5 cursor-pointer hover:bg-[#1D2026] transition-colors duration-150 space-y-2.5 group"
+          className="p-5 cursor-pointer hover:bg-[#0F1015] transition-colors duration-150 space-y-2.5 group"
         >
           <div className="flex items-center justify-between text-xs text-[#8B909A]">
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-semibold flex items-center space-x-1.5 text-[#8B909A]">
@@ -131,7 +131,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
         {/* Metric 2: Active Traverse Route */}
         <div
           onClick={() => setActivePage('traverse')}
-          className="p-5 cursor-pointer hover:bg-[#1D2026] transition-colors duration-150 space-y-2.5 group"
+          className="p-5 cursor-pointer hover:bg-[#0F1015] transition-colors duration-150 space-y-2.5 group"
         >
           <div className="flex items-center justify-between text-xs text-[#8B909A]">
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-semibold flex items-center space-x-1.5 text-[#8B909A]">
@@ -155,7 +155,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
         {/* Metric 3: EVA Simulation Status */}
         <div
           onClick={() => setActivePage('simulation')}
-          className="p-5 cursor-pointer hover:bg-[#1D2026] transition-colors duration-150 space-y-2.5 group"
+          className="p-5 cursor-pointer hover:bg-[#0F1015] transition-colors duration-150 space-y-2.5 group"
         >
           <div className="flex items-center justify-between text-xs text-[#8B909A]">
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-semibold flex items-center space-x-1.5 text-[#8B909A]">
@@ -187,7 +187,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
         {/* Metric 4: Scientific Datasets */}
         <div
           onClick={() => setActivePage('catalogue')}
-          className="p-5 cursor-pointer hover:bg-[#1D2026] transition-colors duration-150 space-y-2.5 group"
+          className="p-5 cursor-pointer hover:bg-[#0F1015] transition-colors duration-150 space-y-2.5 group"
         >
           <div className="flex items-center justify-between text-xs text-[#8B909A]">
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] font-semibold flex items-center space-x-1.5 text-[#8B909A]">
@@ -220,7 +220,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
           {/* Pillar 1: Site Suitability */}
           <div
             onClick={() => setActivePage('sites')}
-            className="bg-[#17191E] border border-[#282C37] p-5 rounded-[2px] cursor-pointer hover:border-[#C85A32]/60 transition-colors space-y-2.5"
+            className="bg-[#0A0B0E] border border-[#181A22] p-5 rounded-[2px] cursor-pointer hover:border-[#C85A32]/60 transition-colors space-y-2.5"
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[#C85A32] font-semibold">
@@ -243,7 +243,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
           {/* Pillar 2: Traverse Suitability */}
           <div
             onClick={() => setActivePage('traverse')}
-            className="bg-[#17191E] border border-[#282C37] p-5 rounded-[2px] cursor-pointer hover:border-[#C85A32]/60 transition-colors space-y-2.5"
+            className="bg-[#0A0B0E] border border-[#181A22] p-5 rounded-[2px] cursor-pointer hover:border-[#C85A32]/60 transition-colors space-y-2.5"
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[#C85A32] font-semibold">
@@ -266,7 +266,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
           {/* Pillar 3: Mission Feasibility */}
           <div
             onClick={() => setActivePage('simulation')}
-            className="bg-[#17191E] border border-[#282C37] p-5 rounded-[2px] cursor-pointer hover:border-[#C85A32]/60 transition-colors space-y-2.5"
+            className="bg-[#0A0B0E] border border-[#181A22] p-5 rounded-[2px] cursor-pointer hover:border-[#C85A32]/60 transition-colors space-y-2.5"
           >
             <div className="flex items-center justify-between">
               <span className="font-mono text-[10px] uppercase tracking-wider text-[#C85A32] font-semibold">
@@ -289,7 +289,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
       </div>
 
       {/* Dataset Verification Checklist */}
-      <div className="bg-[#17191E] border border-[#282C37] p-6 rounded-[2px] space-y-4">
+      <div className="bg-[#0A0B0E] border border-[#181A22] p-6 rounded-[2px] space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 text-xs font-mono uppercase tracking-[0.14em] text-[#F4F4F2] font-semibold">
             <Layers className="h-4 w-4 text-[#C85A32]" />
@@ -313,7 +313,7 @@ export const MissionOverview: React.FC<MissionOverviewProps> = ({ onRevertToLand
           ].map((d) => (
             <div
               key={d.id}
-              className="bg-[#1D2026] border border-[#282C37] p-3 rounded-[2px] space-y-1.5"
+              className="bg-[#0F1015] border border-[#181A22] p-3 rounded-[2px] space-y-1.5"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono font-semibold text-[#F4F4F2]">{d.id}</span>

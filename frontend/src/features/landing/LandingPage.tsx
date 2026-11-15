@@ -97,27 +97,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
   return (
     <div
       ref={containerRef}
-      className="h-screen w-full bg-[#0D0E12] text-[#FAF8F5] font-sans select-text relative overflow-y-auto overflow-x-hidden scroll-smooth"
+      className="h-screen w-full bg-[#050507] text-[#FAF8F5] font-sans select-text relative overflow-y-auto overflow-x-hidden scroll-smooth"
     >
       {/* Atmospheric Background Gradients & Floating Nebulae */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Breathing Rusty Atmospheric Radial Gradients */}
-        <div className="absolute top-0 right-0 w-[650px] h-[650px] bg-gradient-to-b from-[#C85A32]/15 via-[#8E3516]/5 to-transparent rounded-full blur-[130px] animate-pulse-slow" />
-        <div className="absolute bottom-0 left-1/4 w-[850px] h-[450px] bg-gradient-to-t from-[#B24520]/20 via-[#4A1D11]/10 to-transparent blur-[150px] animate-pulse-slow" />
+        {/* Breathing Obsidian Atmospheric Radial Gradients */}
+        <div className="absolute top-0 right-0 w-[650px] h-[650px] bg-gradient-to-b from-[#C85A32]/8 via-[#050507]/40 to-transparent rounded-full blur-[140px] animate-pulse-slow" />
+        <div className="absolute bottom-0 left-1/4 w-[850px] h-[450px] bg-gradient-to-t from-[#B24520]/8 via-[#050507]/60 to-transparent blur-[160px] animate-pulse-slow" />
         
         {/* Subtle Floating Orbit Glow */}
-        <div className="absolute top-1/3 left-10 w-[350px] h-[350px] bg-[#C85A32]/5 rounded-full blur-[90px] animate-float-subtle" />
+        <div className="absolute top-1/3 left-10 w-[350px] h-[350px] bg-[#C85A32]/3 rounded-full blur-[100px] animate-float-subtle" />
 
         {/* Technical Planetary Grid Pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(#C85A32_0.6px,transparent_0.6px)] [background-size:28px_28px] opacity-[0.07]" />
+        <div className="absolute inset-0 bg-[radial-gradient(#C85A32_0.5px,transparent_0.5px)] [background-size:28px_28px] opacity-[0.05]" />
       </div>
 
       {/* Top Technical Navigation Bar */}
-      <header className="sticky top-0 z-40 border-b border-[#2D221E]/90 bg-[#121115]/90 backdrop-blur-md transition-colors duration-200">
+      <header className="sticky top-0 z-40 border-b border-[#181A22] bg-[#07080A]/95 backdrop-blur-md transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Brand Identity */}
           <div className="flex items-center space-x-3.5 group cursor-default">
-            <div className="h-8 w-8 rounded-[2px] bg-[#1D1716] border border-[#C85A32]/50 flex items-center justify-center text-[#C85A32] shadow-[0_0_12px_rgba(200,90,50,0.2)] group-hover:border-[#E27B54] group-hover:shadow-[0_0_16px_rgba(200,90,50,0.4)] transition-all duration-300">
+            <div className="h-8 w-8 rounded-[2px] bg-[#0C0D11] border border-[#C85A32]/50 flex items-center justify-center text-[#C85A32] shadow-[0_0_12px_rgba(200,90,50,0.18)] group-hover:border-[#E27B54] group-hover:shadow-[0_0_16px_rgba(200,90,50,0.35)] transition-all duration-300">
               <Compass className="h-4.5 w-4.5 group-hover:rotate-45 transition-transform duration-500" strokeWidth={1.5} />
             </div>
             <div>
@@ -135,13 +135,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
             <div className="hidden md:flex items-center space-x-2 text-[10px] font-mono text-[#9E958F]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#4E9A68] animate-pulse" />
               <span>NASA SPACE APPS 2026</span>
-              <span className="text-[#3D2C26]">|</span>
+              <span className="text-[#333742]">|</span>
               <span className="text-[#C85A32]">IAU2000:49900</span>
             </div>
 
             <button
               onClick={onEnterWorkstation}
-              className="relative px-4 py-2 rounded-[2px] bg-[#1F1716] hover:bg-[#C85A32] text-[#E27B54] hover:text-[#FAF8F5] border border-[#C85A32]/40 hover:border-[#C85A32] font-mono text-xs uppercase tracking-wider transition-all duration-200 flex items-center space-x-2 cursor-pointer shadow-sm hover:shadow-[0_0_18px_rgba(200,90,50,0.35)] overflow-hidden group"
+              className="relative px-4 py-2 rounded-[2px] bg-[#0E0F14] hover:bg-[#C85A32] text-[#E27B54] hover:text-[#FAF8F5] border border-[#181A22] hover:border-[#C85A32] font-mono text-xs uppercase tracking-wider transition-all duration-200 flex items-center space-x-2 cursor-pointer shadow-sm hover:shadow-[0_0_18px_rgba(200,90,50,0.35)] overflow-hidden group"
             >
               <span>ENTER WORKSTATION</span>
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
@@ -152,12 +152,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
 
       {/* Main Hero Section */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-20 space-y-24">
-        {/* Top Hero Section: Mission Statement & Atmospheric Martian Astronaut Background */}
-        <div className="relative min-h-[460px] lg:min-h-[520px] flex items-center justify-between overflow-visible">
+        {/* Top Hero Grid: Mission Statement & Atmospheric Martian Astronaut Artwork */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative min-h-[460px] lg:min-h-[520px]">
           {/* Left Column: Project Overview & Mission Scope */}
-          <div className="max-w-xl lg:max-w-2xl space-y-6 relative z-10">
+          <div className="lg:col-span-7 space-y-6 relative z-10">
             <Reveal direction="down" delay={0}>
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-[2px] bg-[#231714] border border-[#4C281E] text-[#D4A359] text-[10px] font-mono uppercase tracking-[0.18em] shadow-[0_0_15px_rgba(200,90,50,0.15)]">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-[2px] bg-[#0E0F14] border border-[#181A22] text-[#D4A359] text-[10px] font-mono uppercase tracking-[0.18em] shadow-[0_0_15px_rgba(200,90,50,0.12)]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#C85A32] animate-ping" />
                 <span>Human Planetary Mission Architecture</span>
               </div>
@@ -209,9 +209,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
             </Reveal>
           </div>
 
-          {/* Right Background Graphic: Suited Astronaut standing on Mars Surface */}
+          {/* Right Column: Atmospheric Martian EVA Astronaut Vector Artwork */}
           <div
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-[480px] lg:w-[580px] h-[520px] pointer-events-none select-none z-0 items-center justify-center opacity-85 transition-opacity duration-700"
+            className="lg:col-span-5 relative w-full flex items-center justify-center pointer-events-none select-none z-10"
             aria-hidden="true"
           >
             <MartianAstronautHeroBackground />
@@ -229,7 +229,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
             title="Scroll to explore mission architecture"
           >
             {/* Mouse Silhouette with Animated Scroll Wheel & Pulse Ring */}
-            <div className="relative w-6 h-10 rounded-full border-2 border-[#C85A32]/70 group-hover:border-[#E27B54] bg-[#161214]/90 flex items-start justify-center p-1.5 shadow-[0_0_18px_rgba(200,90,50,0.3)] transition-all group-hover:scale-105">
+            <div className="relative w-6 h-10 rounded-full border-2 border-[#C85A32]/70 group-hover:border-[#E27B54] bg-[#0A0B0E]/90 flex items-start justify-center p-1.5 shadow-[0_0_18px_rgba(200,90,50,0.25)] transition-all group-hover:scale-105">
               {/* Animated Wheel Roller */}
               <div className="w-1.5 h-2.5 rounded-full bg-gradient-to-b from-[#FAF8F5] via-[#E27B54] to-[#C85A32] shadow-[0_0_8px_#E27B54] animate-scroll-wheel" />
             </div>
@@ -241,7 +241,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
         </div>
 
         {/* Section 2: The Three Non-Conflated Analytical Pillars */}
-        <div id="mission-architecture" className="space-y-8 pt-8 border-t border-[#2D221E] scroll-mt-20">
+        <div id="mission-architecture" className="space-y-8 pt-8 border-t border-[#181A22] scroll-mt-20">
           <Reveal direction="up" delay={0}>
             <div className="space-y-2 max-w-3xl">
               <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#C85A32] font-semibold flex items-center space-x-1.5">
@@ -260,8 +260,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Pillar 1: Site Suitability */}
             <Reveal direction="up" delay={100}>
-              <div className="h-full p-6 rounded-[2px] bg-[#161214] border border-[#2D221E] hover:border-[#C85A32] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(200,90,50,0.18)] transition-all duration-300 space-y-4 relative group">
-                <div className="h-10 w-10 rounded-[2px] bg-[#221816] border border-[#C85A32]/40 group-hover:border-[#E27B54] flex items-center justify-center text-[#C85A32] group-hover:text-[#E27B54] group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(200,90,50,0.5)] transition-all duration-300">
+              <div className="h-full p-6 rounded-[2px] bg-[#0A0B0E] border border-[#181A22] hover:border-[#C85A32] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(200,90,50,0.18)] transition-all duration-300 space-y-4 relative group">
+                <div className="h-10 w-10 rounded-[2px] bg-[#121318] border border-[#C85A32]/40 group-hover:border-[#E27B54] flex items-center justify-center text-[#C85A32] group-hover:text-[#E27B54] group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(200,90,50,0.5)] transition-all duration-300">
                   <MapPin className="h-5 w-5" strokeWidth={1.5} />
                 </div>
                 <div className="space-y-2">
@@ -275,7 +275,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
                     Evaluates landing zones with transparent weighted scoring across 5 criteria: terrain safety, human hazard avoidance, mineral science value, subsurface water-ice indicators, and landing accessibility.
                   </p>
                 </div>
-                <div className="pt-2 border-t border-[#2D221E] text-[10px] font-mono text-[#9E958F] space-y-1">
+                <div className="pt-2 border-t border-[#181A22] text-[10px] font-mono text-[#9E958F] space-y-1">
                   <div>• Hard constraint: Slope ≤ 15.0°</div>
                   <div>• SWIM water-ice presence verification</div>
                   <div>• Transparent equation: S = Σ (wᵢ × sᵢ)</div>
@@ -285,8 +285,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
 
             {/* Pillar 2: Traverse Suitability */}
             <Reveal direction="up" delay={250}>
-              <div className="h-full p-6 rounded-[2px] bg-[#161214] border border-[#2D221E] hover:border-[#C85A32] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(200,90,50,0.18)] transition-all duration-300 space-y-4 relative group">
-                <div className="h-10 w-10 rounded-[2px] bg-[#221816] border border-[#C85A32]/40 group-hover:border-[#E27B54] flex items-center justify-center text-[#C85A32] group-hover:text-[#E27B54] group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(200,90,50,0.5)] transition-all duration-300">
+              <div className="h-full p-6 rounded-[2px] bg-[#0A0B0E] border border-[#181A22] hover:border-[#C85A32] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(200,90,50,0.18)] transition-all duration-300 space-y-4 relative group">
+                <div className="h-10 w-10 rounded-[2px] bg-[#121318] border border-[#C85A32]/40 group-hover:border-[#E27B54] flex items-center justify-center text-[#C85A32] group-hover:text-[#E27B54] group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(200,90,50,0.5)] transition-all duration-300">
                   <Route className="h-5 w-5" strokeWidth={1.5} />
                 </div>
                 <div className="space-y-2">
@@ -300,7 +300,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
                     Calculates optimal surface paths between habitat base, intermediate science investigation stations, and return corridors using slope-penalized A* pathfinding.
                   </p>
                 </div>
-                <div className="pt-2 border-t border-[#2D221E] text-[10px] font-mono text-[#9E958F] space-y-1">
+                <div className="pt-2 border-t border-[#181A22] text-[10px] font-mono text-[#9E958F] space-y-1">
                   <div>• 3 Route alternatives: Low-Risk, Balanced, Science</div>
                   <div>• HiRISE &amp; MOLA elevation cross-sections</div>
                   <div>• Hazard exclusion and slope penalty weights</div>
@@ -310,8 +310,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
 
             {/* Pillar 3: Mission Feasibility */}
             <Reveal direction="up" delay={400}>
-              <div className="h-full p-6 rounded-[2px] bg-[#161214] border border-[#2D221E] hover:border-[#C85A32] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(200,90,50,0.18)] transition-all duration-300 space-y-4 relative group">
-                <div className="h-10 w-10 rounded-[2px] bg-[#221816] border border-[#C85A32]/40 group-hover:border-[#E27B54] flex items-center justify-center text-[#C85A32] group-hover:text-[#E27B54] group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(200,90,50,0.5)] transition-all duration-300">
+              <div className="h-full p-6 rounded-[2px] bg-[#0A0B0E] border border-[#181A22] hover:border-[#C85A32] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(200,90,50,0.18)] transition-all duration-300 space-y-4 relative group">
+                <div className="h-10 w-10 rounded-[2px] bg-[#121318] border border-[#C85A32]/40 group-hover:border-[#E27B54] flex items-center justify-center text-[#C85A32] group-hover:text-[#E27B54] group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(200,90,50,0.5)] transition-all duration-300">
                   <Activity className="h-5 w-5" strokeWidth={1.5} />
                 </div>
                 <div className="space-y-2">
@@ -325,7 +325,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
                     Simulates astronaut metabolic expenditure and life-support depletion (O₂, battery power, suit cooling water) across the entire traverse timeline.
                   </p>
                 </div>
-                <div className="pt-2 border-t border-[#2D221E] text-[10px] font-mono text-[#9E958F] space-y-1">
+                <div className="pt-2 border-t border-[#181A22] text-[10px] font-mono text-[#9E958F] space-y-1">
                   <div>• Non-negotiable 25% emergency return reserve</div>
                   <div>• Strict walk-back contingency radius check</div>
                   <div>• Point-of-no-return timeline alerts</div>
@@ -337,8 +337,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
 
         {/* Section 3: Scientific Ingestion Archives with Staggered Fade-in */}
         <Reveal direction="up" delay={150}>
-          <div className="border border-[#2D221E] bg-[#141012] p-8 rounded-[2px] space-y-6 shadow-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-72 h-72 bg-[#C85A32]/5 rounded-full blur-2xl pointer-events-none" />
+          <div className="border border-[#181A22] bg-[#08090C] p-8 rounded-[2px] space-y-6 shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-72 h-72 bg-[#C85A32]/4 rounded-full blur-2xl pointer-events-none" />
 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
               <div className="space-y-1">
@@ -350,7 +350,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
                   Georeferenced Multi-Mission Instruments
                 </h3>
               </div>
-              <div className="text-[10px] font-mono text-[#9E958F] bg-[#1B1516] px-3 py-1.5 rounded-[1px] border border-[#2D221E] shrink-0">
+              <div className="text-[10px] font-mono text-[#9E958F] bg-[#0C0D11] px-3 py-1.5 rounded-[1px] border border-[#181A22] shrink-0">
                 DATUM: IAU2000:49900 • EAST-POSITIVE
               </div>
             </div>
@@ -367,7 +367,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
                 <div
                   key={inst.id}
                   style={{ animationDelay: `${idx * 80}ms` }}
-                  className="p-3 rounded-[2px] bg-[#1B1516] border border-[#2D221E] hover:border-[#E27B54]/70 hover:-translate-y-1 hover:shadow-[0_6px_20px_rgba(200,90,50,0.2)] transition-all duration-300 space-y-1 cursor-default group/inst"
+                  className="p-3 rounded-[2px] bg-[#0C0D11] border border-[#181A22] hover:border-[#E27B54]/70 hover:-translate-y-1 hover:shadow-[0_6px_20px_rgba(200,90,50,0.2)] transition-all duration-300 space-y-1 cursor-default group/inst"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold text-[#FAF8F5] group-hover/inst:text-[#E27B54] transition-colors">
@@ -386,8 +386,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
 
         {/* Section 4: Final Launch Call-to-Action with Atmospheric Glow */}
         <Reveal direction="up" delay={200}>
-          <div className="rounded-[2px] border border-[#3D2C26] hover:border-[#C85A32]/60 bg-gradient-to-r from-[#1B1416] via-[#241718] to-[#1B1416] p-8 md:p-12 text-center space-y-6 relative overflow-hidden shadow-2xl transition-all duration-500">
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#C85A32]/10 rounded-full blur-[100px] pointer-events-none animate-pulse-slow" />
+          <div className="rounded-[2px] border border-[#181A22] hover:border-[#C85A32]/60 bg-gradient-to-r from-[#060709] via-[#0B0C10] to-[#060709] p-8 md:p-12 text-center space-y-6 relative overflow-hidden shadow-2xl transition-all duration-500">
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#C85A32]/6 rounded-full blur-[110px] pointer-events-none animate-pulse-slow" />
 
             <div className="max-w-2xl mx-auto space-y-3 relative z-10">
               <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#C85A32] font-semibold flex items-center justify-center space-x-2">
@@ -417,7 +417,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
       </main>
 
       {/* Clean Minimal Technical Bottom Bar */}
-      <footer className="relative z-10 border-t border-[#2D221E] bg-[#0E0D10] py-4 text-center text-[10px] font-mono text-[#8B837E]">
+      <footer className="relative z-10 border-t border-[#181A22] bg-[#050507] py-4 text-center text-[10px] font-mono text-[#8B837E]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>AresNav • HUMAN MISSION DECISION SUPPORT SYSTEM</span>
           <span className="text-[#C85A32]">NASA SPACE APPS CHALLENGE 2026</span>

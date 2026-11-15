@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ isConnecting = false, onOpenLand
   const { selectedRegion, setSelectedRegion, health, isBackendHealthy } = useMissionStore();
 
   return (
-    <header className="border-b border-[#282C37] bg-[#17191E] z-30 shrink-0 select-none">
+    <header className="border-b border-[#181A22] bg-[#07080A] z-30 shrink-0 select-none">
       {/* Main Mission Control Header */}
       <div className="h-14 px-5 flex items-center justify-between">
         {/* Left: Brand Identity & Target Region */}
@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ isConnecting = false, onOpenLand
             className={`flex items-center space-x-3 ${onOpenLanding ? 'cursor-pointer group' : ''}`}
             title={onOpenLanding ? 'View Project Landing Page & Mission Brief' : undefined}
           >
-            <div className="h-7 w-7 rounded-[2px] bg-[#1D2026] border border-[#C85A32]/40 group-hover:border-[#C85A32] flex items-center justify-center text-[#C85A32] transition-colors">
+            <div className="h-7 w-7 rounded-[2px] bg-[#0E0F14] border border-[#C85A32]/40 group-hover:border-[#C85A32] flex items-center justify-center text-[#C85A32] transition-colors">
               <Compass className="h-4 w-4" strokeWidth={1.5} />
             </div>
             <div className="flex flex-col">
@@ -38,10 +38,10 @@ export const Header: React.FC<HeaderProps> = ({ isConnecting = false, onOpenLand
             </div>
           </div>
 
-          <div className="h-5 w-px bg-[#282C37] mx-1 hidden sm:block" />
+          <div className="h-5 w-px bg-[#181A22] mx-1 hidden sm:block" />
 
           {/* Region Dropdown Selector */}
-          <div className="flex items-center space-x-2 bg-[#1D2026] px-3 py-1.5 rounded-[2px] border border-[#282C37] text-xs">
+          <div className="flex items-center space-x-2 bg-[#0E0F14] px-3 py-1.5 rounded-[2px] border border-[#181A22] text-xs">
             <Globe2 className="h-3.5 w-3.5 text-[#C85A32]" strokeWidth={1.5} />
             <span className="text-[#8B909A] text-[10px] font-mono uppercase tracking-[0.14em] font-semibold">
               REGION:
@@ -54,19 +54,19 @@ export const Header: React.FC<HeaderProps> = ({ isConnecting = false, onOpenLand
               }}
               className="bg-transparent text-[#F4F4F2] font-medium focus:outline-none cursor-pointer text-xs font-sans tracking-wide"
             >
-              <option value={GALE_REGION.region_id} className="bg-[#17191E] text-[#F4F4F2]">
+              <option value={GALE_REGION.region_id} className="bg-[#07080A] text-[#F4F4F2]">
                 Gale Crater / Mount Sharp (Aeolis Mons Layered Mound)
               </option>
             </select>
           </div>
         </div>
 
-        {/* Right: Technical Badges & Status Indicators (visually removed per user design instruction) */}
+        {/* Right: Technical Badges & Status Indicators */}
         <div className="flex items-center space-x-3 text-xs">
           {onOpenLanding && (
             <button
               onClick={onOpenLanding}
-              className="px-2.5 py-1 rounded-[2px] bg-[#1D2026] hover:bg-[#281814] border border-[#282C37] hover:border-[#C85A32]/60 text-[#8B909A] hover:text-[#FAF8F5] text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-[2px] bg-[#0E0F14] hover:bg-[#1A0E0C] border border-[#181A22] hover:border-[#C85A32]/60 text-[#8B909A] hover:text-[#FAF8F5] text-[10px] font-mono uppercase tracking-wider transition-colors cursor-pointer"
               title="Return to Landing Page"
             >
               Landing Page

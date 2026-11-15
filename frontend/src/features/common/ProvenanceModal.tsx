@@ -18,10 +18,10 @@ export const ProvenanceModal: React.FC<ProvenanceModalProps> = ({ dataset, onClo
       onClick={onClose}
     >
       <div
-        className="bg-[#17191E] border border-[#282C37] rounded-[2px] max-w-lg w-full max-h-[85vh] overflow-y-auto p-7 text-[#8B909A] shadow-2xl"
+        className="bg-[#0A0B0E] border border-[#181A22] rounded-[2px] max-w-lg w-full max-h-[85vh] overflow-y-auto p-7 text-[#8B909A] shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between border-b border-[#282C37] pb-4 mb-5">
+        <div className="flex items-start justify-between border-b border-[#181A22] pb-4 mb-5">
           <div>
             <div className="flex items-center space-x-2">
               <span className="text-xs font-mono text-[#C85A32] font-semibold tracking-wider">
@@ -33,7 +33,7 @@ export const ProvenanceModal: React.FC<ProvenanceModalProps> = ({ dataset, onClo
           </div>
           <button
             onClick={onClose}
-            className="text-[#8B909A] hover:text-[#F4F4F2] p-1.5 rounded-[2px] hover:bg-[#1D2026] transition-colors"
+            className="text-[#8B909A] hover:text-[#F4F4F2] p-1.5 rounded-[2px] hover:bg-[#0F1015] transition-colors"
             aria-label="Close"
           >
             <X className="h-4 w-4" strokeWidth={1.5} />
@@ -42,7 +42,7 @@ export const ProvenanceModal: React.FC<ProvenanceModalProps> = ({ dataset, onClo
 
         <div className="space-y-4 text-xs font-sans">
           {/* Mission & Instrument Grid */}
-          <div className="grid grid-cols-2 gap-2.5 bg-[#111215] p-3.5 rounded-[2px] border border-[#282C37]">
+          <div className="grid grid-cols-2 gap-2.5 bg-[#050507] p-3.5 rounded-[2px] border border-[#181A22]">
             <div>
               <span className="text-[#8B909A] block text-[10px] font-mono uppercase tracking-[0.16em] font-semibold">Mission</span>
               <span className="text-[#F4F4F2] font-mono font-medium">{dataset.mission}</span>
@@ -68,7 +68,7 @@ export const ProvenanceModal: React.FC<ProvenanceModalProps> = ({ dataset, onClo
             <h4 className="text-[10px] font-mono text-[#C85A32] uppercase tracking-[0.16em] flex items-center space-x-1 mb-1 font-semibold">
               <BookOpen className="h-3 w-3 mr-1 text-[#C85A32]" strokeWidth={1.5} /> Scientific Citation & Reference
             </h4>
-            <p className="bg-[#111215] p-3.5 rounded-[2px] border border-[#282C37] text-[#C4C7C5] leading-relaxed font-sans text-xs">
+            <p className="bg-[#050507] p-3.5 rounded-[2px] border border-[#181A22] text-[#C4C7C5] leading-relaxed font-sans text-xs">
               {dataset.citation}
             </p>
           </div>
@@ -89,7 +89,7 @@ export const ProvenanceModal: React.FC<ProvenanceModalProps> = ({ dataset, onClo
 
           {/* Access / URL */}
           {dataset.source_url && (
-            <div className="pt-3 border-t border-[#282C37] flex justify-end">
+            <div className="pt-3 border-t border-[#181A22] flex justify-end">
               <a
                 href={dataset.source_url}
                 target="_blank"

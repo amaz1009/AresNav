@@ -43,16 +43,16 @@ export const MissionSimulation: React.FC = () => {
   // Empty state: No active route planned or selected
   if (!isPathConfigured || !activeRoute || !sim) {
     return (
-      <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#111215]">
+      <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#050507]">
         {/* Header Panel */}
-        <div className="border border-[#282C37] bg-[#17191E] p-6 md:p-8 rounded-[2px] flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
+        <div className="border border-[#181A22] bg-[#0A0B0E] p-6 md:p-8 rounded-[2px] flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
           <div className="space-y-2 max-w-3xl">
             <div className="flex items-center space-x-2.5">
               <Activity className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
               <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold">
                 EVA CONSUMABLES & FEASIBILITY (PDF SECTION 9.4)
               </span>
-              <span className="text-[#363B4A]">/</span>
+              <span className="text-[#222530]">/</span>
               <SampleBadge label="PHYSIOLOGY MODEL" />
             </div>
             <h2 className="text-3xl font-normal text-[#F4F4F2] tracking-wide font-editorial">
@@ -70,7 +70,7 @@ export const MissionSimulation: React.FC = () => {
         </div>
 
         {/* Empty State Banner */}
-        <div className="border border-[#282C37] bg-[#17191E] p-10 md:p-14 rounded-[2px] flex flex-col items-center justify-center text-center space-y-5">
+        <div className="border border-[#181A22] bg-[#0A0B0E] p-10 md:p-14 rounded-[2px] flex flex-col items-center justify-center text-center space-y-5">
           <div className="w-14 h-14 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/30 flex items-center justify-center">
             <Route className="h-7 w-7 text-[#C85A32]" strokeWidth={1.5} />
           </div>
@@ -100,16 +100,16 @@ export const MissionSimulation: React.FC = () => {
   const endPt = activeRoute.waypoints?.[activeRoute.waypoints.length - 1];
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#111215]">
+    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#050507]">
       {/* Header Panel */}
-      <div className="border border-[#282C37] bg-[#17191E] p-6 md:p-8 rounded-[2px] flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
+      <div className="border border-[#181A22] bg-[#0A0B0E] p-6 md:p-8 rounded-[2px] flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
         <div className="space-y-2 max-w-3xl">
           <div className="flex items-center space-x-2.5">
             <Activity className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
             <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold">
               EVA CONSUMABLES & FEASIBILITY (PDF SECTION 9.4)
             </span>
-            <span className="text-[#363B4A]">/</span>
+            <span className="text-[#222530]">/</span>
             <SampleBadge label="PHYSIOLOGY MODEL" />
           </div>
           <h2 className="text-3xl font-normal text-[#F4F4F2] tracking-wide font-editorial">
@@ -127,7 +127,7 @@ export const MissionSimulation: React.FC = () => {
       </div>
 
       {/* Active Route Context HUD */}
-      <div className="border border-[#282C37] bg-[#14161A] p-4 md:p-5 rounded-[2px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="border border-[#181A22] bg-[#0A0B0E] p-4 md:p-5 rounded-[2px] flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
           <div className="flex items-center space-x-2">
             <Route className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
@@ -145,11 +145,11 @@ export const MissionSimulation: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap items-center gap-3 text-xs font-mono">
-          <span className="px-2.5 py-1 bg-[#17191E] border border-[#282C37] rounded-[2px] text-[#F4F4F2] flex items-center space-x-1.5">
+          <span className="px-2.5 py-1 bg-[#0A0B0E] border border-[#181A22] rounded-[2px] text-[#F4F4F2] flex items-center space-x-1.5">
             <Compass className="h-3.5 w-3.5 text-[#C85A32]" />
             <span>{(activeRoute.surface_distance_km || activeRoute.total_distance_km).toFixed(2)} km</span>
           </span>
-          <span className="px-2.5 py-1 bg-[#17191E] border border-[#282C37] rounded-[2px] text-[#F4F4F2] flex items-center space-x-1.5">
+          <span className="px-2.5 py-1 bg-[#0A0B0E] border border-[#181A22] rounded-[2px] text-[#F4F4F2] flex items-center space-x-1.5">
             <Mountain className="h-3.5 w-3.5 text-[#C85A32]" />
             <span>Avg {activeRoute.average_slope_deg.toFixed(1)}° / Max {activeRoute.max_slope_deg.toFixed(1)}°</span>
           </span>
@@ -164,7 +164,7 @@ export const MissionSimulation: React.FC = () => {
       </div>
 
       {/* 4-Cell Life Support Metric Ledger */}
-      <div className="border border-[#282C37] bg-[#17191E] rounded-[2px] divide-y sm:divide-y-0 sm:divide-x divide-[#282C37] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="border border-[#181A22] bg-[#0A0B0E] rounded-[2px] divide-y sm:divide-y-0 sm:divide-x divide-[#181A22] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {/* Cell 1: Oxygen */}
         <div className="p-6 space-y-2">
           <div className="flex items-center justify-between text-xs text-[#8B909A]">
@@ -265,8 +265,8 @@ export const MissionSimulation: React.FC = () => {
       {/* Main Grid: Depletion Chart & Configuration Sliders */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column (7 cols): Consumables Depletion Over Time */}
-        <div className="lg:col-span-7 bg-[#17191E] border border-[#282C37] p-6 md:p-8 rounded-[2px] space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#282C37] pb-4">
+        <div className="lg:col-span-7 bg-[#0A0B0E] border border-[#181A22] p-6 md:p-8 rounded-[2px] space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#181A22] pb-4">
             <div>
               <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] font-semibold">
                 Life Support Consumables & Metabolic Expenditure
@@ -287,7 +287,7 @@ export const MissionSimulation: React.FC = () => {
           <div className="h-64 w-full pt-2">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sim.timeline} margin={{ top: 10, right: 15, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#282C37" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#181A22" vertical={false} />
                 <XAxis
                   dataKey="elapsed_min"
                   stroke="#8B909A"
@@ -310,7 +310,7 @@ export const MissionSimulation: React.FC = () => {
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#17191E',
+                    backgroundColor: '#0A0B0E',
                     borderColor: '#C85A32',
                     borderRadius: '2px',
                     fontSize: '11px',
@@ -380,8 +380,8 @@ export const MissionSimulation: React.FC = () => {
         </div>
 
         {/* Right Column (5 cols): Interactive Parameter Sliders */}
-        <div className="lg:col-span-5 bg-[#17191E] border border-[#282C37] p-6 md:p-8 rounded-[2px] space-y-5">
-          <div className="flex items-center justify-between border-b border-[#282C37] pb-3.5">
+        <div className="lg:col-span-5 bg-[#0A0B0E] border border-[#181A22] p-6 md:p-8 rounded-[2px] space-y-5">
+          <div className="flex items-center justify-between border-b border-[#181A22] pb-3.5">
             <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold">
               <Sliders className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
               <span>EVA Mission Parameters</span>
@@ -403,7 +403,7 @@ export const MissionSimulation: React.FC = () => {
                 step={1}
                 value={evaConfigParams.crew_size}
                 onChange={(e) => setEvaConfigParams({ crew_size: parseInt(e.target.value) })}
-                className="w-full h-1 bg-[#282C37] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
+                className="w-full h-1 bg-[#181A22] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
               />
             </div>
 
@@ -420,7 +420,7 @@ export const MissionSimulation: React.FC = () => {
                 step={0.1}
                 value={evaConfigParams.base_speed_kmh}
                 onChange={(e) => setEvaConfigParams({ base_speed_kmh: parseFloat(e.target.value) })}
-                className="w-full h-1 bg-[#282C37] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
+                className="w-full h-1 bg-[#181A22] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
               />
             </div>
 
@@ -437,7 +437,7 @@ export const MissionSimulation: React.FC = () => {
                 step={0.5}
                 value={evaConfigParams.max_eva_hours}
                 onChange={(e) => setEvaConfigParams({ max_eva_hours: parseFloat(e.target.value) })}
-                className="w-full h-1 bg-[#282C37] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
+                className="w-full h-1 bg-[#181A22] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
               />
             </div>
 
@@ -454,7 +454,7 @@ export const MissionSimulation: React.FC = () => {
                 step={0.05}
                 value={evaConfigParams.return_reserve_fraction}
                 onChange={(e) => setEvaConfigParams({ return_reserve_fraction: parseFloat(e.target.value) })}
-                className="w-full h-1 bg-[#282C37] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
+                className="w-full h-1 bg-[#181A22] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
               />
             </div>
 
@@ -471,7 +471,7 @@ export const MissionSimulation: React.FC = () => {
                 step={1}
                 value={evaConfigParams.max_slope_deg}
                 onChange={(e) => setEvaConfigParams({ max_slope_deg: parseFloat(e.target.value) })}
-                className="w-full h-1 bg-[#282C37] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
+                className="w-full h-1 bg-[#181A22] rounded-none appearance-none cursor-pointer accent-[#C85A32] mt-2"
               />
             </div>
           </div>
@@ -479,7 +479,7 @@ export const MissionSimulation: React.FC = () => {
       </div>
 
       {/* Safety Constraint Checks Table (7 Backend Safety Checks) */}
-      <div className="bg-[#17191E] border border-[#282C37] p-6 md:p-8 rounded-[2px] space-y-4">
+      <div className="bg-[#0A0B0E] border border-[#181A22] p-6 md:p-8 rounded-[2px] space-y-4">
         <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold">
           <ShieldCheck className="h-4 w-4 text-[#4E9A68]" strokeWidth={1.5} />
           <span>Automated Safety Constraint Checks (7 Backend Criteria)</span>
@@ -489,7 +489,7 @@ export const MissionSimulation: React.FC = () => {
           {sim.checks.map((check) => (
             <div
               key={check.id}
-              className="bg-[#14161A] border border-[#282C37] p-4 rounded-[2px] flex items-start justify-between text-xs hover:border-[#C85A32]/40 transition-colors"
+              className="bg-[#0A0B0E] border border-[#181A22] p-4 rounded-[2px] flex items-start justify-between text-xs hover:border-[#C85A32]/40 transition-colors"
             >
               <div className="space-y-1 pr-3">
                 <strong className="text-[#F4F4F2] block font-editorial tracking-wide text-sm">{check.label}</strong>
@@ -502,7 +502,7 @@ export const MissionSimulation: React.FC = () => {
       </div>
 
       {/* Mandatory Safety Disclaimer Notice */}
-      <div className="p-4 bg-[#14161A] border border-[#282C37] rounded-[2px] text-[11px] font-mono text-[#8B909A] leading-relaxed">
+      <div className="p-4 bg-[#0A0B0E] border border-[#181A22] rounded-[2px] text-[11px] font-mono text-[#8B909A] leading-relaxed">
         <span className="text-[#C85A32] font-semibold uppercase mr-2">[RESEARCH DISCLAIMER]:</span>
         AresNav is a research and planning prototype. Results are computational estimates based on orbital and
         landing-site datasets and must not be used as the sole basis for flight, surface-operation, or life-safety decisions.

@@ -26,9 +26,9 @@ export const PointInspector: React.FC<PointInspectorProps> = ({ onInspectDataset
   const isSampleInspection = pointInspection?.values.some((v) => v.data_class === 'SAMPLE');
 
   return (
-    <div className="flex flex-col h-full space-y-3.5 p-3.5 overflow-y-auto bg-[#17191E] select-text font-sans">
+    <div className="flex flex-col h-full space-y-3.5 p-3.5 overflow-y-auto bg-[#0A0B0E] select-text font-sans">
       {/* Header with coordinates */}
-      <div className="border-b border-[#282C37] pb-3">
+      <div className="border-b border-[#181A22] pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Crosshair className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
@@ -40,7 +40,7 @@ export const PointInspector: React.FC<PointInspectorProps> = ({ onInspectDataset
         </div>
 
         {/* Selected Coordinates */}
-        <div className="mt-2.5 grid grid-cols-2 gap-2 bg-[#111215] p-2.5 rounded-[2px] border border-[#282C37] font-mono text-xs">
+        <div className="mt-2.5 grid grid-cols-2 gap-2 bg-[#050507] p-2.5 rounded-[2px] border border-[#181A22] font-mono text-xs">
           <div>
             <span className="text-[10px] text-[#8B909A] block uppercase tracking-[0.16em] font-semibold">LAT (Planetocentric)</span>
             <span className="text-[#F4F4F2] font-medium">{selectedPoint.lat.toFixed(5)}Â°</span>
@@ -65,7 +65,7 @@ export const PointInspector: React.FC<PointInspectorProps> = ({ onInspectDataset
       ) : (
         <div className="space-y-3 text-xs">
           {/* Confidence & Region */}
-          <div className="flex items-center justify-between text-[11px] bg-[#1D2026] px-3 py-1.5 rounded-[2px] border border-[#282C37]">
+          <div className="flex items-center justify-between text-[11px] bg-[#0F1015] px-3 py-1.5 rounded-[2px] border border-[#181A22]">
             <span className="text-[#8B909A] font-mono uppercase tracking-[0.14em] text-[10px]">Data Confidence:</span>
             <span
               className={`font-mono font-semibold tracking-wider ${
@@ -92,7 +92,7 @@ export const PointInspector: React.FC<PointInspectorProps> = ({ onInspectDataset
                 <div
                   key={i}
                   data-testid={`inspection-value-${v.layer_id}`}
-                  className="bg-[#111215] p-2.5 rounded-[2px] border border-[#282C37] space-y-1.5 hover:border-[#3E4454] transition-colors"
+                  className="bg-[#050507] p-2.5 rounded-[2px] border border-[#181A22] space-y-1.5 hover:border-[#2A2E3D] transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-[#F4F4F2] capitalize text-xs tracking-wide">
@@ -123,7 +123,7 @@ export const PointInspector: React.FC<PointInspectorProps> = ({ onInspectDataset
 
                   {/* Evidence Chain */}
                   {v.dataset_ids && v.dataset_ids.length > 0 && (
-                    <div className="pt-1 border-t border-[#282C37] flex items-center justify-between text-[10px]">
+                    <div className="pt-1 border-t border-[#181A22] flex items-center justify-between text-[10px]">
                       <span className="text-[#8B909A] font-mono uppercase tracking-wider text-[9px]">Source:</span>
                       <div className="flex flex-wrap gap-1">
                         {v.dataset_ids.map((dsId) => (
@@ -155,7 +155,7 @@ export const PointInspector: React.FC<PointInspectorProps> = ({ onInspectDataset
                 {pointInspection.context.map((ctx, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#111215] p-2.5 rounded-[2px] border border-[#282C37] flex items-center justify-between text-[11px]"
+                    className="bg-[#050507] p-2.5 rounded-[2px] border border-[#181A22] flex items-center justify-between text-[11px]"
                   >
                     <div>
                       <span className="font-semibold text-[#F4F4F2] block">

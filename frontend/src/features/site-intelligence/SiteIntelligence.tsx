@@ -46,21 +46,21 @@ export const SiteIntelligence: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col h-full bg-[#111215] select-text font-sans">
+    <div className="flex-1 overflow-hidden flex flex-col h-full bg-[#050507] select-text font-sans">
       {/* Top Filter and Actions Bar */}
-      <div className="h-11 bg-[#17191E] border-b border-[#282C37] px-6 flex items-center justify-between shrink-0">
+      <div className="h-11 bg-[#0A0B0E] border-b border-[#181A22] px-6 flex items-center justify-between shrink-0">
         <div className="flex items-center space-x-3">
           <Sparkles className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
           <h2 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] font-semibold">
             Candidate Site Intelligence & Ranking ({candidateSites.length} Sites Evaluated)
           </h2>
-          <span className="text-[#363B4A]">/</span>
+          <span className="text-[#222530]">/</span>
           <SampleBadge label="EVALUATION MODEL" />
         </div>
 
         <div className="flex items-center space-x-3 text-xs">
           {activeSite && (
-            <div className="hidden md:flex items-center space-x-2 font-mono text-[11px] bg-[#1D2026] px-2.5 py-1 rounded-[2px] border border-[#282C37]">
+            <div className="hidden md:flex items-center space-x-2 font-mono text-[11px] bg-[#0F1015] px-2.5 py-1 rounded-[2px] border border-[#181A22]">
               <span className="text-[#8B909A] uppercase tracking-wider text-[10px]">SELECTED:</span>
               <span className="text-[#60A5FA] font-medium">{activeSite.name}</span>
               <button
@@ -97,7 +97,7 @@ export const SiteIntelligence: React.FC = () => {
       {/* Main Split Content: 3-column workstation (Ledger | Map | Details Slot) */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
         {/* Left Side: Ranked Site Cards */}
-        <div className="w-full lg:w-80 xl:w-88 border-r border-[#282C37] bg-[#17191E] flex flex-col overflow-y-auto p-4 space-y-3 shrink-0">
+        <div className="w-full lg:w-80 xl:w-88 border-r border-[#181A22] bg-[#0A0B0E] flex flex-col overflow-y-auto p-4 space-y-3 shrink-0">
           <div className="flex items-center justify-between px-1">
             <span className="text-[10px] font-mono text-[#C85A32] uppercase tracking-[0.18em] font-semibold">
               Candidate Sites Ledger
@@ -116,8 +116,8 @@ export const SiteIntelligence: React.FC = () => {
                 onClick={() => handleSiteClick(site)}
                 className={`p-3.5 rounded-[2px] border cursor-pointer transition-colors duration-150 ${
                   isSelected
-                    ? 'bg-[#1D2026] border-[#3B82F6] shadow-md shadow-[#2563EB]/10'
-                    : 'bg-[#14161A] border-[#282C37] hover:border-[#363B4A]'
+                    ? 'bg-[#0F1015] border-[#3B82F6] shadow-md shadow-[#2563EB]/10'
+                    : 'bg-[#0A0B0E] border-[#181A22] hover:border-[#222530]'
                 }`}
               >
                 <div className="flex items-start justify-between">
@@ -126,7 +126,7 @@ export const SiteIntelligence: React.FC = () => {
                       className={`h-5 w-5 rounded-[2px] font-mono text-[10px] flex items-center justify-center font-bold border ${
                         isSelected
                           ? 'bg-[#2563EB] text-white border-[#3B82F6]'
-                          : 'bg-[#17191E] text-[#C85A32] border-[#282C37]'
+                          : 'bg-[#0A0B0E] text-[#C85A32] border-[#181A22]'
                       }`}
                     >
                       0{index + 1}
@@ -170,8 +170,8 @@ export const SiteIntelligence: React.FC = () => {
         </div>
 
         {/* Center: Interactive Mars Map with Candidate Sites Blue Points */}
-        <div className="flex-1 relative min-h-[300px] bg-[#0E0F12] border-r border-[#282C37] overflow-hidden flex flex-col">
-          <div className="absolute top-3 right-4 z-[400] bg-[#17191E]/90 border border-[#282C37] rounded-[2px] px-3 py-1.5 text-[10px] font-mono text-[#8B909A] pointer-events-none shadow backdrop-blur-sm flex items-center space-x-2">
+        <div className="flex-1 relative min-h-[300px] bg-[#050507] border-r border-[#181A22] overflow-hidden flex flex-col">
+          <div className="absolute top-3 right-4 z-[400] bg-[#0A0B0E]/90 border border-[#181A22] rounded-[2px] px-3 py-1.5 text-[10px] font-mono text-[#8B909A] pointer-events-none shadow backdrop-blur-sm flex items-center space-x-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] shadow-[0_0_6px_#2563EB] inline-block" />
             <span className="text-[#C4C7C5]">Blue Pointers = Candidate Sites (Click to inspect)</span>
           </div>
@@ -187,12 +187,12 @@ export const SiteIntelligence: React.FC = () => {
         {/* Right Side: Site Intelligence Slot */}
         <div
           data-testid="site-intelligence-slot"
-          className="w-full lg:w-[460px] xl:w-[520px] overflow-y-auto p-6 space-y-6 bg-[#111215] shrink-0"
+          className="w-full lg:w-[460px] xl:w-[520px] overflow-y-auto p-6 space-y-6 bg-[#050507] shrink-0"
         >
           {!activeSite ? (
             /* Empty State: Only shows details when user clicks a site or blue pointer */
-            <div className="h-full min-h-[400px] flex flex-col items-center justify-center p-8 text-center text-[#8B909A] space-y-4 border border-dashed border-[#282C37] rounded-[2px] bg-[#14161A]/50">
-              <div className="w-16 h-16 rounded-full bg-[#1D2026] border border-[#282C37] flex items-center justify-center">
+            <div className="h-full min-h-[400px] flex flex-col items-center justify-center p-8 text-center text-[#8B909A] space-y-4 border border-dashed border-[#181A22] rounded-[2px] bg-[#0A0B0E]/50">
+              <div className="w-16 h-16 rounded-full bg-[#0F1015] border border-[#181A22] flex items-center justify-center">
                 <Target className="h-8 w-8 text-[#2563EB] animate-pulse" strokeWidth={1.5} />
               </div>
               <div className="space-y-1.5 max-w-sm">
@@ -203,7 +203,7 @@ export const SiteIntelligence: React.FC = () => {
                   No candidate site selected. Select a candidate site from the ledger or click any blue point marker on the Martian map to reveal multi-criteria evaluation metrics, geological evidence, and safety constraints.
                 </p>
               </div>
-              <div className="inline-flex items-center space-x-2 text-[10px] font-mono px-3 py-1.5 rounded-[2px] bg-[#17191E] border border-[#282C37] text-[#8B909A]">
+              <div className="inline-flex items-center space-x-2 text-[10px] font-mono px-3 py-1.5 rounded-[2px] bg-[#0A0B0E] border border-[#181A22] text-[#8B909A]">
                 <span className="w-2 h-2 rounded-full bg-[#2563EB] shadow-[0_0_6px_#2563EB] inline-block" />
                 <span>Highlighted on map with blue points</span>
               </div>
@@ -212,21 +212,21 @@ export const SiteIntelligence: React.FC = () => {
             /* High-Density Site Intelligence Dossier (Displayed ONLY when a site is clicked) */
             <>
               {/* Header Card */}
-              <div className="bg-[#17191E] border border-[#282C37] p-5 rounded-[2px] space-y-3">
+              <div className="bg-[#0A0B0E] border border-[#181A22] p-5 rounded-[2px] space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <StatusBadge status={activeSite.status} size="md" />
                     <span className="font-mono text-xs text-[#C85A32] tracking-wider uppercase font-semibold">
                       {activeSite.site_id}
                     </span>
-                    <span className="text-[#363B4A]">|</span>
+                    <span className="text-[#222530]">|</span>
                     <span className="font-mono text-xs text-[#8B909A]">
                       RADIUS: {activeSite.radius_m}M
                     </span>
                   </div>
                   <button
                     onClick={() => setSelectedSite(null)}
-                    className="text-[#8B909A] hover:text-[#F4F4F2] p-1 rounded hover:bg-[#1D2026] transition-colors"
+                    className="text-[#8B909A] hover:text-[#F4F4F2] p-1 rounded hover:bg-[#0F1015] transition-colors"
                     title="Close details"
                   >
                     <X className="h-4 w-4" />
@@ -239,14 +239,14 @@ export const SiteIntelligence: React.FC = () => {
                   </h2>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs font-mono text-[#8B909A]">
                     <span>LAT: {activeSite.point.lat.toFixed(4)}°</span>
-                    <span className="text-[#363B4A]">|</span>
+                    <span className="text-[#222530]">|</span>
                     <span>LON: {activeSite.point.lon.toFixed(4)}°</span>
-                    <span className="text-[#363B4A]">|</span>
+                    <span className="text-[#222530]">|</span>
                     <span className="text-[#4B88AB]">TARGET: {activeSite.primary_feature}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-2 pt-2 border-t border-[#282C37]">
+                <div className="flex items-center space-x-2 pt-2 border-t border-[#181A22]">
                   <button
                     onClick={() => handleSelectOnMap(activeSite)}
                     className="btn-primary py-1.5 px-3 text-xs flex items-center space-x-2"
@@ -280,7 +280,7 @@ export const SiteIntelligence: React.FC = () => {
               )}
 
               {/* Multi-Criteria Evaluation Grid */}
-              <div className="bg-[#17191E] border border-[#282C37] p-5 rounded-[2px] space-y-4">
+              <div className="bg-[#0A0B0E] border border-[#181A22] p-5 rounded-[2px] space-y-4">
                 <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold">
                   <Scale className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
                   <span>Multi-Criteria Evaluation Scores (S = Σ wᵢ × sᵢ)</span>
@@ -294,7 +294,7 @@ export const SiteIntelligence: React.FC = () => {
                     { label: 'In-Situ Resource Utilization (ISRU)', score: activeSite.criterion_scores.resources, weight: '10%', desc: 'Hydrated mineral reserves and regolith shielding material' },
                     { label: 'Operational Accessibility', score: activeSite.criterion_scores.accessibility, weight: '10%', desc: 'Proximity to primary descent ellipse and flat landing surface' },
                   ].map((crit) => (
-                    <div key={crit.label} className="bg-[#1D2026] border border-[#282C37] p-3 rounded-[2px] space-y-1.5">
+                    <div key={crit.label} className="bg-[#0F1015] border border-[#181A22] p-3 rounded-[2px] space-y-1.5">
                       <div className="flex justify-between text-xs">
                         <div>
                           <span className="font-medium text-[#F4F4F2] font-editorial tracking-wide">{crit.label}</span>
@@ -302,7 +302,7 @@ export const SiteIntelligence: React.FC = () => {
                         </div>
                         <span className="font-mono text-[#C85A32] font-semibold">{crit.score}/100</span>
                       </div>
-                      <div className="w-full h-1.5 bg-[#111215] rounded-none overflow-hidden border border-[#282C37]">
+                      <div className="w-full h-1.5 bg-[#050507] rounded-none overflow-hidden border border-[#181A22]">
                         <div
                           className="h-full bg-[#C85A32] transition-all duration-300"
                           style={{ width: `${crit.score}%` }}
@@ -315,13 +315,13 @@ export const SiteIntelligence: React.FC = () => {
               </div>
 
               {/* Geological Context & Remote Sensing Evidence */}
-              <div className="bg-[#17191E] border border-[#282C37] p-5 rounded-[2px] space-y-4">
+              <div className="bg-[#0A0B0E] border border-[#181A22] p-5 rounded-[2px] space-y-4">
                 <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold">
                   <BookOpen className="h-4 w-4 text-[#4B88AB]" strokeWidth={1.5} />
                   <span>Geological Context & Evidence Chain</span>
                 </h3>
 
-                <div className="p-3 bg-[#14161A] rounded-[2px] border border-[#282C37] text-xs text-[#C4C7C5] leading-relaxed">
+                <div className="p-3 bg-[#0A0B0E] rounded-[2px] border border-[#181A22] text-xs text-[#C4C7C5] leading-relaxed">
                   <strong className="text-[#C85A32] block mb-1 font-mono text-[10px] uppercase tracking-[0.16em]">
                     Stratigraphic Summary:
                   </strong>
@@ -335,11 +335,11 @@ export const SiteIntelligence: React.FC = () => {
                   {activeSite.evidence.map((ev, i) => (
                     <div
                       key={i}
-                      className="bg-[#14161A] border border-[#282C37] p-2.5 rounded-[2px] text-xs space-y-1 hover:border-[#C85A32]/40 transition-colors"
+                      className="bg-[#0A0B0E] border border-[#181A22] p-2.5 rounded-[2px] text-xs space-y-1 hover:border-[#C85A32]/40 transition-colors"
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[#F4F4F2] font-medium">{ev.dataset_id}</span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-[2px] bg-[#1D2026] border border-[#282C37] text-[#C85A32]">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-[2px] bg-[#0F1015] border border-[#181A22] text-[#C85A32]">
                           {ev.instrument}
                         </span>
                       </div>

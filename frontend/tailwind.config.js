@@ -9,9 +9,9 @@ export default {
     extend: {
       colors: {
         mars: {
-          bg: '#0c0d10',
-          panel: '#15171e',
-          border: '#282c37',
+          bg: '#050507',
+          panel: '#0A0B0E',
+          border: '#181A22',
           orange: '#d9532f',
           red: '#c0392b',
           muted: '#8b92a5',

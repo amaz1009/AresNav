@@ -851,8 +851,8 @@ export const Terrain3DViewer: React.FC = () => {
 
   if (!isPathConfigured || !activeRoute) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#0E0F12] text-center select-text font-sans h-full">
-        <div className="max-w-md border border-[#282C37] bg-[#17191E] p-10 rounded-[2px] flex flex-col items-center justify-center space-y-5 shadow-2xl">
+      <div className="flex-1 flex flex-col items-center justify-center p-8 bg-[#050507] text-center select-text font-sans h-full">
+        <div className="max-w-md border border-[#181A22] bg-[#0A0B0E] p-10 rounded-[2px] flex flex-col items-center justify-center space-y-5 shadow-2xl">
           <div className="w-14 h-14 rounded-full bg-[#C85A32]/10 border border-[#C85A32]/30 flex items-center justify-center">
             <Box className="h-7 w-7 text-[#C85A32]" strokeWidth={1.5} />
           </div>
@@ -880,7 +880,7 @@ export const Terrain3DViewer: React.FC = () => {
   return (
     <div className="flex-1 flex flex-col bg-[#0A0B0E] text-[#F4F4F2] select-none overflow-hidden h-full">
       {/* Top 3D Mission Navigation Ribbon */}
-      <div className="border-b border-[#282C37] bg-[#111215] px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shrink-0 z-20">
+      <div className="border-b border-[#181A22] bg-[#050507] px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shrink-0 z-20">
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-2 bg-[#1A1C22] border border-[#3D2C26] px-2.5 py-1 rounded-[2px]">
             <Box className="h-4 w-4 text-[#C85A32]" />
@@ -917,7 +917,7 @@ export const Terrain3DViewer: React.FC = () => {
                 className={`text-[10px] font-mono px-2 py-1 rounded-[2px] border transition-colors flex items-center space-x-1 ${
                   activeRoute?.route_id === plannerRoute.route_id
                     ? 'bg-[#4E9A68]/20 border-[#4E9A68] text-[#68D391] font-bold shadow-[0_0_8px_#4E9A68]/20'
-                    : 'bg-[#17191E] border-[#282C37] text-[#8B909A] hover:text-[#F4F4F2]'
+                    : 'bg-[#0A0B0E] border-[#181A22] text-[#8B909A] hover:text-[#F4F4F2]'
                 }`}
               >
                 <Route className="h-3 w-3 text-[#4E9A68]" />
@@ -935,7 +935,7 @@ export const Terrain3DViewer: React.FC = () => {
                   className={`text-[10px] font-mono px-2 py-1 rounded-[2px] border transition-colors ${
                     isSelected
                       ? 'bg-[#C85A32]/20 border-[#C85A32] text-[#E27B54] font-bold'
-                      : 'bg-[#17191E] border-[#282C37] text-[#8B909A] hover:text-[#F4F4F2]'
+                      : 'bg-[#0A0B0E] border-[#181A22] text-[#8B909A] hover:text-[#F4F4F2]'
                   }`}
                 >
                   {rt.objective.replace('_', ' ')}
@@ -946,7 +946,7 @@ export const Terrain3DViewer: React.FC = () => {
 
           <button
             onClick={() => setActivePage('traverse')}
-            className="text-[10px] font-mono border border-[#282C37] bg-[#17191E] hover:bg-[#20242D] text-[#8B909A] hover:text-[#F4F4F2] px-2.5 py-1 rounded-[2px] flex items-center space-x-1 transition-colors"
+            className="text-[10px] font-mono border border-[#181A22] bg-[#0A0B0E] hover:bg-[#20242D] text-[#8B909A] hover:text-[#F4F4F2] px-2.5 py-1 rounded-[2px] flex items-center space-x-1 transition-colors"
           >
             <span>MAP VIEW</span>
             <ChevronRight className="h-3 w-3" />
@@ -971,7 +971,7 @@ export const Terrain3DViewer: React.FC = () => {
               data-testid="three-canvas"
               className="w-full h-full block"
             />
-            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-[#111215]/85 border border-[#3D2C26] px-3 py-1 rounded-[2px] text-[10px] font-mono text-[#D4A359] pointer-events-none z-10 shadow-lg">
+            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-[#050507]/85 border border-[#3D2C26] px-3 py-1 rounded-[2px] text-[10px] font-mono text-[#D4A359] pointer-events-none z-10 shadow-lg">
               3D PERSPECTIVE MESH // ISOMETRIC ELEVATION MODE
             </div>
           </>
@@ -980,7 +980,7 @@ export const Terrain3DViewer: React.FC = () => {
         {/* Floating Technical Controls Panel (Top Left) */}
         <div className="absolute top-3 left-3 z-10 flex flex-col space-y-2 pointer-events-auto">
           {/* Camera View Mode Switcher */}
-          <div className="bg-[#111215]/90 border border-[#282C37] p-1.5 rounded-[2px] flex items-center space-x-1 shadow-xl">
+          <div className="bg-[#050507]/90 border border-[#181A22] p-1.5 rounded-[2px] flex items-center space-x-1 shadow-xl">
             <button
               onClick={() => {
                 setViewMode('ORBIT');
@@ -989,7 +989,7 @@ export const Terrain3DViewer: React.FC = () => {
               className={`text-[10px] font-mono px-2.5 py-1 rounded-[2px] border transition-colors flex items-center space-x-1 ${
                 viewMode === 'ORBIT'
                   ? 'bg-[#C85A32]/25 border-[#C85A32] text-[#E27B54] font-bold'
-                  : 'bg-[#17191E] border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
+                  : 'bg-[#0A0B0E] border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
               }`}
             >
               <Box className="h-3 w-3" />
@@ -1004,7 +1004,7 @@ export const Terrain3DViewer: React.FC = () => {
               className={`text-[10px] font-mono px-2.5 py-1 rounded-[2px] border transition-colors flex items-center space-x-1 ${
                 viewMode === 'FLYTHROUGH'
                   ? 'bg-[#C85A32]/25 border-[#C85A32] text-[#E27B54] font-bold'
-                  : 'bg-[#17191E] border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
+                  : 'bg-[#0A0B0E] border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
               }`}
             >
               <Zap className="h-3 w-3 text-[#D4A359]" />
@@ -1019,7 +1019,7 @@ export const Terrain3DViewer: React.FC = () => {
               className={`text-[10px] font-mono px-2.5 py-1 rounded-[2px] border transition-colors flex items-center space-x-1 ${
                 viewMode === 'TOP_DOWN'
                   ? 'bg-[#C85A32]/25 border-[#C85A32] text-[#E27B54] font-bold'
-                  : 'bg-[#17191E] border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
+                  : 'bg-[#0A0B0E] border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
               }`}
             >
               <Maximize2 className="h-3 w-3" />
@@ -1028,13 +1028,13 @@ export const Terrain3DViewer: React.FC = () => {
           </div>
 
           {/* Scientific Layer / Colormap Switcher */}
-          <div className="bg-[#111215]/90 border border-[#282C37] p-1.5 rounded-[2px] flex items-center space-x-1 shadow-xl">
+          <div className="bg-[#050507]/90 border border-[#181A22] p-1.5 rounded-[2px] flex items-center space-x-1 shadow-xl">
             <span className="text-[9px] font-mono text-[#8B909A] px-1 uppercase">LAYER:</span>
             <button
               onClick={() => setTextureStyle('OPTICAL')}
               className={`text-[10px] font-mono px-2 py-0.5 rounded-[2px] border ${
                 textureStyle === 'OPTICAL'
-                  ? 'bg-[#1D2026] border-[#D4A359] text-[#D4A359] font-bold'
+                  ? 'bg-[#0F1015] border-[#D4A359] text-[#D4A359] font-bold'
                   : 'border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
               }`}
             >
@@ -1044,7 +1044,7 @@ export const Terrain3DViewer: React.FC = () => {
               onClick={() => setTextureStyle('ELEVATION')}
               className={`text-[10px] font-mono px-2 py-0.5 rounded-[2px] border ${
                 textureStyle === 'ELEVATION'
-                  ? 'bg-[#1D2026] border-[#64B5F6] text-[#64B5F6] font-bold'
+                  ? 'bg-[#0F1015] border-[#64B5F6] text-[#64B5F6] font-bold'
                   : 'border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
               }`}
             >
@@ -1054,7 +1054,7 @@ export const Terrain3DViewer: React.FC = () => {
               onClick={() => setTextureStyle('SLOPE')}
               className={`text-[10px] font-mono px-2 py-0.5 rounded-[2px] border ${
                 textureStyle === 'SLOPE'
-                  ? 'bg-[#1D2026] border-[#C94D4D] text-[#C94D4D] font-bold'
+                  ? 'bg-[#0F1015] border-[#C94D4D] text-[#C94D4D] font-bold'
                   : 'border-transparent text-[#8B909A] hover:text-[#F4F4F2]'
               }`}
             >
@@ -1063,7 +1063,7 @@ export const Terrain3DViewer: React.FC = () => {
           </div>
 
           {/* Elevation Exaggeration Slider */}
-          <div className="bg-[#111215]/90 border border-[#282C37] p-2 rounded-[2px] flex items-center space-x-2 text-[10px] font-mono shadow-xl">
+          <div className="bg-[#050507]/90 border border-[#181A22] p-2 rounded-[2px] flex items-center space-x-2 text-[10px] font-mono shadow-xl">
             <Sliders className="h-3 w-3 text-[#C85A32]" />
             <span className="text-[#8B909A]">EXAGGERATION:</span>
             <span className="text-[#F4F4F2] font-bold">{verticalExaggeration.toFixed(1)}x</span>
@@ -1074,7 +1074,7 @@ export const Terrain3DViewer: React.FC = () => {
               step="0.2"
               value={verticalExaggeration}
               onChange={(e) => setVerticalExaggeration(parseFloat(e.target.value))}
-              className="w-16 h-1 accent-[#C85A32] bg-[#282C37] rounded"
+              className="w-16 h-1 accent-[#C85A32] bg-[#181A22] rounded"
             />
             <button
               onClick={handleResetCamera}
@@ -1088,7 +1088,7 @@ export const Terrain3DViewer: React.FC = () => {
 
         {/* Floating Telemetry & Orbit Guide (Top Right) */}
         <div className="absolute top-3 right-3 z-10 pointer-events-none flex flex-col items-end space-y-1.5 font-mono text-[10px]">
-          <div className="bg-[#111215]/90 border border-[#282C37] px-3 py-1.5 rounded-[2px] flex items-center space-x-3 text-[#8B909A] shadow-xl">
+          <div className="bg-[#050507]/90 border border-[#181A22] px-3 py-1.5 rounded-[2px] flex items-center space-x-3 text-[#8B909A] shadow-xl">
             <div>
               <span>CAM ALT: </span>
               <span className="text-[#F4F4F2] font-semibold">{cameraTelemetry.alt}m</span>
@@ -1103,13 +1103,13 @@ export const Terrain3DViewer: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-[#111215]/75 border border-[#282C37] px-2.5 py-1 rounded-[2px] text-[#8B909A]">
+          <div className="bg-[#050507]/75 border border-[#181A22] px-2.5 py-1 rounded-[2px] text-[#8B909A]">
             <span>LEFT DRAG: ORBIT // RIGHT DRAG: PAN // SCROLL: ZOOM</span>
           </div>
         </div>
 
         {/* Trajectory Flythrough Controls Ribbon (Bottom Overlay) */}
-        <div className="absolute bottom-4 left-4 right-4 z-10 bg-[#111215]/95 border border-[#282C37] p-3 rounded-[2px] shadow-2xl flex flex-col space-y-2 pointer-events-auto max-w-4xl mx-auto">
+        <div className="absolute bottom-4 left-4 right-4 z-10 bg-[#050507]/95 border border-[#181A22] p-3 rounded-[2px] shadow-2xl flex flex-col space-y-2 pointer-events-auto max-w-4xl mx-auto">
           <div className="flex items-center justify-between text-xs font-mono">
             <div className="flex items-center space-x-2">
               <span className="w-2 h-2 rounded-full bg-[#C85A32] animate-pulse" />
@@ -1158,7 +1158,7 @@ export const Terrain3DViewer: React.FC = () => {
                   if (viewMode !== 'FLYTHROUGH') setViewMode('FLYTHROUGH');
                   setFlythroughProgress(parseFloat(e.target.value));
                 }}
-                className="w-full h-1.5 accent-[#C85A32] bg-[#282C37] rounded cursor-pointer"
+                className="w-full h-1.5 accent-[#C85A32] bg-[#181A22] rounded cursor-pointer"
               />
               <span className="text-[10px] font-mono text-[#8B909A] w-12 text-right">
                 {Math.round(flythroughProgress * 100)}%
@@ -1174,7 +1174,7 @@ export const Terrain3DViewer: React.FC = () => {
                   className={`text-[10px] font-mono px-2 py-1 rounded-[2px] border ${
                     flythroughSpeed === spd
                       ? 'bg-[#C85A32]/25 border-[#C85A32] text-[#E27B54] font-bold'
-                      : 'bg-[#17191E] border-[#282C37] text-[#8B909A]'
+                      : 'bg-[#0A0B0E] border-[#181A22] text-[#8B909A]'
                   }`}
                 >
                   {spd}x

@@ -336,16 +336,16 @@ export const TraversePlanner: React.FC = () => {
   }, [activeRoute]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#111215]">
+    <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 max-w-[1720px] mx-auto w-full select-text font-sans bg-[#050507]">
       {/* Header Panel */}
-      <div className="border border-[#282C37] bg-[#17191E] p-6 md:p-8 rounded-[2px] flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
+      <div className="border border-[#181A22] bg-[#0A0B0E] p-6 md:p-8 rounded-[2px] flex flex-col md:flex-row md:items-start justify-between gap-6 relative">
         <div className="space-y-2 max-w-3xl">
           <div className="flex items-center space-x-2.5">
             <Route className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
             <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#C85A32] font-semibold">
               HUMAN EVA TRAVERSABILITY & PATHFINDING
             </span>
-            <span className="text-[#363B4A]">/</span>
+            <span className="text-[#222530]">/</span>
             <SampleBadge label="ROUTING ENGINE" />
           </div>
           <h2 className="text-3xl font-normal text-[#F4F4F2] tracking-wide font-editorial">
@@ -388,7 +388,7 @@ export const TraversePlanner: React.FC = () => {
       </div>
 
       {/* Two Tabs Navigation Bar: Base Tab and Destination Tab */}
-      <div className="flex items-center justify-between border-b border-[#282C37] pb-0">
+      <div className="flex items-center justify-between border-b border-[#181A22] pb-0">
         <div className="flex items-center space-x-2">
           {/* Base Tab Button */}
           <button
@@ -397,8 +397,8 @@ export const TraversePlanner: React.FC = () => {
             onClick={() => setActiveTab('base')}
             className={`px-5 py-3 font-mono text-xs tracking-[0.14em] uppercase transition-all flex items-center space-x-2.5 border-b-2 -mb-[2px] ${
               activeTab === 'base'
-                ? 'border-[#4E9A68] text-[#F4F4F2] bg-[#17191E] font-semibold'
-                : 'border-transparent text-[#8B909A] hover:text-[#C4C7C5] hover:bg-[#14161A]'
+                ? 'border-[#4E9A68] text-[#F4F4F2] bg-[#0A0B0E] font-semibold'
+                : 'border-transparent text-[#8B909A] hover:text-[#C4C7C5] hover:bg-[#0A0B0E]'
             }`}
           >
             <Home
@@ -420,7 +420,7 @@ export const TraversePlanner: React.FC = () => {
                 <span>{isBaseEffectivelyLocked ? 'LOCKED' : 'SET'}</span>
               </span>
             ) : (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-[2px] bg-[#1D2026] text-[#8B909A] border border-[#282C37]">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-[2px] bg-[#0F1015] text-[#8B909A] border border-[#181A22]">
                 UNSET
               </span>
             )}
@@ -433,8 +433,8 @@ export const TraversePlanner: React.FC = () => {
             onClick={() => setActiveTab('destination')}
             className={`px-5 py-3 font-mono text-xs tracking-[0.14em] uppercase transition-all flex items-center space-x-2.5 border-b-2 -mb-[2px] ${
               activeTab === 'destination'
-                ? 'border-[#EF4444] text-[#F4F4F2] bg-[#17191E] font-semibold'
-                : 'border-transparent text-[#8B909A] hover:text-[#C4C7C5] hover:bg-[#14161A]'
+                ? 'border-[#EF4444] text-[#F4F4F2] bg-[#0A0B0E] font-semibold'
+                : 'border-transparent text-[#8B909A] hover:text-[#C4C7C5] hover:bg-[#0A0B0E]'
             }`}
           >
             <Target
@@ -456,7 +456,7 @@ export const TraversePlanner: React.FC = () => {
                 <span>{isDestEffectivelyLocked ? 'LOCKED' : 'SET'}</span>
               </span>
             ) : (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-[2px] bg-[#1D2026] text-[#8B909A] border border-[#282C37]">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-[2px] bg-[#0F1015] text-[#8B909A] border border-[#181A22]">
                 UNSET
               </span>
             )}
@@ -482,11 +482,11 @@ export const TraversePlanner: React.FC = () => {
       {/* Main Split Layout: Active Tab Controls on Left + Interactive Map on Right */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
         {/* Left Side: Tab Configuration Panel (5 cols) */}
-        <div className="lg:col-span-5 bg-[#17191E] border border-[#282C37] rounded-[2px] p-6 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-5 bg-[#0A0B0E] border border-[#181A22] rounded-[2px] p-6 flex flex-col justify-between space-y-6">
           {activeTab === 'base' ? (
             /* ================= BASE TAB CONTENT ================= */
             <div className="space-y-6">
-              <div className="border-b border-[#282C37] pb-4">
+              <div className="border-b border-[#181A22] pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#4E9A68] shadow-[0_0_8px_#4E9A68]" />
@@ -522,7 +522,7 @@ export const TraversePlanner: React.FC = () => {
                       placeholder="e.g. 18.4447"
                       value={baseLatInput}
                       onChange={(e) => setBaseLatInput(e.target.value)}
-                      className="w-full bg-[#111215] border border-[#282C37] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#4E9A68] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full bg-[#050507] border border-[#181A22] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#4E9A68] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     />
                   </div>
 
@@ -537,7 +537,7 @@ export const TraversePlanner: React.FC = () => {
                       placeholder="e.g. 77.4508"
                       value={baseLonInput}
                       onChange={(e) => setBaseLonInput(e.target.value)}
-                      className="w-full bg-[#111215] border border-[#282C37] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#4E9A68] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full bg-[#050507] border border-[#181A22] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#4E9A68] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -556,7 +556,7 @@ export const TraversePlanner: React.FC = () => {
                     disabled={isBaseEffectivelyLocked}
                     className={`btn-primary py-2 px-4 text-xs font-mono tracking-wider flex-1 flex items-center justify-center space-x-2 ${
                       isBaseEffectivelyLocked
-                        ? 'bg-[#282C37] text-[#8B909A] border-[#282C37] cursor-not-allowed opacity-75'
+                        ? 'bg-[#181A22] text-[#8B909A] border-[#181A22] cursor-not-allowed opacity-75'
                         : 'bg-[#4E9A68] hover:bg-[#3D8555] border-[#4E9A68]'
                     }`}
                   >
@@ -586,7 +586,7 @@ export const TraversePlanner: React.FC = () => {
 
               {/* Map Interaction Status Banner */}
               <div
-                className={`p-3.5 rounded-[2px] bg-[#111215] border ${
+                className={`p-3.5 rounded-[2px] bg-[#050507] border ${
                   isBaseEffectivelyLocked ? 'border-[#D4A359]/30' : 'border-[#4E9A68]/40'
                 } space-y-1.5`}
               >
@@ -615,7 +615,7 @@ export const TraversePlanner: React.FC = () => {
               </div>
 
               {/* Quick Preset Coordinates */}
-              <div className="space-y-2 pt-2 border-t border-[#282C37]">
+              <div className="space-y-2 pt-2 border-t border-[#181A22]">
                 <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8B909A] font-semibold block">
                   Quick Landmark Presets:
                 </span>
@@ -636,7 +636,7 @@ export const TraversePlanner: React.FC = () => {
                         setBaseLonInput(preset.lon.toFixed(5));
                         setBaseError(null);
                       }}
-                      className="text-left p-2 rounded-[2px] bg-[#14161A] hover:bg-[#1D2026] border border-[#282C37] hover:border-[#4E9A68]/50 transition-colors text-xs font-mono disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="text-left p-2 rounded-[2px] bg-[#0A0B0E] hover:bg-[#0F1015] border border-[#181A22] hover:border-[#4E9A68]/50 transition-colors text-xs font-mono disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <span className="text-[#F4F4F2] block font-medium">{preset.label}</span>
                       <span className="text-[10px] text-[#8B909A]">
@@ -650,7 +650,7 @@ export const TraversePlanner: React.FC = () => {
           ) : (
             /* ================= DESTINATION TAB CONTENT ================= */
             <div className="space-y-6">
-              <div className="border-b border-[#282C37] pb-4">
+              <div className="border-b border-[#181A22] pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444] shadow-[0_0_8px_#EF4444]" />
@@ -686,7 +686,7 @@ export const TraversePlanner: React.FC = () => {
                       placeholder="e.g. 18.3845"
                       value={destLatInput}
                       onChange={(e) => setDestLatInput(e.target.value)}
-                      className="w-full bg-[#111215] border border-[#282C37] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#EF4444] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full bg-[#050507] border border-[#181A22] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#EF4444] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     />
                   </div>
 
@@ -701,7 +701,7 @@ export const TraversePlanner: React.FC = () => {
                       placeholder="e.g. 77.5812"
                       value={destLonInput}
                       onChange={(e) => setDestLonInput(e.target.value)}
-                      className="w-full bg-[#111215] border border-[#282C37] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#EF4444] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="w-full bg-[#050507] border border-[#181A22] rounded-[2px] px-3 py-2 text-xs font-mono text-[#F4F4F2] focus:outline-none focus:border-[#EF4444] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -720,7 +720,7 @@ export const TraversePlanner: React.FC = () => {
                     disabled={isDestEffectivelyLocked}
                     className={`btn-primary py-2 px-4 text-xs font-mono tracking-wider flex-1 flex items-center justify-center space-x-2 ${
                       isDestEffectivelyLocked
-                        ? 'bg-[#282C37] text-[#8B909A] border-[#282C37] cursor-not-allowed opacity-75'
+                        ? 'bg-[#181A22] text-[#8B909A] border-[#181A22] cursor-not-allowed opacity-75'
                         : 'bg-[#EF4444] hover:bg-[#DC2626] border-[#EF4444]'
                     }`}
                   >
@@ -750,7 +750,7 @@ export const TraversePlanner: React.FC = () => {
 
               {/* Map Interaction Status Banner */}
               <div
-                className={`p-3.5 rounded-[2px] bg-[#111215] border ${
+                className={`p-3.5 rounded-[2px] bg-[#050507] border ${
                   isDestEffectivelyLocked ? 'border-[#D4A359]/30' : 'border-[#EF4444]/40'
                 } space-y-1.5`}
               >
@@ -779,7 +779,7 @@ export const TraversePlanner: React.FC = () => {
               </div>
 
               {/* Quick Preset Coordinates */}
-              <div className="space-y-2 pt-2 border-t border-[#282C37]">
+              <div className="space-y-2 pt-2 border-t border-[#181A22]">
                 <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8B909A] font-semibold block">
                   Quick Landmark Presets:
                 </span>
@@ -800,7 +800,7 @@ export const TraversePlanner: React.FC = () => {
                         setDestLonInput(preset.lon.toFixed(5));
                         setDestError(null);
                       }}
-                      className="text-left p-2 rounded-[2px] bg-[#14161A] hover:bg-[#1D2026] border border-[#282C37] hover:border-[#EF4444]/50 transition-colors text-xs font-mono disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="text-left p-2 rounded-[2px] bg-[#0A0B0E] hover:bg-[#0F1015] border border-[#181A22] hover:border-[#EF4444]/50 transition-colors text-xs font-mono disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <span className="text-[#F4F4F2] block font-medium">{preset.label}</span>
                       <span className="text-[10px] text-[#8B909A]">
@@ -814,12 +814,12 @@ export const TraversePlanner: React.FC = () => {
           )}
 
           {/* Current Mission Coordinate Readout Bar */}
-          <div className="bg-[#111215] border border-[#282C37] p-3.5 rounded-[2px] space-y-2">
+          <div className="bg-[#050507] border border-[#181A22] p-3.5 rounded-[2px] space-y-2">
             <div className="text-[10px] font-mono text-[#8B909A] uppercase tracking-[0.14em] font-semibold">
               Mission Coordinate Configuration:
             </div>
             <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-              <div className="p-2 rounded-[2px] bg-[#17191E] border border-[#282C37]">
+              <div className="p-2 rounded-[2px] bg-[#0A0B0E] border border-[#181A22]">
                 <div className="flex items-center space-x-1.5 text-[#4E9A68] font-semibold">
                   <span className="w-2 h-2 rounded-full bg-[#4E9A68]" />
                   <span>BASE:</span>
@@ -829,7 +829,7 @@ export const TraversePlanner: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-2 rounded-[2px] bg-[#17191E] border border-[#282C37]">
+              <div className="p-2 rounded-[2px] bg-[#0A0B0E] border border-[#181A22]">
                 <div className="flex items-center space-x-1.5 text-[#EF4444] font-semibold">
                   <span className="w-2 h-2 rounded-full bg-[#EF4444]" />
                   <span>DESTINATION:</span>
@@ -845,9 +845,9 @@ export const TraversePlanner: React.FC = () => {
         </div>
 
         {/* Right Side: Interactive Mars Map (7 cols) */}
-        <div className="lg:col-span-7 bg-[#0E0F12] border border-[#282C37] rounded-[2px] overflow-hidden relative min-h-[500px] h-full flex flex-col">
+        <div className="lg:col-span-7 bg-[#050507] border border-[#181A22] rounded-[2px] overflow-hidden relative min-h-[500px] h-full flex flex-col">
           {/* Active Mode Banner */}
-          <div className="absolute top-3 left-4 z-[400] bg-[#17191E]/95 border border-[#282C37] rounded-[2px] px-3.5 py-1.5 text-xs font-mono text-[#F4F4F2] flex items-center space-x-2 pointer-events-none shadow-md backdrop-blur-sm">
+          <div className="absolute top-3 left-4 z-[400] bg-[#0A0B0E]/95 border border-[#181A22] rounded-[2px] px-3.5 py-1.5 text-xs font-mono text-[#F4F4F2] flex items-center space-x-2 pointer-events-none shadow-md backdrop-blur-sm">
             <span
               className={`w-2 h-2 rounded-full ${
                 activeTab === 'base'
@@ -891,7 +891,7 @@ export const TraversePlanner: React.FC = () => {
 
           {/* Map Bottom Legend Strip: Route Colors & Active Targeting */}
           {base && destination ? (
-            <div className="bg-[#111215] border-t border-[#282C37] px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-[10.5px] font-mono">
+            <div className="bg-[#050507] border-t border-[#181A22] px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-[10.5px] font-mono">
               <div className="flex items-center space-x-3 text-[#C4C7C5]">
                 <span className="text-[#8B909A] font-semibold uppercase">PATHS:</span>
                 <span className="flex items-center space-x-1">
@@ -919,7 +919,7 @@ export const TraversePlanner: React.FC = () => {
               </span>
             </div>
           ) : (
-            <div className="bg-[#111215] border-t border-[#282C37] px-4 py-2 text-[10.5px] font-mono text-[#8B909A] flex items-center justify-between">
+            <div className="bg-[#050507] border-t border-[#181A22] px-4 py-2 text-[10.5px] font-mono text-[#8B909A] flex items-center justify-between">
               <span>AWAITING CHECKPOINTS: Click map or enter coordinates to designate Base and Destination</span>
               <span className="text-[#D4A359]">PATHS UNLOADED</span>
             </div>
@@ -930,7 +930,7 @@ export const TraversePlanner: React.FC = () => {
       {/* Select Traverse Path Ribbon / Cards (Only rendered when Base and Destination are configured) */}
       {base && destination && (
         <div className="space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#282C37] pb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#181A22] pb-2">
             <div className="flex items-center space-x-2">
               <Route className="h-4 w-4 text-[#C85A32]" />
               <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] font-semibold">
@@ -952,11 +952,11 @@ export const TraversePlanner: React.FC = () => {
                 className={`p-4 rounded-[2px] border cursor-pointer transition-all space-y-2 ${
                   activeRoute?.route_id === 'TRAVERSE_PLANNER_ROUTE'
                     ? 'bg-[#4E9A68]/15 border-[#4E9A68] shadow-[0_0_10px_rgba(78,154,104,0.2)]'
-                    : 'bg-[#17191E] border-[#282C37] hover:border-[#4E9A68]/50'
+                    : 'bg-[#0A0B0E] border-[#181A22] hover:border-[#4E9A68]/50'
                 }`}
               >
                 <div className="flex items-start justify-between">
-                  <span className="text-[9px] font-mono px-2 py-0.5 rounded-[2px] bg-[#111215] text-[#4E9A68] border border-[#4E9A68]/40 uppercase font-semibold">
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded-[2px] bg-[#050507] text-[#4E9A68] border border-[#4E9A68]/40 uppercase font-semibold">
                     CUSTOM PLANNER VECTOR
                   </span>
                   <StatusBadge status={plannerRoute.status} size="sm" />
@@ -980,12 +980,12 @@ export const TraversePlanner: React.FC = () => {
                   onClick={() => setSelectedRoute(rt)}
                   className={`p-4 rounded-[2px] border cursor-pointer transition-all space-y-2 ${
                     isSelected
-                      ? 'bg-[#1D2026] border-[#C85A32] shadow-[0_0_10px_rgba(200,90,50,0.2)]'
-                      : 'bg-[#17191E] border-[#282C37] hover:border-[#363B4A]'
+                      ? 'bg-[#0F1015] border-[#C85A32] shadow-[0_0_10px_rgba(200,90,50,0.2)]'
+                      : 'bg-[#0A0B0E] border-[#181A22] hover:border-[#222530]'
                   }`}
                 >
                   <div className="flex items-start justify-between">
-                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-[2px] bg-[#111215] text-[#C85A32] border border-[#282C37] uppercase font-semibold">
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded-[2px] bg-[#050507] text-[#C85A32] border border-[#181A22] uppercase font-semibold">
                       {rt.objective.replace(/_/g, ' ')}
                     </span>
                     <StatusBadge status={rt.status} size="sm" />
@@ -1009,7 +1009,7 @@ export const TraversePlanner: React.FC = () => {
         <div className="space-y-6">
           {/* Quick Metrics Ledger */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-[#17191E] border border-[#282C37] p-4 rounded-[2px] space-y-1">
+            <div className="bg-[#0A0B0E] border border-[#181A22] p-4 rounded-[2px] space-y-1">
               <span className="text-[10px] text-[#8B909A] block uppercase tracking-[0.14em] font-semibold font-mono">
                 SURFACE DISTANCE
               </span>
@@ -1021,7 +1021,7 @@ export const TraversePlanner: React.FC = () => {
               </span>
             </div>
 
-            <div className="bg-[#17191E] border border-[#282C37] p-4 rounded-[2px] space-y-1">
+            <div className="bg-[#0A0B0E] border border-[#181A22] p-4 rounded-[2px] space-y-1">
               <span className="text-[10px] text-[#8B909A] block uppercase tracking-[0.14em] font-semibold font-mono">
                 AZIMUTH BEARING
               </span>
@@ -1031,7 +1031,7 @@ export const TraversePlanner: React.FC = () => {
               <span className="text-[10px] text-[#8B909A] font-mono">From habitat base</span>
             </div>
 
-            <div className="bg-[#17191E] border border-[#282C37] p-4 rounded-[2px] space-y-1">
+            <div className="bg-[#0A0B0E] border border-[#181A22] p-4 rounded-[2px] space-y-1">
               <span className="text-[10px] text-[#8B909A] block uppercase tracking-[0.14em] font-semibold font-mono">
                 ESTIMATED WALK TIME
               </span>
@@ -1043,7 +1043,7 @@ export const TraversePlanner: React.FC = () => {
               </span>
             </div>
 
-            <div className="bg-[#17191E] border border-[#282C37] p-4 rounded-[2px] space-y-1">
+            <div className="bg-[#0A0B0E] border border-[#181A22] p-4 rounded-[2px] space-y-1">
               <span className="text-[10px] text-[#8B909A] block uppercase tracking-[0.14em] font-semibold font-mono">
                 WALK-BACK SAFETY
               </span>
@@ -1057,8 +1057,8 @@ export const TraversePlanner: React.FC = () => {
           </div>
 
           {/* Elevation Profile Chart along the Traverse Vector */}
-          <div className="bg-[#17191E] border border-[#282C37] p-6 rounded-[2px] space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#282C37] pb-4">
+          <div className="bg-[#0A0B0E] border border-[#181A22] p-6 rounded-[2px] space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#181A22] pb-4">
               <div>
                 <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold">
                   <TrendingUp className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
@@ -1086,7 +1086,7 @@ export const TraversePlanner: React.FC = () => {
             <div className="h-64 w-full pt-2">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#282C37" vertical={false} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#181A22" vertical={false} />
                   <XAxis
                     dataKey="distKm"
                     stroke="#8B909A"
@@ -1110,7 +1110,7 @@ export const TraversePlanner: React.FC = () => {
                   />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: '#17191E',
+                      backgroundColor: '#0A0B0E',
                       borderColor: '#C85A32',
                       borderRadius: '2px',
                       fontSize: '11px',
@@ -1146,14 +1146,14 @@ export const TraversePlanner: React.FC = () => {
           </div>
 
           {/* Safety & Walk-back Contingency Ledger */}
-          <div className="bg-[#17191E] border border-[#282C37] p-6 rounded-[2px] space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold border-b border-[#282C37] pb-3">
+          <div className="bg-[#0A0B0E] border border-[#181A22] p-6 rounded-[2px] space-y-4">
+            <h3 className="text-xs font-mono uppercase tracking-[0.16em] text-[#F4F4F2] flex items-center space-x-2 font-semibold border-b border-[#181A22] pb-3">
               <ShieldCheck className="h-4 w-4 text-[#4E9A68]" strokeWidth={1.5} />
               <span>Traverse Safety & Walk-back Reserve Verification</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-sans">
-              <div className="p-3.5 bg-[#14161A] rounded-[2px] border border-[#282C37] space-y-1">
+              <div className="p-3.5 bg-[#0A0B0E] rounded-[2px] border border-[#181A22] space-y-1">
                 <strong className="text-[#C85A32] block font-mono text-[10px] uppercase tracking-[0.16em]">
                   Walk-Back Distance Limit:
                 </strong>
@@ -1163,7 +1163,7 @@ export const TraversePlanner: React.FC = () => {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-[#14161A] rounded-[2px] border border-[#282C37] space-y-1">
+              <div className="p-3.5 bg-[#0A0B0E] rounded-[2px] border border-[#181A22] space-y-1">
                 <strong className="text-[#C85A32] block font-mono text-[10px] uppercase tracking-[0.16em]">
                   Suitability Status:
                 </strong>
@@ -1174,7 +1174,7 @@ export const TraversePlanner: React.FC = () => {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-[#14161A] rounded-[2px] border border-[#282C37] space-y-1">
+              <div className="p-3.5 bg-[#0A0B0E] rounded-[2px] border border-[#181A22] space-y-1">
                 <strong className="text-[#C85A32] block font-mono text-[10px] uppercase tracking-[0.16em]">
                   Contingency Reserves:
                 </strong>
@@ -1188,7 +1188,7 @@ export const TraversePlanner: React.FC = () => {
       )}
 
       {(!base || !destination) && (
-        <div className="p-6 rounded-[2px] bg-[#17191E] border border-dashed border-[#282C37] text-center text-xs text-[#8B909A] space-y-2">
+        <div className="p-6 rounded-[2px] bg-[#0A0B0E] border border-dashed border-[#181A22] text-center text-xs text-[#8B909A] space-y-2">
           <Route className="h-6 w-6 mx-auto opacity-40 text-[#C85A32]" />
           <p className="text-[#F4F4F2] font-medium text-sm">Traverse Route Calculation Pending</p>
           <p className="max-w-md mx-auto leading-relaxed">

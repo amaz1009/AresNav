@@ -163,7 +163,7 @@ export const MarsMap: React.FC<MarsMapProps> = ({
     Boolean(showCandidateSites && (candidateSites?.length ?? 0) > 0);
 
   return (
-    <div className="relative w-full h-full bg-[#0E0F12] overflow-hidden select-none">
+    <div className="relative w-full h-full bg-[#050507] overflow-hidden select-none">
       {/* Leaflet Map Surface */}
       <MapContainer
         center={center}
@@ -412,7 +412,7 @@ export const MarsMap: React.FC<MarsMapProps> = ({
       {/* Coordinate & Layer HUD Overlay (Strictly preserves data-testid="map-hud" for unit tests) */}
       <div
         data-testid="map-hud"
-        className="absolute top-3 left-4 z-[400] bg-[#17191E]/95 border border-[#282C37] rounded-[2px] px-3.5 py-1.5 text-xs font-mono text-[#F4F4F2] flex items-center space-x-2 pointer-events-none shadow-md backdrop-blur-sm"
+        className="absolute top-3 left-4 z-[400] bg-[#0A0B0E]/95 border border-[#181A22] rounded-[2px] px-3.5 py-1.5 text-xs font-mono text-[#F4F4F2] flex items-center space-x-2 pointer-events-none shadow-md backdrop-blur-sm"
       >
         <Compass className="h-3.5 w-3.5 text-[#C85A32]" strokeWidth={1.5} />
         <span className="tracking-wider">

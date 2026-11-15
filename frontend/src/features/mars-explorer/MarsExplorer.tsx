@@ -111,9 +111,9 @@ export const MarsExplorer: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden relative font-sans select-none bg-[#111215]">
+    <div className="flex-1 flex flex-col h-full overflow-hidden relative font-sans select-none bg-[#050507]">
       {/* Precision Search & Tactical Landmark Bar */}
-      <div className="h-11 bg-[#17191E] border-b border-[#282C37] px-4 flex items-center justify-between z-20 shrink-0 gap-3">
+      <div className="h-11 bg-[#0A0B0E] border-b border-[#181A22] px-4 flex items-center justify-between z-20 shrink-0 gap-3">
         <form onSubmit={handleCoordinateSearch} className="flex items-center space-x-2">
           <div className="relative">
             <Search className="h-3.5 w-3.5 text-[#8B909A] absolute left-3 top-2.5" strokeWidth={1.5} />
@@ -122,7 +122,7 @@ export const MarsExplorer: React.FC = () => {
               placeholder="Search coordinates (e.g. -4.83, 137.30) or landmark..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-[#111215] border border-[#282C37] rounded-[2px] pl-9 pr-3 py-1 text-xs text-[#F4F4F2] placeholder-[#8B909A] focus:outline-none focus:border-[#C85A32] w-64 md:w-80 font-mono transition-colors"
+              className="bg-[#050507] border border-[#181A22] rounded-[2px] pl-9 pr-3 py-1 text-xs text-[#F4F4F2] placeholder-[#8B909A] focus:outline-none focus:border-[#C85A32] w-64 md:w-80 font-mono transition-colors"
             />
           </div>
           <button
@@ -142,7 +142,7 @@ export const MarsExplorer: React.FC = () => {
             <button
               key={lm.name}
               onClick={() => handleJumpToLandmark(lm)}
-              className="px-2.5 py-0.5 rounded-[2px] bg-[#1D2026] hover:bg-[#252932] border border-[#282C37] text-[#C4C7C5] hover:text-[#C85A32] hover:border-[#C85A32]/50 font-mono text-[10px] tracking-wider transition-colors duration-150"
+              className="px-2.5 py-0.5 rounded-[2px] bg-[#0F1015] hover:bg-[#252932] border border-[#181A22] text-[#C4C7C5] hover:text-[#C85A32] hover:border-[#C85A32]/50 font-mono text-[10px] tracking-wider transition-colors duration-150"
             >
               {lm.name}
             </button>
@@ -160,7 +160,7 @@ export const MarsExplorer: React.FC = () => {
               const r = routes.find((rt) => rt.route_id === e.target.value) || null;
               setSelectedRoute(r);
             }}
-            className="bg-[#111215] border border-[#282C37] text-[#F4F4F2] px-2.5 py-1 rounded-[2px] text-xs focus:outline-none focus:border-[#C85A32] cursor-pointer"
+            className="bg-[#050507] border border-[#181A22] text-[#F4F4F2] px-2.5 py-1 rounded-[2px] text-xs focus:outline-none focus:border-[#C85A32] cursor-pointer"
           >
             <option value="">None (Basemap Only)</option>
             {routes.map((rt) => (
@@ -186,12 +186,12 @@ export const MarsExplorer: React.FC = () => {
       {/* Main Workspace 3-Column Workstation Layout */}
       <div className="flex-1 flex overflow-hidden relative">
         {/* Left Side: Scientific Layer Panel */}
-        <aside className="w-72 border-r border-[#282C37] bg-[#17191E] flex flex-col z-10 shrink-0">
+        <aside className="w-72 border-r border-[#181A22] bg-[#0A0B0E] flex flex-col z-10 shrink-0">
           <LayerPanel onInspectDataset={handleInspectDataset} />
         </aside>
 
         {/* Center: Leaflet Mars Surface Map */}
-        <main className="flex-1 relative h-full bg-[#0E0F12] overflow-hidden">
+        <main className="flex-1 relative h-full bg-[#050507] overflow-hidden">
           <MarsMap
             center={mapCenter}
             zoom={mapZoom}
@@ -202,7 +202,7 @@ export const MarsExplorer: React.FC = () => {
 
           {/* Multi-Route Color Legend Overlay (Only rendered when Base and Destination are configured) */}
           {base && destination && (
-            <div className="absolute bottom-4 left-4 z-[400] bg-[#17191E]/95 border border-[#282C37] rounded-[2px] p-2.5 shadow-xl backdrop-blur-md text-xs font-mono flex flex-wrap items-center gap-2 max-w-[calc(100%-80px)]">
+            <div className="absolute bottom-4 left-4 z-[400] bg-[#0A0B0E]/95 border border-[#181A22] rounded-[2px] p-2.5 shadow-xl backdrop-blur-md text-xs font-mono flex flex-wrap items-center gap-2 max-w-[calc(100%-80px)]">
               <span className="text-[10px] uppercase tracking-wider text-[#8B909A] font-semibold flex items-center space-x-1">
                 <span>EXPLORATION PATHS:</span>
               </span>
@@ -212,7 +212,7 @@ export const MarsExplorer: React.FC = () => {
                 className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-[2px] border transition-colors cursor-pointer ${
                   selectedRoute?.route_id === 'ROUTE_A'
                     ? 'bg-[#10B981]/25 border-[#10B981] text-[#10B981] font-semibold shadow-[0_0_8px_rgba(16,185,129,0.3)]'
-                    : 'bg-[#111215] border-[#282C37] text-[#C4C7C5] hover:border-[#10B981]/60'
+                    : 'bg-[#050507] border-[#181A22] text-[#C4C7C5] hover:border-[#10B981]/60'
                 }`}
                 title="Select Route Alpha (Lowest Risk)"
               >
@@ -227,7 +227,7 @@ export const MarsExplorer: React.FC = () => {
                 className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-[2px] border transition-colors cursor-pointer ${
                   selectedRoute?.route_id === 'ROUTE_B'
                     ? 'bg-[#F59E0B]/25 border-[#F59E0B] text-[#F59E0B] font-semibold shadow-[0_0_8px_rgba(245,158,11,0.3)]'
-                    : 'bg-[#111215] border-[#282C37] text-[#C4C7C5] hover:border-[#F59E0B]/60'
+                    : 'bg-[#050507] border-[#181A22] text-[#C4C7C5] hover:border-[#F59E0B]/60'
                 }`}
                 title="Select Route Bravo (Balanced)"
               >
@@ -242,7 +242,7 @@ export const MarsExplorer: React.FC = () => {
                 className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-[2px] border transition-colors cursor-pointer ${
                   selectedRoute?.route_id === 'ROUTE_C'
                     ? 'bg-[#A855F7]/25 border-[#A855F7] text-[#A855F7] font-semibold shadow-[0_0_8px_rgba(168,85,247,0.3)]'
-                    : 'bg-[#111215] border-[#282C37] text-[#C4C7C5] hover:border-[#A855F7]/60'
+                    : 'bg-[#050507] border-[#181A22] text-[#C4C7C5] hover:border-[#A855F7]/60'
                 }`}
                 title="Select Route Charlie (Max Science)"
               >
@@ -298,7 +298,7 @@ export const MarsExplorer: React.FC = () => {
         </main>
 
         {/* Right Side: High-Density Point Inspector */}
-        <aside className="w-80 border-l border-[#282C37] bg-[#17191E] flex flex-col z-10 shrink-0">
+        <aside className="w-80 border-l border-[#181A22] bg-[#0A0B0E] flex flex-col z-10 shrink-0">
           <PointInspector onInspectDataset={handleInspectDataset} />
         </aside>
       </div>

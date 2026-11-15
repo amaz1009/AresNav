@@ -188,7 +188,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-[#111215] text-[#F4F4F2] overflow-hidden font-sans select-none relative">
+    <div className="flex flex-col h-screen w-screen bg-[#050507] text-[#F4F4F2] overflow-hidden font-sans select-none relative">
       {/* Universal Top Planetary Header */}
       <Header isConnecting={isConnecting} onOpenLanding={() => setShowLanding(true)} />
 
@@ -248,18 +248,18 @@ export const App: React.FC = () => {
                 /* Initial Unloaded Baseline View (strictly preserves WP-04 and T-FE baseline) */
                 <div className="flex-1 flex overflow-hidden relative w-full h-full">
                   {/* Left Panel */}
-                  <aside className="w-72 border-r border-[#282C37] bg-[#17191E] flex flex-col z-10 shrink-0">
-                    <div className="p-3.5 border-b border-[#282C37] flex items-center justify-between bg-[#111215]">
+                  <aside className="w-72 border-r border-[#181A22] bg-[#0A0B0E] flex flex-col z-10 shrink-0">
+                    <div className="p-3.5 border-b border-[#181A22] flex items-center justify-between bg-[#050507]">
                       <div className="flex items-center space-x-2 text-xs font-mono font-medium uppercase tracking-[0.16em] text-[#F4F4F2]">
                         <Layers className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
                         <span>Layers & Products</span>
                       </div>
                     </div>
                     <div className="p-4 flex-1 overflow-y-auto space-y-4 text-xs text-[#8B909A]">
-                      <div className="p-3.5 rounded-[2px] bg-[#1D2026] border border-[#282C37] text-[#C4C7C5]">
+                      <div className="p-3.5 rounded-[2px] bg-[#0F1015] border border-[#181A22] text-[#C4C7C5]">
                         Region: Gale / Mount Sharp. No region data loaded yet.
                       </div>
-                      <div className="p-3.5 rounded-[2px] border border-dashed border-[#282C37] text-center text-[#8B909A]">
+                      <div className="p-3.5 rounded-[2px] border border-dashed border-[#181A22] text-center text-[#8B909A]">
                         No data layers loaded yet.
                       </div>
                       <button
@@ -274,13 +274,13 @@ export const App: React.FC = () => {
                   </aside>
 
                   {/* Center Map */}
-                  <main className="flex-1 relative h-full bg-[#111215] overflow-hidden">
+                  <main className="flex-1 relative h-full bg-[#050507] overflow-hidden">
                     <MarsMap onMapClick={handleMapClick} />
                   </main>
 
                   {/* Right Panel */}
-                  <aside className="w-80 border-l border-[#282C37] bg-[#17191E] flex flex-col z-10 shrink-0">
-                    <div className="p-3.5 border-b border-[#282C37] flex items-center justify-between bg-[#111215]">
+                  <aside className="w-80 border-l border-[#181A22] bg-[#0A0B0E] flex flex-col z-10 shrink-0">
+                    <div className="p-3.5 border-b border-[#181A22] flex items-center justify-between bg-[#050507]">
                       <div className="flex items-center space-x-2 text-xs font-mono font-medium uppercase tracking-[0.16em] text-[#F4F4F2]">
                         <Crosshair className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
                         <span>Inspector & Evidence</span>
@@ -288,7 +288,7 @@ export const App: React.FC = () => {
                     </div>
                     {!selectedPoint && !pointInspection ? (
                       <div className="p-4 flex-1 overflow-y-auto space-y-4 text-xs text-[#8B909A]">
-                        <div className="p-3.5 rounded-[2px] bg-[#1D2026] border border-[#282C37] space-y-2">
+                        <div className="p-3.5 rounded-[2px] bg-[#0F1015] border border-[#181A22] space-y-2">
                           <div className="text-[#F4F4F2] font-medium flex items-center space-x-1.5 font-mono text-xs">
                             <ShieldAlert className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
                             <span>Safety Verification</span>
@@ -297,7 +297,7 @@ export const App: React.FC = () => {
                             Point sampling and route safety constraints will be evaluated here upon point click or route selection.
                           </p>
                         </div>
-                        <div className="p-3.5 rounded-[2px] border border-dashed border-[#282C37] text-center text-[#8B909A]">
+                        <div className="p-3.5 rounded-[2px] border border-dashed border-[#181A22] text-center text-[#8B909A]">
                           Awaiting terrain point inspection. No data loaded yet.
                         </div>
                       </div>
@@ -314,8 +314,8 @@ export const App: React.FC = () => {
 
       {/* Universal Bottom Drawer (always rendered on explorer when no layers loaded, for tests and initial guidance) */}
       {activePage === 'explorer' && layers.length === 0 && (
-        <footer className="h-28 border-t border-[#282C37] bg-[#17191E] px-4 py-2 z-20 shrink-0 flex flex-col">
-          <div className="flex items-center justify-between text-xs border-b border-[#282C37] pb-1.5 text-[#8B909A] font-mono">
+        <footer className="h-28 border-t border-[#181A22] bg-[#0A0B0E] px-4 py-2 z-20 shrink-0 flex flex-col">
+          <div className="flex items-center justify-between text-xs border-b border-[#181A22] pb-1.5 text-[#8B909A] font-mono">
             <span className="font-medium text-[#F4F4F2]">Traverse Planner & Profile</span>
             <span>No route planned</span>
           </div>

@@ -70,7 +70,7 @@ export const Navigation: React.FC = () => {
   ];
 
   return (
-    <nav className="h-10 border-b border-[#282C37] bg-[#131519] px-4 flex items-center space-x-1 overflow-x-auto z-20 shrink-0 select-none">
+    <nav className="h-10 border-b border-[#181A22] bg-[#060709] px-4 flex items-center space-x-1 overflow-x-auto z-20 shrink-0 select-none">
       <div className="flex items-center space-x-1">
         {tabs.map((tab) => {
           const isActive = activePage === tab.id;
@@ -81,8 +81,8 @@ export const Navigation: React.FC = () => {
               onClick={() => setActivePage(tab.id)}
               className={`relative flex items-center space-x-2 px-3.5 h-10 text-[11px] font-mono uppercase tracking-[0.12em] font-medium transition-colors duration-150 ${
                 isActive
-                  ? 'text-[#F4F4F2] bg-[#17191E]'
-                  : 'text-[#8B909A] hover:text-[#F4F4F2] hover:bg-[#1A1C22]'
+                  ? 'text-[#F4F4F2] bg-[#0A0B0E]'
+                  : 'text-[#8B909A] hover:text-[#F4F4F2] hover:bg-[#0F1015]'
               }`}
             >
               <span className={isActive ? 'text-[#C85A32]' : 'text-[#8B909A]'}>
@@ -94,7 +94,7 @@ export const Navigation: React.FC = () => {
                   className={`text-[9px] font-mono px-1.5 py-0.2 rounded-[2px] tracking-normal ${
                     isActive
                       ? 'bg-[#C85A32]/20 text-[#E27B54] border border-[#C85A32]/40 font-semibold'
-                      : 'bg-[#1D2026] text-[#8B909A] border border-[#282C37]'
+                      : 'bg-[#0F1015] text-[#8B909A] border border-[#181A22]'
                   }`}
                 >
                   {tab.badge}

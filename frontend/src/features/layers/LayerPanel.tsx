@@ -47,8 +47,8 @@ export const LayerPanel: React.FC<LayerPanelProps> = ({ onInspectDataset }) => {
   }
 
   return (
-    <div className="flex flex-col h-full space-y-3 p-3.5 overflow-y-auto bg-[#17191E] select-text font-sans">
-      <div className="flex items-center justify-between border-b border-[#282C37] pb-2.5">
+    <div className="flex flex-col h-full space-y-3 p-3.5 overflow-y-auto bg-[#0A0B0E] select-text font-sans">
+      <div className="flex items-center justify-between border-b border-[#181A22] pb-2.5">
         <div className="flex items-center space-x-2">
           <Layers className="h-3.5 w-3.5 text-[#C85A32]" strokeWidth={1.5} />
           <h2 className="text-xs font-mono font-medium uppercase tracking-[0.16em] text-[#F4F4F2]">
@@ -72,10 +72,10 @@ export const LayerPanel: React.FC<LayerPanelProps> = ({ onInspectDataset }) => {
               data-testid={`layer-card-${layer.layer_id}`}
               className={`p-3 rounded-[2px] border transition-all duration-200 ${
                 isUnavailable
-                  ? 'bg-[#111215]/60 border-[#282C37] opacity-50'
+                  ? 'bg-[#050507]/60 border-[#181A22] opacity-50'
                   : isActive
-                  ? 'bg-[#1D2026] border-[#C85A32]/60 shadow-[0_2px_8px_rgba(200,90,50,0.08)]'
-                  : 'bg-[#111215] border-[#282C37] hover:border-[#3E4454]'
+                  ? 'bg-[#0F1015] border-[#C85A32]/60 shadow-[0_2px_8px_rgba(200,90,50,0.08)]'
+                  : 'bg-[#050507] border-[#181A22] hover:border-[#2A2E3D]'
               }`}
             >
               {/* Header row: Checkbox, Name, Status */}
@@ -86,7 +86,7 @@ export const LayerPanel: React.FC<LayerPanelProps> = ({ onInspectDataset }) => {
                     disabled={isUnavailable}
                     checked={isActive}
                     onChange={() => toggleLayer(layer.layer_id)}
-                    className="h-3.5 w-3.5 rounded-[2px] bg-[#111215] border-[#282C37] accent-[#C85A32] focus:ring-0 disabled:cursor-not-allowed cursor-pointer"
+                    className="h-3.5 w-3.5 rounded-[2px] bg-[#050507] border-[#181A22] accent-[#C85A32] focus:ring-0 disabled:cursor-not-allowed cursor-pointer"
                   />
                   <div>
                     <span
@@ -128,7 +128,7 @@ export const LayerPanel: React.FC<LayerPanelProps> = ({ onInspectDataset }) => {
 
               {/* Active controls: Opacity slider & Legend */}
               {!isUnavailable && isActive && (
-                <div className="mt-2.5 pt-2 border-t border-[#282C37] space-y-2 text-xs">
+                <div className="mt-2.5 pt-2 border-t border-[#181A22] space-y-2 text-xs">
                   {/* Opacity control */}
                   <div className="flex items-center space-x-2">
                     <Sliders className="h-3 w-3 text-[#8B909A]" strokeWidth={1.5} />
@@ -144,13 +144,13 @@ export const LayerPanel: React.FC<LayerPanelProps> = ({ onInspectDataset }) => {
                       onChange={(e) =>
                         setLayerOpacity(layer.layer_id, parseFloat(e.target.value))
                       }
-                      className="w-full h-1 bg-[#282C37] rounded-none appearance-none cursor-pointer accent-[#C85A32]"
+                      className="w-full h-1 bg-[#181A22] rounded-none appearance-none cursor-pointer accent-[#C85A32]"
                     />
                   </div>
 
                   {/* Legend display */}
                   {layer.legend && (
-                    <div className="bg-[#111215] p-2 rounded-[2px] border border-[#282C37] space-y-1">
+                    <div className="bg-[#050507] p-2 rounded-[2px] border border-[#181A22] space-y-1">
                       <div className="flex items-center justify-between text-[10px] text-[#8B909A] font-mono">
                         <span>Colormap: {layer.legend.colormap}</span>
                         {layer.legend.units && (
@@ -177,7 +177,7 @@ export const LayerPanel: React.FC<LayerPanelProps> = ({ onInspectDataset }) => {
                           {layer.legend.categories.map((cat, i) => (
                             <span
                               key={i}
-                              className="inline-flex items-center space-x-1 text-[9px] px-1.5 py-0.5 rounded-[2px] bg-[#17191E] text-[#8B909A] border border-[#282C37] font-mono"
+                              className="inline-flex items-center space-x-1 text-[9px] px-1.5 py-0.5 rounded-[2px] bg-[#0A0B0E] text-[#8B909A] border border-[#181A22] font-mono"
                             >
                               <span
                                 className="w-2 h-2 rounded-[1px] inline-block"
