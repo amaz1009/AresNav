@@ -70,9 +70,20 @@ The large NASA raster files are **not stored in git**. They live in `backend/dat
 | `backend/data/surface_images` | Surface imagery. |
 | `backend/data/manifests`, `backend/data/regions` | Small JSON files. Already in git. |
 
-**Option A: copy existing data.** If you already have the data (for example on another
-computer or from the project owner), copy the `processed`, `raw`, `renders` and
-`surface_images` folders into `backend/data`.
+**Option A: download the prepared data (recommended, about 800 MB).**
+
+1. Download `aresnav-map-data.zip` from the shared Google Drive folder:
+   <https://drive.google.com/drive/folders/177m5_756a_6WBSLaNPm4hhwBbSTB2odL?usp=sharing>
+   Google may warn that it cannot scan large files for viruses. Click **Download anyway**.
+2. Extract it into `backend\data`, so that the `processed` and `surface_images` folders sit
+   directly inside it. From the repository root in PowerShell:
+   ```powershell
+   Expand-Archive "$HOME\Downloads\aresnav-map-data.zip" -DestinationPath backend\data -Force
+   ```
+3. Check that the data is there. This should list `.tif` files:
+   ```powershell
+   dir backend\data\processed
+   ```
 
 **Option B: rebuild it.** Three scripts in `backend/scripts` create the data, in this order:
 
