@@ -36,8 +36,8 @@ You need an internet connection the first time. Everything else is installed for
 
 1. **Get the code**
    ```powershell
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/amaz1009/AresNav.git
+   cd AresNav
    ```
    Use a normal PowerShell window, not "Run as administrator", and not inside
    `C:\Windows\System32`. A folder such as `Documents` is a good place.
