@@ -86,15 +86,6 @@ const Reveal: React.FC<RevealProps> = ({
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const handleScroll = () => {
-    if (!containerRef.current) return;
-    const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
-    const maxScroll = scrollHeight - clientHeight;
-    const progress = maxScroll > 0 ? (scrollTop / maxScroll) * 100 : 0;
-    setScrollProgress(progress);
-  };
 
   const handleScrollDown = () => {
     const target = document.getElementById('mission-architecture');
@@ -106,17 +97,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
   return (
     <div
       ref={containerRef}
-      onScroll={handleScroll}
       className="h-screen w-full bg-[#0D0E12] text-[#FAF8F5] font-sans select-text relative overflow-y-auto overflow-x-hidden scroll-smooth"
     >
-      {/* Top Laser Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-[2.5px] z-50 bg-[#161214]/60 pointer-events-none">
-        <div
-          className="h-full bg-gradient-to-r from-[#C85A32] via-[#E27B54] to-[#D4A359] shadow-[0_0_12px_#E27B54] transition-all duration-100 ease-out"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
-
       {/* Atmospheric Background Gradients & Floating Nebulae */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {/* Breathing Rusty Atmospheric Radial Gradients */}
