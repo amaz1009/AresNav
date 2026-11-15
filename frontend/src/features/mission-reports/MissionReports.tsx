@@ -10,6 +10,7 @@ import {
   AlertTriangle,
   FileText,
   ArrowRight,
+  Loader2,
 } from 'lucide-react';
 
 export const MissionReports: React.FC = () => {
@@ -27,6 +28,8 @@ export const MissionReports: React.FC = () => {
   } = useMissionStore();
 
   const [copied, setCopied] = useState(false);
+  const [isExportingDocx, setIsExportingDocx] = useState(false);
+  const [isExportingPdf, setIsExportingPdf] = useState(false);
 
   const site = selectedSite || candidateSites[0];
   const isPathConfigured = Boolean((base && destination) || selectedRoute);
@@ -96,15 +99,29 @@ export const MissionReports: React.FC = () => {
   };
 
   const handleDownloadMarkdown = () => {
-    const blob = new Blob([briefing.markdown], { type: 'text/markdown;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `ARESNAV_MISSION_BRIEFING_${selectedRegion.region_id.toUpperCase()}.md`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    reportService.downloadMarkdown(briefing);
+  };
+
+  const handleDownloadDocx = async () => {
+    try {
+      setIsExportingDocx(true);
+      await reportService.downloadDocx(briefing);
+    } catch (err) {
+      console.error('Failed to export DOCX:', err);
+    } finally {
+      setIsExportingDocx(false);
+    }
+  };
+
+  const handleDownloadPdf = () => {
+    try {
+      setIsExportingPdf(true);
+      reportService.downloadPdf(briefing);
+    } catch (err) {
+      console.error('Failed to export PDF:', err);
+    } finally {
+      setIsExportingPdf(false);
+    }
   };
 
   return (
@@ -128,21 +145,55 @@ export const MissionReports: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center space-x-3 shrink-0">
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           <button
             onClick={handleCopyMarkdown}
-            className="btn-secondary space-x-2 text-[10px] tracking-[0.14em]"
+            title="Copy Raw Markdown Dossier to Clipboard"
+            className="btn-secondary space-x-1.5 text-[10px] tracking-[0.14em] px-3 py-2 cursor-pointer"
           >
-            {copied ? <Check className="h-3.5 w-3.5 text-[#4E9A68]" strokeWidth={1.5} /> : <Copy className="h-3.5 w-3.5 text-[#8B909A]" strokeWidth={1.5} />}
+            {copied ? (
+              <Check className="h-3.5 w-3.5 text-[#4E9A68]" strokeWidth={1.5} />
+            ) : (
+              <Copy className="h-3.5 w-3.5 text-[#8B909A]" strokeWidth={1.5} />
+            )}
             <span>{copied ? 'COPIED!' : 'COPY MD'}</span>
           </button>
 
           <button
             onClick={handleDownloadMarkdown}
-            className="btn-primary space-x-2 text-[10px] tracking-[0.14em]"
+            title="Export Mission Briefing as Markdown Document (.md)"
+            className="btn-secondary space-x-1.5 text-[10px] tracking-[0.14em] px-3 py-2 border-[#181A22] hover:border-[#C85A32]/60 hover:text-[#FAF8F5] cursor-pointer"
           >
-            <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
-            <span>EXPORT BRIEFING (.MD)</span>
+            <Download className="h-3.5 w-3.5 text-[#C85A32]" strokeWidth={1.5} />
+            <span>EXPORT .MD</span>
+          </button>
+
+          <button
+            onClick={handleDownloadDocx}
+            disabled={isExportingDocx}
+            title="Export Mission Briefing as Microsoft Word Document (.docx)"
+            className="btn-secondary space-x-1.5 text-[10px] tracking-[0.14em] px-3 py-2 border-[#181A22] hover:border-[#3B82F6]/60 hover:text-[#FAF8F5] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {isExportingDocx ? (
+              <Loader2 className="h-3.5 w-3.5 text-[#3B82F6] animate-spin" strokeWidth={1.5} />
+            ) : (
+              <Download className="h-3.5 w-3.5 text-[#3B82F6]" strokeWidth={1.5} />
+            )}
+            <span>{isExportingDocx ? 'GENERATING...' : 'EXPORT .DOCX'}</span>
+          </button>
+
+          <button
+            onClick={handleDownloadPdf}
+            disabled={isExportingPdf}
+            title="Export Mission Briefing as Printable Vector PDF Dossier (.pdf)"
+            className="btn-primary space-x-1.5 text-[10px] tracking-[0.14em] px-3.5 py-2 shadow-[0_2px_14px_rgba(200,90,50,0.35)] hover:shadow-[0_4px_20px_rgba(200,90,50,0.55)] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
+          >
+            {isExportingPdf ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+            ) : (
+              <Download className="h-3.5 w-3.5" strokeWidth={1.5} />
+            )}
+            <span>{isExportingPdf ? 'GENERATING...' : 'EXPORT .PDF'}</span>
           </button>
         </div>
       </div>
