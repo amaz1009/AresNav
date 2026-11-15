@@ -169,103 +169,59 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterWorkstation }) 
 
       {/* Main Hero Section */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-20 space-y-24">
-        {/* Top Hero Grid: Mission Statement & Catchy Martian Surface Visual */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Column: Project Overview & Mission Scope */}
-          <div className="lg:col-span-7 space-y-6">
-            <Reveal direction="down" delay={0}>
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-[2px] bg-[#231714] border border-[#4C281E] text-[#D4A359] text-[10px] font-mono uppercase tracking-[0.18em] shadow-[0_0_15px_rgba(200,90,50,0.15)]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#C85A32] animate-ping" />
-                <span>Human Planetary Mission Architecture</span>
+        {/* Top Hero Section: Mission Statement & Direct Call to Action */}
+        <div className="max-w-4xl space-y-6">
+          <Reveal direction="down" delay={0}>
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-[2px] bg-[#231714] border border-[#4C281E] text-[#D4A359] text-[10px] font-mono uppercase tracking-[0.18em] shadow-[0_0_15px_rgba(200,90,50,0.15)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#C85A32] animate-ping" />
+              <span>Human Planetary Mission Architecture</span>
+            </div>
+          </Reveal>
+
+          <Reveal direction="up" delay={100}>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-[#FAF8F5] font-editorial leading-[1.08]">
+              Surface Intelligence &amp; Mission Planning for{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D96B43] via-[#C85A32] to-[#E07A5F] italic font-editorial">
+                Human Exploration of Mars
+              </span>
+            </h1>
+          </Reveal>
+
+          <Reveal direction="up" delay={200}>
+            <p className="text-sm md:text-base text-[#C4C7C5] leading-relaxed font-sans max-w-3xl font-light">
+              <strong className="text-[#FAF8F5] font-medium">AresNav</strong> is an operational planetary decision-support platform designed for mission controllers, planetary geologists, and astronaut sortie planners. Bridging orbital remote sensing with astronaut physiological safety limits, the system evaluates exploration site suitability, maps hazardous slopes, charts traversable routes, and models real-time life-support consumables.
+            </p>
+          </Reveal>
+
+          {/* Main Primary Action Button with Dynamic Shimmer */}
+          <Reveal direction="up" delay={300}>
+            <div className="pt-2 space-y-4">
+              <button
+                onClick={onEnterWorkstation}
+                className="group relative px-8 py-4.5 rounded-[2px] bg-gradient-to-r from-[#C85A32] via-[#E27B54] to-[#B24520] hover:from-[#D96B43] hover:to-[#C85A32] text-[#FAF8F5] font-semibold text-xs md:text-sm tracking-[0.18em] uppercase flex items-center space-x-3.5 shadow-[0_4px_30px_rgba(200,90,50,0.45)] hover:shadow-[0_8px_40px_rgba(200,90,50,0.65)] hover:-translate-y-0.5 transition-all duration-300 border border-[#E27B54]/60 cursor-pointer overflow-hidden"
+              >
+                {/* Subtle Light Beam Reflection */}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+                <span className="relative z-10">ENTER MISSION WORKSTATION</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform relative z-10" />
+              </button>
+
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-mono text-[#9E958F] pt-1">
+                <span className="flex items-center space-x-1.5 text-[#C4C7C5] hover:text-[#FAF8F5] transition-colors">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#4E9A68]" />
+                  <span>Interactive 2D Surface Map</span>
+                </span>
+                <span className="flex items-center space-x-1.5 text-[#C4C7C5] hover:text-[#FAF8F5] transition-colors">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#4E9A68]" />
+                  <span>Multi-Mission Scientific Layers</span>
+                </span>
+                <span className="flex items-center space-x-1.5 text-[#C4C7C5] hover:text-[#FAF8F5] transition-colors">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#4E9A68]" />
+                  <span>A* Terrain Traverse Planner</span>
+                </span>
               </div>
-            </Reveal>
-
-            <Reveal direction="up" delay={100}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight text-[#FAF8F5] font-editorial leading-[1.08]">
-                AresNav Decision-Support Platform
-              </h1>
-            </Reveal>
-
-            <Reveal direction="up" delay={200}>
-              <p className="text-sm md:text-base text-[#C4C7C5] leading-relaxed font-sans max-w-2xl font-light">
-                <strong className="text-[#FAF8F5] font-medium">AresNav</strong> is an operational planetary decision-support platform designed for mission controllers, planetary geologists, and astronaut sortie planners. Bridging orbital remote sensing with astronaut physiological safety limits, the system evaluates exploration site suitability, maps hazardous slopes, charts traversable routes, and models real-time life-support consumables.
-              </p>
-            </Reveal>
-
-            {/* Main Primary Action Button with Dynamic Shimmer */}
-            <Reveal direction="up" delay={300}>
-              <div className="pt-2 space-y-4">
-                <button
-                  onClick={onEnterWorkstation}
-                  className="group relative px-8 py-4.5 rounded-[2px] bg-gradient-to-r from-[#C85A32] via-[#E27B54] to-[#B24520] hover:from-[#D96B43] hover:to-[#C85A32] text-[#FAF8F5] font-semibold text-xs md:text-sm tracking-[0.18em] uppercase flex items-center space-x-3.5 shadow-[0_4px_30px_rgba(200,90,50,0.45)] hover:shadow-[0_8px_40px_rgba(200,90,50,0.65)] hover:-translate-y-0.5 transition-all duration-300 border border-[#E27B54]/60 cursor-pointer overflow-hidden"
-                >
-                  {/* Subtle Light Beam Reflection */}
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
-                  <span className="relative z-10">ENTER MISSION WORKSTATION</span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform relative z-10" />
-                </button>
-
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-mono text-[#9E958F] pt-1">
-                  <span className="flex items-center space-x-1.5 text-[#C4C7C5] hover:text-[#FAF8F5] transition-colors">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#4E9A68]" />
-                    <span>Interactive 2D Surface Map</span>
-                  </span>
-                  <span className="flex items-center space-x-1.5 text-[#C4C7C5] hover:text-[#FAF8F5] transition-colors">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#4E9A68]" />
-                    <span>Multi-Mission Scientific Layers</span>
-                  </span>
-                  <span className="flex items-center space-x-1.5 text-[#C4C7C5] hover:text-[#FAF8F5] transition-colors">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-[#4E9A68]" />
-                    <span>A* Terrain Traverse Planner</span>
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Right Column: Mission Directive in place of the Imagebox */}
-          <div className="lg:col-span-5 relative" data-testid="mission-directive-card">
-            <Reveal direction="left" delay={250}>
-              <div className="relative rounded-[2px] border border-[#3D2C26] hover:border-[#C85A32]/80 bg-[#161214] p-8 sm:p-10 shadow-[0_12px_45px_rgba(0,0,0,0.6)] hover:shadow-[0_20px_60px_rgba(200,90,50,0.25)] flex flex-col justify-center min-h-[320px] sm:min-h-[360px] group overflow-hidden transition-all duration-500">
-                {/* Animated Scanning Laser Telemetry Beam */}
-                <div className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#E27B54] to-transparent shadow-[0_0_15px_#E27B54] pointer-events-none animate-scanline z-30 opacity-75" />
-
-                {/* Corner Technical Crosshairs with Glowing Hover */}
-                <div className="absolute top-1 left-1 w-3 h-3 border-t-2 border-l-2 border-[#C85A32] group-hover:border-[#E27B54] transition-colors z-20" />
-                <div className="absolute top-1 right-1 w-3 h-3 border-t-2 border-r-2 border-[#C85A32] group-hover:border-[#E27B54] transition-colors z-20" />
-                <div className="absolute bottom-1 left-1 w-3 h-3 border-b-2 border-l-2 border-[#C85A32] group-hover:border-[#E27B54] transition-colors z-20" />
-                <div className="absolute bottom-1 right-1 w-3 h-3 border-b-2 border-r-2 border-[#C85A32] group-hover:border-[#E27B54] transition-colors z-20" />
-
-                {/* Rusty Atmospheric Background Radial Glow */}
-                <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#C85A32]/10 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
-                <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-[#C85A32]/5 rounded-full blur-3xl pointer-events-none animate-pulse-slow" />
-
-                <div className="relative z-10 space-y-5">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-[10px] font-mono text-[#C85A32] uppercase tracking-[0.2em]">
-                      <span className="h-2 w-2 rounded-full bg-[#C85A32] animate-ping" />
-                      <span>MISSION DIRECTIVE</span>
-                    </div>
-                    <span className="text-[9.5px] font-mono text-[#4E9A68] bg-[#122419] px-2 py-0.5 rounded-[1px] border border-[#1E3E2B]">
-                      TARGET: GALE CRATER
-                    </span>
-                  </div>
-
-                  <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-normal tracking-tight text-[#FAF8F5] font-editorial leading-[1.14]">
-                    Surface Intelligence &amp; Mission Planning for{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D96B43] via-[#C85A32] to-[#E07A5F] italic font-editorial">
-                      Human Exploration of Mars
-                    </span>
-                  </h2>
-
-                  <div className="pt-4 border-t border-[#3D2C26]/80 flex items-center justify-between text-[11px] font-mono text-[#9E958F]">
-                    <span>NASA SPACE APPS 2026</span>
-                    <span className="text-[#D4A359]">IAU2000:49900 DATUM</span>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
         </div>
 
         {/* Interactive Mouse Scroll Wheel Prompt with Pulse Ripple */}

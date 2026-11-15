@@ -12,14 +12,14 @@ describe('LandingPage Feature', () => {
     expect(screen.getAllByText(/NASA SPACE APPS 2026/i).length).toBeGreaterThan(0);
   });
 
-  it('renders mission directive showcase in place of the imagebox', () => {
+  it('renders hero headline with Surface Intelligence & Mission Planning for Human Exploration of Mars', () => {
     render(<LandingPage onEnterWorkstation={() => {}} />);
 
-    const card = screen.getByTestId('mission-directive-card');
-    expect(card).toBeInTheDocument();
-    expect(screen.getByText(/Surface Intelligence & Mission Planning for/i)).toBeInTheDocument();
-    expect(screen.getByText(/Human Exploration of Mars/i)).toBeInTheDocument();
-    expect(screen.getByText(/MISSION DIRECTIVE/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(
+      /Surface Intelligence & Mission Planning for Human Exploration of Mars/i
+    );
+    expect(screen.getByText(/Interactive 2D Surface Map/i)).toBeInTheDocument();
+    expect(screen.getByText(/Multi-Mission Scientific Layers/i)).toBeInTheDocument();
   });
 
   it('displays the three analytical decision pillars: site, traverse, and feasibility', () => {
