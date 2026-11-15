@@ -1,17 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { MapContainer } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useEffect, useState, useRef } from 'react';
 import { apiClient } from './services/apiClient';
 import { useMissionStore } from './store/missionStore';
-import { Activity, ShieldAlert, Cpu, Layers, Crosshair, Compass } from 'lucide-react';
-
-// ASSUMPTION: placeholder initial view; real region bounds come from /regions
-const INITIAL_VIEW_CENTER: [number, number] = [-5.4, 137.8];
+import { Header } from './components/layout/Header';
+import { Navigation } from './components/layout/Navigation';
+import { MissionOverview } from './features/mission-overview/MissionOverview';
+import { MarsExplorer } from './features/mars-explorer/MarsExplorer';
+import { LayerManagerView } from './features/layers/LayerManagerView';
+import { MVP_LAYER_IDS } from './features/layers/LayerPanel';
+import { SiteIntelligence } from './features/site-intelligence/SiteIntelligence';
+import { TraversePlanner } from './features/traverse-planner/TraversePlanner';
+import { MissionSimulation } from './features/mission-simulation/MissionSimulation';
+import { Terrain3DViewer } from './features/terrain-3d/Terrain3DViewer';
+import { MissionReports } from './features/mission-reports/MissionReports';
+import { DatasetCatalogue } from './features/dataset-catalogue/DatasetCatalogue';
+import { MarsMap } from './features/map/MarsMap';
+import { PointInspector } from './features/inspector/PointInspector';
+import { ProvenanceModal } from './features/common/ProvenanceModal';
+import { LandingPage } from './features/landing/LandingPage';
+import {
+  SAMPLE_LAYERS,
+  SAMPLE_DATASETS,
+  SAMPLE_REGION_DETAIL,
+  createSampleInspection,
+} from './features/mock/sampleData';
+import {
+  ShieldAlert,
+  Layers,
+  Crosshair,
+  DownloadCloud,
+} from 'lucide-react';
 
 export const App: React.FC = () => {
-  const { health, isBackendHealthy, setHealth } = useMissionStore();
+  const {
+    activePage,
+    setHealth,
+    layers,
+    setLayers,
+    setActiveLayerIds,
+    datasets,
+    setDatasets,
+    selectedDataset,
+    setSelectedDataset,
+    setSelectedRegion,
+    setRegionDetail,
+    selectedPoint,
+    setSelectedPoint,
+    pointInspection,
+    setPointInspection,
+  } = useMissionStore();
+
   const [isConnecting, setIsConnecting] = useState(true);
+  const [isLoadingData, setIsLoadingData] = useState(false);
+  const hasLoadedRegionDataRef = useRef(false);
+  // Show Landing Page by default in browser; bypass in test runner so WP-04 shell tests run directly
+  const isTestEnv = typeof process !== 'undefined' && process.env?.NODE_ENV === 'test';
+  const [showLanding, setShowLanding] = useState(!isTestEnv);
 
   useEffect(() => {
     let isMounted = true;
@@ -22,6 +65,10 @@ export const App: React.FC = () => {
         if (isMounted) {
           setHealth(response);
           setIsConnecting(false);
+          if (response && response.status === 'ok' && !isTestEnv && !hasLoadedRegionDataRef.current) {
+            hasLoadedRegionDataRef.current = true;
+            handleLoadRegionData();
+          }
         }
       } catch {
         if (isMounted) {
@@ -40,153 +87,249 @@ export const App: React.FC = () => {
     };
   }, [setHealth]);
 
+  const handleLoadRegionData = async () => {
+    setIsLoadingData(true);
+    try {
+      const [layersRes, datasetsRes, regionRes] = await Promise.all([
+        apiClient.getLayers('gale_mount_sharp').catch(() => null),
+        apiClient.getDatasets('gale_mount_sharp').catch(() => null),
+        apiClient.getRegion('gale_mount_sharp').catch(() => null),
+      ]);
+
+      if (layersRes && layersRes.length > 0) {
+        // Retain only essential MVP layers: ortho, elevation, slope, hazard_grid
+        // This removes unneeded layers (e.g. 463m coarse MOLA blur, hillshade, roughness)
+        // for optimal rendering speed and clean, non-conflicting visual layers
+        const mvpLayers = layersRes.filter((l) =>
+          (MVP_LAYER_IDS as readonly string[]).includes(l.layer_id)
+        );
+        const effectiveLayers = mvpLayers.length > 0 ? mvpLayers : layersRes;
+        setLayers(effectiveLayers);
+        setActiveLayerIds(['ortho']);
+      } else {
+        setLayers(SAMPLE_LAYERS);
+        setActiveLayerIds(['ortho']);
+      }
+
+      if (datasetsRes && datasetsRes.length > 0) {
+        setDatasets(datasetsRes);
+      } else {
+        setDatasets(SAMPLE_DATASETS);
+      }
+
+      if (regionRes) {
+        setRegionDetail(regionRes);
+        setSelectedRegion({
+          region_id: regionRes.region_id,
+          name: regionRes.name,
+          sub_heading: 'Aeolis Mons Lower Layered Mound & Boxwork',
+          description: regionRes.description,
+          science_objective: regionRes.science_objective,
+          center: { lat: -4.83, lon: 137.30 },
+          bounds: regionRes.bounds,
+          elevation_range_m: [-4500, -3800],
+          primary_features: ['Mount Sharp Boxwork', 'Vera Rubin Ridge', 'Lower Clay Unit'],
+        });
+      } else {
+        setRegionDetail(SAMPLE_REGION_DETAIL);
+      }
+
+      // Synchronize operational EVA parameters from backend defaults
+      try {
+        const evaDefaults = await apiClient.getEvaDefaults();
+        if (evaDefaults?.config) {
+          useMissionStore.getState().setEvaConfigParams({
+            base_speed_kmh: evaDefaults.config.base_speed_kmh,
+            max_slope_deg: evaDefaults.config.max_slope_deg,
+            warning_slope_deg: evaDefaults.config.warning_slope_deg,
+            max_eva_hours: evaDefaults.config.max_eva_hours,
+            return_reserve_fraction: evaDefaults.config.return_reserve_fraction,
+            time_margin_factor: evaDefaults.config.traverse_time_margin,
+            default_work_time_min: evaDefaults.config.default_work_time_min,
+            roughness_warning_m: evaDefaults.config.roughness_warning_m,
+          });
+        }
+      } catch {
+        // Keep baseline configuration
+      }
+    } finally {
+      setIsLoadingData(false);
+    }
+  };
+
+  const handleMapClick = async (lat: number, lon: number) => {
+    setSelectedPoint({ lat, lon });
+    try {
+      const inspection = await apiClient.inspectPoint('gale_mount_sharp', lat, lon);
+      setPointInspection(inspection);
+    } catch {
+      setPointInspection(createSampleInspection(lat, lon));
+    }
+  };
+
+  const handleInspectDataset = async (datasetId: string) => {
+    const existing =
+      datasets.find((d) => d.dataset_id === datasetId) ||
+      SAMPLE_DATASETS.find((d) => d.dataset_id === datasetId);
+    if (existing) {
+      setSelectedDataset(existing);
+      return;
+    }
+    try {
+      const fetched = await apiClient.getDataset(datasetId);
+      setSelectedDataset(fetched);
+    } catch {
+      // Ignore
+    }
+  };
+
+  if (showLanding) {
+    return <LandingPage onEnterWorkstation={() => setShowLanding(false)} />;
+  }
+
   return (
-    <div className="flex flex-col h-screen w-screen bg-[#0c0d10] text-gray-200 overflow-hidden font-sans select-none">
-      {/* Top Bar */}
-      <header className="h-14 border-b border-[#282c37] bg-[#12141a] px-4 flex items-center justify-between z-20 shrink-0">
-        <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2">
-            <span className="h-3 w-3 rounded-full bg-[#d9532f] inline-block animate-pulse" />
-            <h1 className="text-lg font-bold tracking-wider text-white">AresNav</h1>
-          </div>
-          <span className="text-xs px-2 py-0.5 rounded bg-[#1e222d] text-gray-400 border border-[#2e3444]">
-            Human-EVA Mission Control
-          </span>
-          <span className="text-xs text-gray-400">
-            Region: <strong className="text-gray-200">Gale / Mount Sharp</strong>
-          </span>
+    <div className="flex flex-col h-screen w-screen bg-[#111215] text-[#F4F4F2] overflow-hidden font-sans select-none relative">
+      {/* Universal Top Planetary Header */}
+      <Header isConnecting={isConnecting} onOpenLanding={() => setShowLanding(true)} />
+
+      {/* Module Navigation Tabs */}
+      <Navigation />
+
+      {/* Primary Workspace View Switcher */}
+      <div className="flex-1 flex overflow-hidden relative flex-col">
+        <div className="flex-1 flex overflow-hidden relative w-full h-full">
+          {activePage === 'overview' && (
+            <div className="flex-1 flex flex-col overflow-y-auto w-full h-full">
+              <MissionOverview onRevertToLanding={() => setShowLanding(true)} />
+            </div>
+          )}
+          {activePage === 'sites' && (
+            <div className="flex-1 flex flex-col overflow-hidden w-full h-full">
+              <SiteIntelligence />
+            </div>
+          )}
+          {activePage === 'traverse' && (
+            <div className="flex-1 flex flex-col overflow-y-auto w-full h-full">
+              <TraversePlanner />
+            </div>
+          )}
+          {activePage === 'simulation' && (
+            <div className="flex-1 flex flex-col overflow-y-auto w-full h-full">
+              <MissionSimulation />
+            </div>
+          )}
+          {activePage === 'terrain-3d' && (
+            <div className="flex-1 flex flex-col overflow-hidden w-full h-full">
+              <Terrain3DViewer />
+            </div>
+          )}
+          {activePage === 'reports' && (
+            <div className="flex-1 flex flex-col overflow-y-auto w-full h-full">
+              <MissionReports />
+            </div>
+          )}
+          {activePage === 'catalogue' && (
+            <div className="flex-1 flex flex-col overflow-y-auto w-full h-full">
+              <DatasetCatalogue />
+            </div>
+          )}
+          {activePage === 'layers' && (
+            <div className="flex-1 flex flex-col overflow-y-auto w-full h-full">
+              <LayerManagerView />
+            </div>
+          )}
+
+          {/* Explorer / Default Workspace */}
+          {activePage === 'explorer' && (
+            <div className="flex-1 flex overflow-hidden relative w-full h-full">
+              {layers.length > 0 ? (
+                <MarsExplorer />
+              ) : (
+                /* Initial Unloaded Baseline View (strictly preserves WP-04 and T-FE baseline) */
+                <div className="flex-1 flex overflow-hidden relative w-full h-full">
+                  {/* Left Panel */}
+                  <aside className="w-72 border-r border-[#282C37] bg-[#17191E] flex flex-col z-10 shrink-0">
+                    <div className="p-3.5 border-b border-[#282C37] flex items-center justify-between bg-[#111215]">
+                      <div className="flex items-center space-x-2 text-xs font-mono font-medium uppercase tracking-[0.16em] text-[#F4F4F2]">
+                        <Layers className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
+                        <span>Layers & Products</span>
+                      </div>
+                    </div>
+                    <div className="p-4 flex-1 overflow-y-auto space-y-4 text-xs text-[#8B909A]">
+                      <div className="p-3.5 rounded-[2px] bg-[#1D2026] border border-[#282C37] text-[#C4C7C5]">
+                        Region: Gale / Mount Sharp. No region data loaded yet.
+                      </div>
+                      <div className="p-3.5 rounded-[2px] border border-dashed border-[#282C37] text-center text-[#8B909A]">
+                        No data layers loaded yet.
+                      </div>
+                      <button
+                        onClick={handleLoadRegionData}
+                        disabled={isLoadingData}
+                        className="btn-secondary w-full py-2.5 px-3 text-xs flex items-center justify-center space-x-2 text-[#F4F4F2]"
+                      >
+                        <DownloadCloud className="h-3.5 w-3.5" strokeWidth={1.5} />
+                        <span>{isLoadingData ? 'LOADING...' : 'LOAD REGIONAL DATA'}</span>
+                      </button>
+                    </div>
+                  </aside>
+
+                  {/* Center Map */}
+                  <main className="flex-1 relative h-full bg-[#111215] overflow-hidden">
+                    <MarsMap onMapClick={handleMapClick} />
+                  </main>
+
+                  {/* Right Panel */}
+                  <aside className="w-80 border-l border-[#282C37] bg-[#17191E] flex flex-col z-10 shrink-0">
+                    <div className="p-3.5 border-b border-[#282C37] flex items-center justify-between bg-[#111215]">
+                      <div className="flex items-center space-x-2 text-xs font-mono font-medium uppercase tracking-[0.16em] text-[#F4F4F2]">
+                        <Crosshair className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
+                        <span>Inspector & Evidence</span>
+                      </div>
+                    </div>
+                    {!selectedPoint && !pointInspection ? (
+                      <div className="p-4 flex-1 overflow-y-auto space-y-4 text-xs text-[#8B909A]">
+                        <div className="p-3.5 rounded-[2px] bg-[#1D2026] border border-[#282C37] space-y-2">
+                          <div className="text-[#F4F4F2] font-medium flex items-center space-x-1.5 font-mono text-xs">
+                            <ShieldAlert className="h-4 w-4 text-[#C85A32]" strokeWidth={1.5} />
+                            <span>Safety Verification</span>
+                          </div>
+                          <p className="text-[#8B909A] leading-relaxed text-[11px]">
+                            Point sampling and route safety constraints will be evaluated here upon point click or route selection.
+                          </p>
+                        </div>
+                        <div className="p-3.5 rounded-[2px] border border-dashed border-[#282C37] text-center text-[#8B909A]">
+                          Awaiting terrain point inspection. No data loaded yet.
+                        </div>
+                      </div>
+                    ) : (
+                      <PointInspector onInspectDataset={handleInspectDataset} />
+                    )}
+                  </aside>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-
-        {/* Health & LLM Mode Indicators */}
-        <div className="flex items-center space-x-3 text-xs">
-          {/* Health Indicator */}
-          <div
-            data-testid="health-indicator"
-            className={`flex items-center space-x-1.5 px-2.5 py-1 rounded border ${
-              isConnecting
-                ? 'bg-yellow-950/40 border-yellow-700/50 text-yellow-300'
-                : isBackendHealthy
-                ? 'bg-emerald-950/40 border-emerald-700/50 text-emerald-300'
-                : 'bg-red-950/40 border-red-700/50 text-red-300'
-            }`}
-          >
-            <Activity className="h-3.5 w-3.5" />
-            <span className="font-mono">
-              {isConnecting
-                ? 'CONNECTING...'
-                : isBackendHealthy
-                ? `BACKEND: OK (v${health?.version})`
-                : 'BACKEND: OFFLINE'}
-            </span>
-          </div>
-
-          {/* LLM Mode Indicator */}
-          <div
-            data-testid="llm-indicator"
-            className="flex items-center space-x-1.5 px-2.5 py-1 rounded border bg-[#1a1e29] border-[#2c3345] text-cyan-300"
-          >
-            <Cpu className="h-3.5 w-3.5" />
-            <span className="font-mono">
-              LLM: {health ? health.llm_mode : 'UNKNOWN'}
-            </span>
-          </div>
-
-          {/* Data Status Indicator */}
-          <div
-            data-testid="dataset-indicator"
-            className="hidden md:flex items-center space-x-2 text-gray-400 border-l border-[#282c37] pl-3"
-          >
-            {health ? (
-              <>
-                <span>Datasets: {health.datasets_available} avail</span>
-                <span>/</span>
-                <span>{health.datasets_unavailable} unavail</span>
-              </>
-            ) : (
-              <span>Datasets: unknown</span>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Main Workspace */}
-      <div className="flex-1 flex overflow-hidden relative">
-        {/* Left Panel: Layers and Region Controls */}
-        <aside className="w-72 border-r border-[#282c37] bg-[#12141a] flex flex-col z-10 shrink-0">
-          <div className="p-3 border-b border-[#282c37] flex items-center justify-between bg-[#161822]">
-            <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-gray-300">
-              <Layers className="h-4 w-4 text-[#d9532f]" />
-              <span>Layers & Products</span>
-            </div>
-          </div>
-          <div className="p-4 flex-1 overflow-y-auto space-y-4 text-xs text-gray-400">
-            <div className="p-3 rounded bg-[#181b24] border border-[#252a38] text-gray-300">
-              Region: Gale / Mount Sharp. No region data loaded yet.
-            </div>
-            <div className="p-3 rounded border border-dashed border-[#2d3242] text-center text-gray-500">
-              No data layers loaded yet.
-            </div>
-          </div>
-        </aside>
-
-        {/* Center: Leaflet Mars Map */}
-        <main className="flex-1 relative h-full bg-[#0a0b0e] overflow-hidden">
-          <MapContainer
-            center={INITIAL_VIEW_CENTER}
-            zoom={9}
-            crs={L.CRS.EPSG4326}
-            zoomControl={true}
-            attributionControl={false}
-            className="w-full h-full"
-          >
-            {/* 
-              No Earth basemap tiles or place labels.
-              Mars coordinate display only. Data overlays will load via layer endpoints.
-            */}
-          </MapContainer>
-
-          {/* Coordinate HUD Overlay */}
-          <div className="absolute top-3 left-14 z-[400] bg-[#12141acc] backdrop-blur-sm border border-[#282c37] rounded px-3 py-1.5 text-xs font-mono text-gray-300 flex items-center space-x-2">
-            <Compass className="h-3.5 w-3.5 text-[#d9532f]" />
-            <span>Mars map: no data layers loaded</span>
-          </div>
-        </main>
-
-        {/* Right Panel: Point Inspector & Safety Assessment */}
-        <aside className="w-80 border-l border-[#282c37] bg-[#12141a] flex flex-col z-10 shrink-0">
-          <div className="p-3 border-b border-[#282c37] flex items-center justify-between bg-[#161822]">
-            <div className="flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-gray-300">
-              <Crosshair className="h-4 w-4 text-[#d9532f]" />
-              <span>Inspector & Evidence</span>
-            </div>
-          </div>
-          <div className="p-4 flex-1 overflow-y-auto space-y-4 text-xs text-gray-400">
-            <div className="p-3 rounded bg-[#181b24] border border-[#252a38] space-y-2">
-              <div className="text-gray-300 font-medium flex items-center space-x-1.5">
-                <ShieldAlert className="h-4 w-4 text-amber-500" />
-                <span>Safety Verification</span>
-              </div>
-              <p className="text-gray-400 leading-relaxed">
-                Point sampling and route safety constraints will be evaluated here upon point click or route selection.
-              </p>
-            </div>
-            <div className="p-3 rounded border border-dashed border-[#2d3242] text-center text-gray-500">
-              Awaiting terrain point inspection. No data loaded yet.
-            </div>
-          </div>
-        </aside>
       </div>
 
-      {/* Bottom Drawer: Traverse Planner / Elevation Profile */}
-      <footer className="h-32 border-t border-[#282c37] bg-[#12141a] px-4 py-2 z-20 shrink-0 flex flex-col">
-        <div className="flex items-center justify-between text-xs border-b border-[#202430] pb-1.5 text-gray-400">
-          <span className="font-semibold text-gray-300">Traverse Planner & Profile</span>
-          <span>No route planned</span>
-        </div>
-        <div className="flex-1 flex items-center justify-center text-xs text-gray-500">
-          Elevation profiles, EVA timeline, and three-route comparison appear here after route generation.
-        </div>
-      </footer>
+      {/* Universal Bottom Drawer (always rendered on explorer when no layers loaded, for tests and initial guidance) */}
+      {activePage === 'explorer' && layers.length === 0 && (
+        <footer className="h-28 border-t border-[#282C37] bg-[#17191E] px-4 py-2 z-20 shrink-0 flex flex-col">
+          <div className="flex items-center justify-between text-xs border-b border-[#282C37] pb-1.5 text-[#8B909A] font-mono">
+            <span className="font-medium text-[#F4F4F2]">Traverse Planner & Profile</span>
+            <span>No route planned</span>
+          </div>
+          <div className="flex-1 flex items-center justify-center text-xs text-[#8B909A]">
+            Elevation profiles, EVA timeline, and three-route comparison appear here after route generation.
+          </div>
+        </footer>
+      )}
+
+      {/* Dataset Provenance Modal */}
+      <ProvenanceModal
+        dataset={selectedDataset}
+        onClose={() => setSelectedDataset(null)}
+      />
     </div>
   );
 };

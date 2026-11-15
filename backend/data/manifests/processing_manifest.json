@@ -13,7 +13,7 @@
           "source_file": "DTEEC_001488_1750_001752_1750_U02.IMG",
           "opened_path": "data/raw/DTEEC_001488_1750_001752_1750_U02.IMG"
         },
-        "completed_at": "2026-11-14T04:33:42.586409+00:00"
+        "completed_at": "2026-11-14T13:25:38.653676+00:00"
       },
       {
         "step": "validate_crs",
@@ -23,7 +23,7 @@
           "latitude_type": "PLANETOCENTRIC",
           "is_projected": true
         },
-        "completed_at": "2026-11-14T04:33:42.656432+00:00"
+        "completed_at": "2026-11-14T13:25:38.695994+00:00"
       },
       {
         "step": "nodata_normalization",
@@ -32,7 +32,7 @@
           "source_nodata": -3.4028226550889045e+38,
           "target_nodata": "NaN"
         },
-        "completed_at": "2026-11-14T04:33:44.136150+00:00"
+        "completed_at": "2026-11-14T13:25:39.729048+00:00"
       },
       {
         "step": "coverage_statistics",
@@ -43,7 +43,7 @@
           "nodata_cells": 22190001,
           "valid_fraction": 0.753701678247164
         },
-        "completed_at": "2026-11-14T04:33:44.175272+00:00"
+        "completed_at": "2026-11-14T13:25:39.777084+00:00"
       },
       {
         "step": "write_cog",
@@ -53,7 +53,7 @@
           "compress": "deflate",
           "tiled": true
         },
-        "completed_at": "2026-11-14T04:34:28.080983+00:00"
+        "completed_at": "2026-11-14T13:26:05.230035+00:00"
       }
     ],
     "status": "COMPLETED",
@@ -73,7 +73,7 @@
           "source_file": "PSP_001752_1750_RED_C_01_ORTHO.JP2",
           "opened_path": "data/raw/PSP_001752_1750_RED_C_01_ORTHO.JP2"
         },
-        "completed_at": "2026-11-14T04:34:28.212625+00:00"
+        "completed_at": "2026-11-14T13:26:05.380231+00:00"
       },
       {
         "step": "validate_crs",
@@ -83,7 +83,7 @@
           "latitude_type": "PLANETOCENTRIC",
           "is_projected": true
         },
-        "completed_at": "2026-11-14T04:34:28.271256+00:00"
+        "completed_at": "2026-11-14T13:26:05.430508+00:00"
       },
       {
         "step": "nodata_normalization",
@@ -92,7 +92,7 @@
           "source_nodata": null,
           "target_nodata": "NaN"
         },
-        "completed_at": "2026-11-14T04:34:35.210784+00:00"
+        "completed_at": "2026-11-14T13:26:11.263538+00:00"
       },
       {
         "step": "coverage_statistics",
@@ -103,7 +103,7 @@
           "nodata_cells": 0,
           "valid_fraction": 1.0
         },
-        "completed_at": "2026-11-14T04:34:35.249392+00:00"
+        "completed_at": "2026-11-14T13:26:11.313482+00:00"
       },
       {
         "step": "write_cog",
@@ -113,7 +113,7 @@
           "compress": "deflate",
           "tiled": true
         },
-        "completed_at": "2026-11-14T04:35:04.027189+00:00"
+        "completed_at": "2026-11-14T13:26:28.887125+00:00"
       }
     ],
     "status": "COMPLETED",
@@ -134,7 +134,7 @@
           "source_file": "megt00n090hb.lbl",
           "opened_path": "data/raw/megt00n090hb.lbl"
         },
-        "completed_at": "2026-11-14T04:35:04.100854+00:00"
+        "completed_at": "2026-11-14T13:26:28.948355+00:00"
       },
       {
         "step": "validate_crs",
@@ -144,7 +144,7 @@
           "latitude_type": "PLANETOCENTRIC",
           "is_projected": true
         },
-        "completed_at": "2026-11-14T04:35:04.135891+00:00"
+        "completed_at": "2026-11-14T13:26:28.970548+00:00"
       },
       {
         "step": "nodata_normalization",
@@ -153,7 +153,7 @@
           "source_nodata": -32768.0,
           "target_nodata": "NaN"
         },
-        "completed_at": "2026-11-14T04:35:05.119496+00:00"
+        "completed_at": "2026-11-14T13:26:29.871591+00:00"
       },
       {
         "step": "coverage_statistics",
@@ -164,7 +164,7 @@
           "nodata_cells": 0,
           "valid_fraction": 1.0
         },
-        "completed_at": "2026-11-14T04:35:05.146037+00:00"
+        "completed_at": "2026-11-14T13:26:29.912344+00:00"
       },
       {
         "step": "write_cog",
@@ -174,7 +174,7 @@
           "compress": "deflate",
           "tiled": true
         },
-        "completed_at": "2026-11-14T04:35:47.566282+00:00"
+        "completed_at": "2026-11-14T13:26:57.330721+00:00"
       }
     ],
     "status": "COMPLETED",

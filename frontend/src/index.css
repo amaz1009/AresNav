@@ -3,22 +3,222 @@
 @tailwind utilities;
 
 :root {
+  --color-rust: #C85A32;
+  --color-rust-hover: #D96B43;
+  --color-rust-dim: #4D2214;
+  --color-graphite-deep: #111215;
+  --color-graphite-panel: #17191E;
+  --color-graphite-card: #1D2026;
+  --color-border: #282C37;
+  --color-offwhite: #F4F4F2;
+  --color-offwhite-muted: #C4C7C5;
   color-scheme: dark;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #0c0d10;
-  color: #f3f4f6;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #111215;
+  color: #E8E8E4;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: hidden;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Minimalist technical scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #111215;
+}
+::-webkit-scrollbar-thumb {
+  background: #282C37;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C85A32;
 }
 
 /* Leaflet dark styling */
 .leaflet-container {
-  background-color: #111215 !important;
+  background-color: #0E0F12 !important;
   width: 100%;
   height: 100%;
   outline: none;
+}
+
+.custom-map-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* AresNav Technical Mission-Control Design System */
+@layer components {
+  /* Primary CTA: Muted Martian Rust */
+  .btn-primary {
+    @apply inline-flex items-center justify-center font-mono text-[11px] uppercase tracking-[0.14em] font-medium px-4 py-2 rounded-[2px] bg-[#C85A32] hover:bg-[#D96B43] active:bg-[#B54A24] text-[#F4F4F2] border border-[#E27B54]/40 transition-colors duration-200 focus:outline-none disabled:opacity-40 disabled:pointer-events-none;
+  }
+  
+  /* Secondary: Warm Graphite */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center font-mono text-[11px] uppercase tracking-[0.14em] font-medium px-4 py-2 rounded-[2px] bg-[#1D2026] hover:bg-[#252932] text-[#F4F4F2] border border-[#282C37] hover:border-[#C85A32]/60 transition-colors duration-200 focus:outline-none disabled:opacity-40 disabled:pointer-events-none;
+  }
+
+  .btn-tertiary {
+    @apply inline-flex items-center justify-center font-mono text-[11px] uppercase tracking-[0.12em] font-medium px-2.5 py-1.5 rounded-[2px] bg-transparent hover:bg-[#1D2026] text-[#8B909A] hover:text-[#F4F4F2] transition-colors focus:outline-none;
+  }
+
+  .btn-destructive {
+    @apply inline-flex items-center justify-center font-mono text-[11px] uppercase tracking-[0.14em] font-medium px-4 py-2 rounded-[2px] bg-[#291516] hover:bg-[#381B1D] text-[#E57373] border border-[#4F2325] transition-colors focus:outline-none;
+  }
+
+  /* Compatibility aliases */
+  .button--primary {
+    @apply btn-primary;
+  }
+  .button--secondary {
+    @apply btn-secondary;
+  }
+
+  /* Clean technical action button */
+  .button-icon-circle {
+    @apply h-9 w-9 rounded-[2px] border border-[#282C37] bg-[#17191E] flex items-center justify-center text-[#8B909A] hover:text-[#F4F4F2] hover:border-[#C85A32] hover:bg-[#1D2026] transition-colors duration-200 focus:outline-none;
+  }
+
+  /* Structured Section & Surface Panels */
+  .panel-surface {
+    @apply bg-[#17191E] border border-[#282C37] rounded-[2px];
+  }
+
+  .card-surface {
+    @apply bg-[#1D2026] border border-[#282C37] rounded-[2px];
+  }
+
+  .star-surface {
+    @apply bg-[#17191E] border border-[#282C37] rounded-[4px] shadow-[0_15px_35px_rgba(0,0,0,0.5)];
+  }
+
+  /* Micro status badges */
+  .badge-nominal {
+    @apply inline-flex items-center font-mono text-[10px] uppercase tracking-[0.12em] font-semibold px-2 py-0.5 rounded-[2px] bg-[#122419] text-[#4E9A68] border border-[#1E3E2B];
+  }
+  .badge-warning {
+    @apply inline-flex items-center font-mono text-[10px] uppercase tracking-[0.12em] font-semibold px-2 py-0.5 rounded-[2px] bg-[#282114] text-[#D4A359] border border-[#4C3B20];
+  }
+  .badge-danger {
+    @apply inline-flex items-center font-mono text-[10px] uppercase tracking-[0.12em] font-semibold px-2 py-0.5 rounded-[2px] bg-[#291516] text-[#C94D4D] border border-[#4F2325];
+  }
+  .badge-neutral {
+    @apply inline-flex items-center font-mono text-[10px] uppercase tracking-[0.12em] font-semibold px-2 py-0.5 rounded-[2px] bg-[#1D2026] text-[#8B909A] border border-[#282C37];
+  }
+}
+
+/* Scroll wheel indicator animation */
+@keyframes scroll-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-scroll-wheel {
+  animation: scroll-wheel 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Aerospace Telemetry Scanline Animation */
+@keyframes scanline {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scanline {
+  animation: scanline 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Ambient Breathing Atmospheric Glow */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.32;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 7s ease-in-out infinite;
+}
+
+/* Subtle Weightless Floating */
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-subtle {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+/* Metallic Shimmer Sweep */
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer-sweep {
+  background-size: 200% 100%;
+  animation: shimmer-sweep 3s ease-in-out infinite;
+}
+
+/* Radar Beacon Ripple */
+@keyframes radar-ping {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(200, 90, 50, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 12px rgba(200, 90, 50, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(200, 90, 50, 0);
+  }
+}
+
+.animate-radar-ping {
+  animation: radar-ping 2.5s infinite;
 }

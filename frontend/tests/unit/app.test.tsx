@@ -13,6 +13,12 @@ vi.mock('react-leaflet', () => ({
     capturedMapProps = props;
     return <div data-testid="leaflet-map">{props.children}</div>;
   },
+  ImageOverlay: () => <div data-testid="image-overlay" />,
+  Marker: () => <div data-testid="map-marker" />,
+  Popup: ({ children }: { children?: React.ReactNode }) => <div>{children}</div>,
+  Polyline: () => <div data-testid="map-polyline" />,
+  useMap: () => ({ setView: vi.fn(), getZoom: vi.fn(() => 10), invalidateSize: vi.fn() }),
+  useMapEvents: () => null,
 }));
 
 describe('App Layout Shell (WP-04)', () => {

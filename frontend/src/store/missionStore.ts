@@ -1,11 +1,29 @@
 import { create } from 'zustand';
 import type { components } from '../types/api.gen';
+import type {
+  NavPage,
+  RegionInfo,
+  CandidateSite,
+  TraverseRoute,
+  EvaSimulationConfig,
+  EvaSimulationResult,
+  DatasetMetadata,
+} from '../types/models';
+import {
+  GALE_REGION,
+  GALE_CANDIDATE_SITES,
+  GALE_ROUTES,
+  DEFAULT_EVA_CONFIG,
+  DEMO_DATASETS,
+} from '../mocks/demoData';
+import { simulationService } from '../services/simulationService';
 
 export type MissionStateContract = components['schemas']['MissionState'];
 export type HealthResponse = components['schemas']['HealthResponse'];
 export type RegionSummary = components['schemas']['RegionSummary'];
 export type RegionDetail = components['schemas']['RegionDetail'];
 export type LayerInfo = components['schemas']['LayerInfo'];
+export type DatasetRecord = components['schemas']['DatasetRecord'];
 export type PointInspection = components['schemas']['PointInspection'];
 export type RoutePlanResponse = components['schemas']['RoutePlanResponse'];
 export type MissionReport = components['schemas']['MissionReport'];
@@ -32,23 +50,58 @@ export interface MissionStoreState {
   agent_analysis: AgentAnalysisResponse | null;
   notes: string | null;
 
-  // --- UI and Loading State (kept separate) ---
+  // --- UI and Local-First State ---
+  activePage: NavPage;
+  selectedRegion: RegionInfo;
+  candidateSites: CandidateSite[];
+  selectedSite: CandidateSite | null;
+  routes: TraverseRoute[];
+  selectedRoute: TraverseRoute | null;
+  evaConfigParams: EvaSimulationConfig;
+  simulationResult: EvaSimulationResult | null;
+  datasetsMeta: DatasetMetadata[];
+  selectedDatasetMeta: DatasetMetadata | null;
+
+  // Compatibility and API Fields
   health: HealthResponse | null;
   isBackendHealthy: boolean;
   regionDetail: RegionDetail | null;
   availableRegions: RegionSummary[];
   layers: LayerInfo[];
   activeLayerIds: string[];
+  layerOpacities: Record<string, number>;
+  datasets: DatasetRecord[];
+  selectedDataset: DatasetRecord | null;
   selectedPoint: GeoPoint | null;
   pointInspection: PointInspection | null;
   report: MissionReport | null;
   isLoading: boolean;
   errorMessage: string | null;
+  isBaseLocked: boolean;
+  isDestinationLocked: boolean;
 
   // --- Actions & Setters ---
+  setActivePage: (page: NavPage) => void;
+  setSelectedRegion: (region: RegionInfo) => void;
+  setSelectedSite: (site: CandidateSite | null) => void;
+  setSelectedRoute: (route: TraverseRoute | null) => void;
+  setIsBaseLocked: (locked: boolean) => void;
+  setIsDestinationLocked: (locked: boolean) => void;
+  setEvaConfigParams: (params: Partial<EvaSimulationConfig>) => void;
+  setSimulationResult: (result: EvaSimulationResult | null) => void;
+  setSelectedDatasetMeta: (ds: DatasetMetadata | null) => void;
+
   setHealth: (health: HealthResponse | null) => void;
   setRegionId: (region_id: string | null) => void;
   setSelectedRegionId: (region_id: string | null) => void;
+  setRegionDetail: (detail: RegionDetail | null) => void;
+  setAvailableRegions: (regions: RegionSummary[]) => void;
+  setLayers: (layers: LayerInfo[]) => void;
+  setActiveLayerIds: (ids: string[]) => void;
+  toggleLayer: (layerId: string) => void;
+  setLayerOpacity: (layerId: string, opacity: number) => void;
+  setDatasets: (datasets: DatasetRecord[]) => void;
+  setSelectedDataset: (dataset: DatasetRecord | null) => void;
   setMissionInfo: (info: {
     mission_id?: string | null;
     name?: string | null;
@@ -73,11 +126,10 @@ export interface MissionStoreState {
 }
 
 export const useMissionStore = create<MissionStoreState>((set, get) => ({
-  // MissionState contract fields initial values
+  // Contract initial values
   mission_id: null,
   name: null,
   created_at: null,
-  // Region ID fixed by docs/API_CONTRACTS.md:725 and docs/DATA_SOURCES.md:29
   region_id: 'gale_mount_sharp',
   objective_text: null,
   base: null,
@@ -90,18 +142,76 @@ export const useMissionStore = create<MissionStoreState>((set, get) => ({
   agent_analysis: null,
   notes: null,
 
-  // UI & Loading state initial values
+  // UI state initial values
+  activePage: 'explorer',
+  selectedRegion: GALE_REGION,
+  candidateSites: GALE_CANDIDATE_SITES,
+  selectedSite: null,
+  routes: GALE_ROUTES,
+  selectedRoute: null,
+  evaConfigParams: DEFAULT_EVA_CONFIG,
+  simulationResult: null,
+  datasetsMeta: DEMO_DATASETS,
+  selectedDatasetMeta: DEMO_DATASETS[0],
+
   health: null,
   isBackendHealthy: false,
   regionDetail: null,
   availableRegions: [],
   layers: [],
-  activeLayerIds: [],
+  activeLayerIds: ['ortho'],
+  layerOpacities: {
+    ortho: 1.0,
+    elevation: 0.75,
+    slope: 0.7,
+    hazard_grid: 0.8,
+  },
+  datasets: [],
+  selectedDataset: null,
   selectedPoint: null,
   pointInspection: null,
   report: null,
   isLoading: false,
   errorMessage: null,
+  isBaseLocked: false,
+  isDestinationLocked: false,
+
+  setActivePage: (activePage) => set({ activePage }),
+  setSelectedRegion: (selectedRegion) =>
+    set({
+      selectedRegion,
+      region_id: selectedRegion.region_id,
+    }),
+  setSelectedSite: (selectedSite) => set({ selectedSite }),
+  setIsBaseLocked: (isBaseLocked) => set({ isBaseLocked }),
+  setIsDestinationLocked: (isDestinationLocked) => set({ isDestinationLocked }),
+  setSelectedRoute: (selectedRoute) => {
+    if (!selectedRoute) {
+      set({ selectedRoute: null, selected_route_id: null, simulationResult: null });
+      return;
+    }
+    const sim = simulationService.simulateEva(selectedRoute, get().evaConfigParams);
+    const startWp = selectedRoute.waypoints?.[0];
+    const endWp = selectedRoute.waypoints?.[selectedRoute.waypoints.length - 1];
+    set({
+      selectedRoute,
+      selected_route_id: selectedRoute.route_id,
+      simulationResult: sim,
+      ...(!get().base && startWp ? { base: { lat: startWp.lat, lon: startWp.lon } } : {}),
+      ...(!get().destination && endWp ? { destination: { lat: endWp.lat, lon: endWp.lon } } : {}),
+    });
+  },
+  setEvaConfigParams: (params) => {
+    const newConfig = { ...get().evaConfigParams, ...params };
+    const route = get().selectedRoute;
+    const sim = route ? simulationService.simulateEva(route, newConfig) : null;
+    set({
+      evaConfigParams: newConfig,
+      simulationResult: sim,
+    });
+  },
+  setSimulationResult: (simulationResult) => set({ simulationResult }),
+  setSelectedDatasetMeta: (selectedDatasetMeta) => set({ selectedDatasetMeta }),
 
   setHealth: (health) =>
     set({
@@ -111,6 +221,37 @@ export const useMissionStore = create<MissionStoreState>((set, get) => ({
 
   setRegionId: (region_id) => set({ region_id }),
   setSelectedRegionId: (region_id) => set({ region_id }),
+  setRegionDetail: (regionDetail) => set({ regionDetail }),
+  setAvailableRegions: (availableRegions) => set({ availableRegions }),
+  setLayers: (layers) =>
+    set((state) => {
+      const opacities = { ...state.layerOpacities };
+      layers.forEach((l) => {
+        if (opacities[l.layer_id] === undefined) {
+          opacities[l.layer_id] = 1.0;
+        }
+      });
+      return { layers, layerOpacities: opacities };
+    }),
+  setActiveLayerIds: (activeLayerIds) => set({ activeLayerIds }),
+  toggleLayer: (layerId) =>
+    set((state) => {
+      const exists = state.activeLayerIds.includes(layerId);
+      return {
+        activeLayerIds: exists
+          ? state.activeLayerIds.filter((id) => id !== layerId)
+          : [...state.activeLayerIds, layerId],
+      };
+    }),
+  setLayerOpacity: (layerId, opacity) =>
+    set((state) => ({
+      layerOpacities: {
+        ...state.layerOpacities,
+        [layerId]: Math.max(0, Math.min(1, opacity)),
+      },
+    })),
+  setDatasets: (datasets) => set({ datasets }),
+  setSelectedDataset: (selectedDataset) => set({ selectedDataset }),
 
   setMissionInfo: (info) =>
     set((state) => ({
@@ -122,8 +263,16 @@ export const useMissionStore = create<MissionStoreState>((set, get) => ({
       notes: info.notes !== undefined ? info.notes : state.notes,
     })),
 
-  setBase: (base) => set({ base }),
-  setDestination: (destination) => set({ destination }),
+  setBase: (base) =>
+    set({
+      base,
+      ...(base === null ? { isBaseLocked: false } : {}),
+    }),
+  setDestination: (destination) =>
+    set({
+      destination,
+      ...(destination === null ? { isDestinationLocked: false } : {}),
+    }),
   setStops: (stops) => set({ stops }),
   setEvaConfig: (eva_config) => set({ eva_config }),
   setPlan: (plan) => set({ plan }),

@@ -3,6 +3,7 @@
 from fastapi import APIRouter
 
 from app.core.errors import AppException
+from app.engines.eva.defaults import get_default_eva_response
 from app.models import EnvelopeRequest, EnvelopeResponse, EvaDefaultsResponse
 
 router = APIRouter(prefix="/eva", tags=["EVA"])
@@ -15,11 +16,7 @@ router = APIRouter(prefix="/eva", tags=["EVA"])
     description="Returns baseline EVA physiological parameters and explicit reference assumptions.",
 )
 async def get_eva_defaults() -> EvaDefaultsResponse:
-    raise AppException(
-        error_code="NOT_IMPLEMENTED",
-        message="Endpoint belongs to an unmerged work package",
-        status_code=501,
-    )
+    return get_default_eva_response()
 
 
 @router.post(

@@ -318,11 +318,20 @@ def test_t_model_01_mission_state_and_report_prefixes() -> None:
         )
 
 
+def test_eva_defaults_returns_200(client: TestClient) -> None:
+    """Verify GET /api/v1/eva/defaults returns 200 with EvaDefaultsResponse."""
+    response = client.get("/api/v1/eva/defaults")
+    assert response.status_code == 200
+    data = response.json()
+    assert "config" in data
+    assert "assumptions" in data
+    assert len(data["assumptions"]) == 9
+
+
 def test_stubs_return_not_implemented_envelope(client: TestClient) -> None:
     """Verify stub endpoints return 501 NOT_IMPLEMENTED with standard error envelope."""
-    # Test remaining stub endpoints (regions, datasets, layers, terrain implemented in WP-08)
+    # Test remaining stub endpoints (regions, datasets, layers, terrain in WP-08, eva/defaults in WP-11)
     stub_calls = [
-        ("GET", "/api/v1/eva/defaults"),
         (
             "POST",
             "/api/v1/routes/plan",

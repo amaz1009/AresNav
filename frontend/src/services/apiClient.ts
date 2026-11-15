@@ -1,6 +1,11 @@
 import type { components } from '../types/api.gen';
 
 export type HealthResponse = components['schemas']['HealthResponse'];
+export type RegionSummary = components['schemas']['RegionSummary'];
+export type RegionDetail = components['schemas']['RegionDetail'];
+export type LayerInfo = components['schemas']['LayerInfo'];
+export type DatasetRecord = components['schemas']['DatasetRecord'];
+export type PointInspection = components['schemas']['PointInspection'];
 
 export interface ApiErrorEnvelope {
   error_code: string;
@@ -78,6 +83,37 @@ export class ApiClient {
 
   public getHealth(): Promise<HealthResponse> {
     return this.get<HealthResponse>('/health');
+  }
+
+  public getRegions(): Promise<RegionSummary[]> {
+    return this.get<RegionSummary[]>('/regions');
+  }
+
+  public getRegion(regionId: string): Promise<RegionDetail> {
+    return this.get<RegionDetail>(`/regions/${regionId}`);
+  }
+
+  public getLayers(regionId?: string): Promise<LayerInfo[]> {
+    const query = regionId ? `?region_id=${encodeURIComponent(regionId)}` : '';
+    return this.get<LayerInfo[]>(`/layers${query}`);
+  }
+
+  public getDatasets(regionId?: string): Promise<DatasetRecord[]> {
+    const query = regionId ? `?region_id=${encodeURIComponent(regionId)}` : '';
+    return this.get<DatasetRecord[]>(`/datasets${query}`);
+  }
+
+  public getDataset(datasetId: string): Promise<DatasetRecord> {
+    return this.get<DatasetRecord>(`/datasets/${encodeURIComponent(datasetId)}`);
+  }
+
+  public inspectPoint(regionId: string, lat: number, lon: number): Promise<PointInspection> {
+    const query = `?region_id=${encodeURIComponent(regionId)}&lat=${lat}&lon=${lon}`;
+    return this.get<PointInspection>(`/terrain/point${query}`);
+  }
+
+  public getEvaDefaults(): Promise<components['schemas']['EvaDefaultsResponse']> {
+    return this.get<components['schemas']['EvaDefaultsResponse']>('/eva/defaults');
   }
 }
 
